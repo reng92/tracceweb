@@ -1,20 +1,69 @@
 ---
-import BaseLayout from "../layouts/BaseLayout.astro"
+import BaseLayout from '../layouts/BaseLayout.astro'
 ---
-<BaseLayout title="Cookie Policy — Tracce Studio">
 
-  <section class="ts-container" style="padding-top:80px; padding-bottom:40px;">
-    <h1 style="font-family:'Barlow Condensed',sans-serif; font-weight:900; text-transform:uppercase; font-size:clamp(48px,7vw,80px); line-height:0.92; color:#0a0a0a;">
+<BaseLayout title="Cookie Policy — Tracce Studio">
+  <section style="padding:80px 48px 40px; border-bottom:1px solid rgba(0,0,0,0.08);">
+    <p style="font-size:10px; letter-spacing:0.14em; text-transform:uppercase; color:#0033ff; font-weight:500; margin-bottom:16px;">Legale</p>
+    <h1 style="font-family:'Barlow Condensed',sans-serif; font-weight:900; text-transform:uppercase; font-size:clamp(40px,6vw,72px); line-height:1; color:#0a0a0a; margin:0;">
       Cookie Policy
     </h1>
   </section>
 
-  <section class="ts-container" style="padding-bottom:80px; max-width:800px;">
-    <div style="background:#f8f8f8; padding:40px; border-radius:4px; margin-bottom:40px;">
-      <p style="font-size:16px; line-height:1.6; color:#666;">
-        Il contenuto della Cookie Policy sarà integrato tramite iubenda
-      </p>
+  <section style="padding:60px 48px 80px; max-width:860px;">
+    <div style="font-size:14px; line-height:1.8; color:#333; display:flex; flex-direction:column; gap:32px;">
+
+      <div>
+        <p>Questo sito utilizza Cookie. I Cookie sono piccoli file di testo che vengono salvati sul dispositivo dell'Utente durante la navigazione. Servono a far funzionare il sito correttamente e a migliorare l'esperienza dell'Utente.</p>
+      </div>
+
+      <div>
+        <p style="font-size:10px; letter-spacing:0.14em; text-transform:uppercase; color:#0033ff; font-weight:500; margin-bottom:16px;">Categorie di cookie utilizzati</p>
+
+        <div style="display:flex; flex-direction:column; gap:20px;">
+
+          <div style="padding:20px 24px; border:1px solid rgba(0,0,0,0.08); border-radius:2px;">
+            <div style="display:flex; align-items:center; gap:12px; margin-bottom:10px;">
+              <span style="background:#0033ff; color:#fff; font-size:10px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; padding:3px 10px; border-radius:2px;">Necessari</span>
+              <span style="font-size:11px; color:#888;">Sempre attivi — non richiedono consenso</span>
+            </div>
+            <p style="margin:0;">Questi cookie sono indispensabili per il funzionamento del sito e non possono essere disabilitati. Non raccolgono informazioni personali identificabili. Includono cookie di sessione e cookie per il salvataggio delle preferenze sul consenso.</p>
+          </div>
+
+          <div style="padding:20px 24px; border:1px solid rgba(0,0,0,0.08); border-radius:2px;">
+            <div style="display:flex; align-items:center; gap:12px; margin-bottom:10px;">
+              <span style="background:#555; color:#fff; font-size:10px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; padding:3px 10px; border-radius:2px;">Analitici</span>
+              <span style="font-size:11px; color:#888;">Richiedono consenso</span>
+            </div>
+            <p style="margin:0;">Permettono di raccogliere informazioni aggregate e anonime su come gli Utenti navigano il sito (pagine visitate, tempo di permanenza, provenienza del traffico). I dati sono utilizzati esclusivamente per migliorare le prestazioni del sito. Attualmente il sito non utilizza strumenti analitici di terze parti.</p>
+          </div>
+
+          <div style="padding:20px 24px; border:1px solid rgba(0,0,0,0.08); border-radius:2px;">
+            <div style="display:flex; align-items:center; gap:12px; margin-bottom:10px;">
+              <span style="background:#555; color:#fff; font-size:10px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; padding:3px 10px; border-radius:2px;">Marketing</span>
+              <span style="font-size:11px; color:#888;">Richiedono consenso</span>
+            </div>
+            <p style="margin:0;">Utilizzati per mostrare pubblicità pertinente agli interessi dell'Utente. Attualmente il sito non utilizza cookie di profilazione o remarketing di terze parti.</p>
+          </div>
+
+        </div>
+      </div>
+
+      <div>
+        <p style="font-size:10px; letter-spacing:0.14em; text-transform:uppercase; color:#0033ff; font-weight:500; margin-bottom:12px;">Come gestire i cookie</p>
+        <p>L'Utente può gestire le preferenze sui cookie in qualsiasi momento tramite il banner presente sul sito o dalle impostazioni del proprio browser. La disabilitazione dei cookie tecnici potrebbe compromettere il corretto funzionamento del sito.</p>
+        <p style="margin-top:12px;">Per ulteriori informazioni sui cookie e su come gestirli: <a href="https://www.garanteprivacy.it/cookie" target="_blank" style="color:#0033ff;">garanteprivacy.it/cookie</a></p>
+      </div>
+
+      <div>
+        <p style="font-size:10px; letter-spacing:0.14em; text-transform:uppercase; color:#0033ff; font-weight:500; margin-bottom:12px;">Titolare del trattamento</p>
+        <p>Luigi Cartolano — P.IVA IT06207980654<br/>Via Mezzacapo 192, 84036 Sala Consilina (SA)<br/><a href="mailto:info@traccestudio.it" style="color:#0033ff;">info@traccestudio.it</a></p>
+      </div>
+
+      <div style="border-top:1px solid rgba(0,0,0,0.08); padding-top:24px;">
+        <p style="font-size:12px; color:#888;">Ultimo aggiornamento: marzo 2026</p>
+      </div>
+
     </div>
   </section>
-
 </BaseLayout>

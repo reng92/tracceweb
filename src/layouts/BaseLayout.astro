@@ -30,5 +30,41 @@ const {
     <slot />
   </main>
   <Footer />
+
+  <div id="cookie-banner" style="display:none; position:fixed; bottom:24px; left:24px; max-width:420px; background:#0a0a0a; color:#fff; padding:24px 28px; border-radius:4px; z-index:9999; box-shadow:0 8px 40px rgba(0,0,0,0.3); font-family:'DM Sans',sans-serif;">
+    <p style="font-size:13px; line-height:1.6; margin:0 0 8px; font-weight:600;">Questo sito utilizza cookie</p>
+    <p style="font-size:12px; line-height:1.6; color:rgba(255,255,255,0.65); margin:0 0 20px;">
+      Usiamo cookie tecnici (necessari) e, con il tuo consenso, cookie analitici per migliorare la navigazione.
+      Consulta la nostra <a href="/cookie-policy" style="color:#0033ff; text-decoration:underline;">Cookie Policy</a>.
+    </p>
+    <div style="display:flex; gap:10px; flex-wrap:wrap;">
+      <button id="cookie-accept-all" style="background:#0033ff; color:#fff; border:none; padding:9px 20px; font-size:11px; font-weight:600; letter-spacing:0.08em; text-transform:uppercase; border-radius:2px; cursor:pointer;">
+        Accetta tutti
+      </button>
+      <button id="cookie-accept-necessary" style="background:transparent; color:rgba(255,255,255,0.7); border:1px solid rgba(255,255,255,0.2); padding:9px 20px; font-size:11px; font-weight:600; letter-spacing:0.08em; text-transform:uppercase; border-radius:2px; cursor:pointer;">
+        Solo necessari
+      </button>
+      <a href="/cookie-policy" style="display:flex; align-items:center; font-size:11px; color:rgba(255,255,255,0.4); text-decoration:none; letter-spacing:0.06em; text-transform:uppercase;">
+        Gestisci
+      </a>
+    </div>
+  </div>
+
+  <script>
+    (function() {
+      var consent = localStorage.getItem('tracce_cookie_consent');
+      if (!consent) {
+        document.getElementById('cookie-banner').style.display = 'block';
+      }
+      document.getElementById('cookie-accept-all').addEventListener('click', function() {
+        localStorage.setItem('tracce_cookie_consent', 'all');
+        document.getElementById('cookie-banner').style.display = 'none';
+      });
+      document.getElementById('cookie-accept-necessary').addEventListener('click', function() {
+        localStorage.setItem('tracce_cookie_consent', 'necessary');
+        document.getElementById('cookie-banner').style.display = 'none';
+      });
+    })();
+  </script>
 </body>
 </html>

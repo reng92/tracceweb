@@ -1,20 +1,84 @@
 ---
-import BaseLayout from "../layouts/BaseLayout.astro"
+import BaseLayout from '../layouts/BaseLayout.astro'
 ---
-<BaseLayout title="Privacy Policy — Tracce Studio">
 
-  <section class="ts-container" style="padding-top:80px; padding-bottom:40px;">
-    <h1 style="font-family:'Barlow Condensed',sans-serif; font-weight:900; text-transform:uppercase; font-size:clamp(48px,7vw,80px); line-height:0.92; color:#0a0a0a;">
+<BaseLayout title="Privacy Policy — Tracce Studio">
+  <section style="padding:80px 48px 40px; border-bottom:1px solid rgba(0,0,0,0.08);">
+    <p style="font-size:10px; letter-spacing:0.14em; text-transform:uppercase; color:#0033ff; font-weight:500; margin-bottom:16px;">Legale</p>
+    <h1 style="font-family:'Barlow Condensed',sans-serif; font-weight:900; text-transform:uppercase; font-size:clamp(40px,6vw,72px); line-height:1; color:#0a0a0a; margin:0;">
       Privacy Policy
     </h1>
   </section>
 
-  <section class="ts-container" style="padding-bottom:80px; max-width:800px;">
-    <div style="background:#f8f8f8; padding:40px; border-radius:4px; margin-bottom:40px;">
-      <p style="font-size:16px; line-height:1.6; color:#666;">
-        Il contenuto della Privacy Policy sarà integrato tramite iubenda
-      </p>
+  <section style="padding:60px 48px 80px; max-width:860px;">
+    <div style="font-size:14px; line-height:1.8; color:#333; display:flex; flex-direction:column; gap:32px;">
+
+      <div>
+        <p style="font-size:10px; letter-spacing:0.14em; text-transform:uppercase; color:#0033ff; font-weight:500; margin-bottom:12px;">Titolare del trattamento</p>
+        <p>Luigi Cartolano<br/>P.IVA: IT06207980654<br/>Via Mezzacapo 192 – 84036 Sala Consilina (SA)<br/>Email: <a href="mailto:info@traccestudio.it" style="color:#0033ff;">info@traccestudio.it</a></p>
+      </div>
+
+      <div>
+        <p style="font-size:10px; letter-spacing:0.14em; text-transform:uppercase; color:#0033ff; font-weight:500; margin-bottom:12px;">1. Tipologie di dati raccolti</p>
+        <p>Il Titolare non fornisce una lista di tipologie di Dati Personali raccolti. Tra i Dati Personali raccolti da questo sito web, in modo autonomo o tramite terze parti, ci sono: nome, cognome, email, numero di telefono, dati di utilizzo e cookie.</p>
+        <p style="margin-top:12px;">I Dati Personali possono essere liberamente forniti dall'Utente, oppure, nel caso dei Dati di Utilizzo, raccolti automaticamente durante l'uso di questo sito. Se non diversamente specificato, tutti i Dati richiesti sono obbligatori.</p>
+      </div>
+
+      <div>
+        <p style="font-size:10px; letter-spacing:0.14em; text-transform:uppercase; color:#0033ff; font-weight:500; margin-bottom:12px;">2. Finalità del trattamento</p>
+        <p>I dati dell'Utente sono raccolti per consentire al Titolare di fornire i propri Servizi, così come per le seguenti finalità:</p>
+        <ul style="margin-top:12px; padding-left:20px; display:flex; flex-direction:column; gap:8px;">
+          <li><strong>Contatto e richieste</strong> — gestione delle richieste inviate tramite il modulo di contatto</li>
+          <li><strong>Statistica</strong> — analisi anonima del comportamento degli utenti per migliorare il sito</li>
+          <li><strong>Cookie tecnici</strong> — necessari al corretto funzionamento del sito</li>
+        </ul>
+      </div>
+
+      <div>
+        <p style="font-size:10px; letter-spacing:0.14em; text-transform:uppercase; color:#0033ff; font-weight:500; margin-bottom:12px;">3. Base giuridica del trattamento</p>
+        <p>Il Titolare tratta Dati Personali relativi all'Utente in caso sussista una delle seguenti condizioni:</p>
+        <ul style="margin-top:12px; padding-left:20px; display:flex; flex-direction:column; gap:8px;">
+          <li>l'Utente ha prestato il consenso per una o più finalità specifiche</li>
+          <li>il trattamento è necessario per l'esecuzione di un contratto con l'Utente</li>
+          <li>il trattamento è necessario per adempiere un obbligo legale</li>
+          <li>il trattamento è necessario per il perseguimento del legittimo interesse del Titolare</li>
+        </ul>
+      </div>
+
+      <div>
+        <p style="font-size:10px; letter-spacing:0.14em; text-transform:uppercase; color:#0033ff; font-weight:500; margin-bottom:12px;">4. Luogo del trattamento</p>
+        <p>I Dati sono trattati presso le sedi operative del Titolare e in ogni altro luogo in cui le parti coinvolte nel trattamento siano localizzate. I Dati non sono trasferiti al di fuori dell'Unione Europea.</p>
+      </div>
+
+      <div>
+        <p style="font-size:10px; letter-spacing:0.14em; text-transform:uppercase; color:#0033ff; font-weight:500; margin-bottom:12px;">5. Periodo di conservazione</p>
+        <p>I Dati sono trattati e conservati per il tempo richiesto dalle finalità per le quali sono stati raccolti. I Dati raccolti per finalità connesse al contratto saranno conservati fino al completamento di tale contratto. I Dati utilizzati per finalità riconducibili all'interesse legittimo del Titolare saranno conservati sino al soddisfacimento di tale interesse.</p>
+      </div>
+
+      <div>
+        <p style="font-size:10px; letter-spacing:0.14em; text-transform:uppercase; color:#0033ff; font-weight:500; margin-bottom:12px;">6. Diritti dell'Utente</p>
+        <p>Gli Utenti possono esercitare determinati diritti con riferimento ai Dati trattati dal Titolare. In particolare, l'Utente ha il diritto di:</p>
+        <ul style="margin-top:12px; padding-left:20px; display:flex; flex-direction:column; gap:8px;">
+          <li><strong>Revocare il consenso</strong> in qualsiasi momento</li>
+          <li><strong>Opporsi al trattamento</strong> dei propri Dati</li>
+          <li><strong>Accedere ai propri Dati</strong> e ottenerne copia</li>
+          <li><strong>Verificare e chiedere la rettifica</strong> dei propri Dati</li>
+          <li><strong>Ottenere la limitazione</strong> del trattamento dei propri Dati</li>
+          <li><strong>Chiedere la cancellazione</strong> dei propri Dati personali</li>
+          <li><strong>Proporre reclamo</strong> all'autorità di controllo (Garante Privacy – <a href="https://www.garanteprivacy.it" target="_blank" style="color:#0033ff;">garanteprivacy.it</a>)</li>
+        </ul>
+        <p style="margin-top:12px;">Per esercitare i propri diritti, l'Utente può inviare una richiesta a: <a href="mailto:info@traccestudio.it" style="color:#0033ff;">info@traccestudio.it</a></p>
+      </div>
+
+      <div>
+        <p style="font-size:10px; letter-spacing:0.14em; text-transform:uppercase; color:#0033ff; font-weight:500; margin-bottom:12px;">7. Cookie</p>
+        <p>Il sito utilizza Cookie. Per saperne di più consulta la <a href="/cookie-policy" style="color:#0033ff;">Cookie Policy</a>.</p>
+      </div>
+
+      <div style="border-top:1px solid rgba(0,0,0,0.08); padding-top:24px;">
+        <p style="font-size:12px; color:#888;">Ultimo aggiornamento: marzo 2026</p>
+      </div>
+
     </div>
   </section>
-
 </BaseLayout>
