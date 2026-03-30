@@ -3,18 +3,47 @@
 @tailwind utilities;
 
 @layer base {
-  *, *::before, *::after {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-  }
-  html {
-    scroll-behavior: smooth;
-  }
-  body {
-    font-family: 'DM Sans', sans-serif;
-    background: #f5f4f0;
-    color: #0a0a0a;
-    overflow-x: hidden;
-  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'DM Sans', sans-serif; background: #f5f4f0; color: #0a0a0a; overflow-x: hidden; }
+}
+
+.ts-container { padding-left: 48px; padding-right: 48px; }
+.ts-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; }
+.ts-grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 48px; }
+.ts-grid-services { display: grid; grid-template-columns: 64px 1fr 1fr; gap: 16px 40px; }
+.ts-hero-grid { display: grid; grid-template-columns: 1fr 140px; gap: 40px; align-items: start; }
+.ts-portfolio-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; }
+.ts-portfolio-grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2px; }
+
+@media (max-width: 1024px) {
+  .ts-container { padding-left: 32px; padding-right: 32px; }
+  .ts-grid-2 { gap: 48px; }
+  .ts-grid-services { grid-template-columns: 48px 1fr; }
+  .ts-grid-services .ts-service-desc { grid-column: 2; }
+  .ts-portfolio-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 768px) {
+  .ts-container { padding-left: 20px; padding-right: 20px; }
+  .ts-grid-2 { grid-template-columns: 1fr; gap: 40px; }
+  .ts-grid-3 { grid-template-columns: 1fr; gap: 32px; }
+  .ts-grid-services { grid-template-columns: 1fr; }
+  .ts-grid-services > span:first-child { display: none; }
+  .ts-hero-grid { grid-template-columns: 1fr; }
+  .ts-hero-badge { display: none !important; }
+  .ts-portfolio-grid { grid-template-columns: 1fr; }
+  .ts-portfolio-grid .ts-wide { grid-column: span 1 !important; }
+  .ts-portfolio-grid-2 { grid-template-columns: 1fr; }
+  .ts-nav-links { display: none !important; }
+  .ts-footer-grid { grid-template-columns: 1fr !important; gap: 32px !important; }
+}
+
+@keyframes ticker {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+@keyframes logosTicker {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
 }

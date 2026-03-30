@@ -8,22 +8,17 @@ const navLinks = [
 ]
 ---
 <footer style="background:#0a0a0a; color:#fff; padding:52px 48px 28px;">
-  <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:48px; margin-bottom:40px;">
+  <div class="ts-footer-grid" style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:48px; margin-bottom:40px;">
     <div>
-      <img src="/logos/tracce.svg" alt="Tracce Studio" style="height:28px; width:auto; filter:invert(1); margin-bottom:16px; display:block;" />
+      <img src="/logos/tracce.svg" alt="Tracce Studio" style="height:26px; filter:invert(1); display:block; margin-bottom:16px;" />
       <div style="font-size:12px; line-height:1.9; color:#666;">
-        Luigi Cartolano<br />
-        Campania, Italia<br />
-        info@traccestudio.it<br />
-        +39 392 078 5890
+        Luigi Cartolano<br />Campania, Italia<br />info@traccestudio.it<br />+39 392 078 5890
       </div>
     </div>
     <div>
       <div style="font-size:9.5px; letter-spacing:0.14em; text-transform:uppercase; color:#444; font-weight:500; margin-bottom:16px;">Navigazione</div>
       {navLinks.map((link) => (
-        <a href={link.href} style="display:block; font-size:12px; color:#999; line-height:2.1; text-decoration:none;">
-          {link.label}
-        </a>
+        <a href={link.href} style="display:block; font-size:12px; color:#999; line-height:2.1; text-decoration:none;">{link.label}</a>
       ))}
     </div>
     <div>
@@ -32,7 +27,7 @@ const navLinks = [
       <a href="/cookie-policy" style="display:block; font-size:12px; color:#999; line-height:2.1; text-decoration:none;">Cookie Policy</a>
     </div>
   </div>
-  <div style="border-top:1px solid #1a1a1a; padding-top:24px; display:flex; justify-content:space-between; font-size:11px; color:#444;">
+  <div style="border-top:1px solid #1a1a1a; padding-top:24px; display:flex; justify-content:space-between; font-size:11px; color:#444; flex-wrap:wrap; gap:8px;">
     <span>© 2025 Tracce Studio — Web Agency</span>
     <span>Website designed by Tracce</span>
   </div>
