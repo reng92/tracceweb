@@ -1,6 +1,6 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro"
-import { client } from "../lib/sanity"
+import { client, urlFor } from "../lib/sanity"
 import { projectsQuery, servicesQuery } from "../lib/queries"
 
 const projects = await client.fetch(projectsQuery).catch(() => [])
@@ -84,8 +84,18 @@ const showProjects = projects.length > 0 ? projects : defaultProjects
         const isWide = p.wide === true || i === 0
         return (
           <div style={isWide ? "grid-column:span 2; position:relative; overflow:hidden; background:#161616; cursor:pointer;" : "position:relative; overflow:hidden; background:#161616; cursor:pointer;"}>
-            <div style={isWide ? "aspect-ratio:2/1; background:#1a1a1a; display:flex; align-items:center; justify-content:center;" : "aspect-ratio:1/1; background:#1a1a1a; display:flex; align-items:center; justify-content:center;"}>
-              <span style="font-family:'Barlow Condensed',sans-serif; font-weight:900; font-size:40px; color:rgba(255,255,255,0.05); text-transform:uppercase;">{p.title}</span>
+            <div style={isWide ? "aspect-ratio:2/1; background:#1a1a1a; overflow:hidden;" : "aspect-ratio:1/1; background:#1a1a1a; overflow:hidden;"}>
+              {p.coverImage ? (
+                <img
+                  src={urlFor(p.coverImage).width(800).url()}
+                  alt={p.title}
+                  style="width:100%; height:100%; object-fit:cover; display:block;"
+                />
+              ) : (
+                <div style="width:100%; height:100%; display:flex; align-items:center; justify-content:center;">
+                  <span style="font-family:'Barlow Condensed',sans-serif; font-weight:900; font-size:40px; color:rgba(255,255,255,0.05); text-transform:uppercase;">{p.title}</span>
+                </div>
+              )}
             </div>
             <div style="position:absolute; inset:0; background:rgba(0,51,255,0); display:flex; flex-direction:column; justify-content:flex-end; padding:20px; transition:background 0.3s;">
               <p style="font-family:'Barlow Condensed',sans-serif; font-weight:900; text-transform:uppercase; font-size:20px; color:#fff; letter-spacing:0.04em;">{p.title}</p>
