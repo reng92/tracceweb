@@ -33,7 +33,6 @@
   .ts-hero-grid { grid-template-columns: 1fr; }
   .ts-hero-badge { display: none !important; }
   .ts-portfolio-grid { grid-template-columns: 1fr; }
-  .ts-portfolio-grid .ts-wide { grid-column: span 1 !important; }
   .ts-portfolio-grid-2 { grid-template-columns: 1fr; }
   .ts-nav-links { display: none !important; }
   .ts-footer-grid { grid-template-columns: 1fr !important; gap: 32px !important; }
@@ -46,4 +45,99 @@
 @keyframes logosTicker {
   from { transform: translateX(0); }
   to { transform: translateX(-50%); }
+}
+
+/* ============ RESPONSIVE ============ */
+
+@media (max-width: 768px) {
+
+  /* HEADER */
+  header {
+    padding: 0 20px !important;
+  }
+
+  /* HERO */
+  section[style*="grid-template-columns:1fr 140px"],
+  section[style*="grid-template-columns: 1fr 140px"] {
+    display: block !important;
+    padding: 48px 20px 40px !important;
+  }
+
+  /* Badge TA nascosto su mobile */
+  .ts-hero-badge,
+  header + section > div[style*="128px"] {
+    display: none !important;
+  }
+
+  /* SERVIZI */
+  div[style*="grid-template-columns:64px 1fr 1fr"],
+  div[style*="grid-template-columns: 64px 1fr 1fr"] {
+    display: block !important;
+    padding: 20px 0 !important;
+  }
+
+  div[style*="grid-template-columns:64px 1fr 1fr"] > span:first-child,
+  div[style*="grid-template-columns: 64px 1fr 1fr"] > span:first-child {
+    display: none !important;
+  }
+
+  div[style*="grid-template-columns:64px 1fr 1fr"] h3,
+  div[style*="grid-template-columns: 64px 1fr 1fr"] h3 {
+    font-size: 26px !important;
+    margin-bottom: 8px !important;
+  }
+
+  /* PORTFOLIO GRID */
+  div[style*="grid-template-columns:repeat(3,1fr)"],
+  div[style*="grid-template-columns: repeat(3,1fr)"],
+  div[style*="grid-template-columns:repeat(3, 1fr)"] {
+    grid-template-columns: 1fr 1fr !important;
+  }
+
+  /* SEZIONI CON PADDING FISSO */
+  section[style*="padding:80px 48px"],
+  section[style*="padding: 80px 48px"] {
+    padding: 48px 20px !important;
+  }
+
+  section[style*="padding:60px 48px"],
+  section[style*="padding: 60px 48px"] {
+    padding: 40px 20px !important;
+  }
+
+  /* CONTATTI — griglia 2 colonne */
+  div[style*="grid-template-columns:1fr 1fr"],
+  div[style*="grid-template-columns: 1fr 1fr"] {
+    display: block !important;
+  }
+
+  div[style*="grid-template-columns:1fr 1fr"] form,
+  div[style*="grid-template-columns: 1fr 1fr"] form {
+    margin-top: 40px !important;
+  }
+
+  /* FOOTER */
+  .ts-footer-grid,
+  footer > div[style*="grid-template-columns"] {
+    grid-template-columns: 1fr !important;
+    gap: 32px !important;
+  }
+
+  /* TITOLI HERO */
+  h1[style*="clamp"] {
+    font-size: clamp(42px, 11vw, 72px) !important;
+  }
+
+  h2[style*="clamp"] {
+    font-size: clamp(32px, 9vw, 52px) !important;
+  }
+}
+
+@media (max-width: 480px) {
+  /* PORTFOLIO su mobile piccolo — 1 colonna */
+  div[style*="grid-template-columns:repeat(3,1fr)"],
+  div[style*="grid-template-columns: repeat(3,1fr)"],
+  div[style*="grid-template-columns:repeat(3, 1fr)"] {
+    grid-template-columns: 1fr !important;
+  }
 }

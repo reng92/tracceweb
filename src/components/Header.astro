@@ -7,18 +7,75 @@ const navLinks = [
   { label: "Contatti", href: "/contatti" },
 ]
 ---
-<header style="background:#f5f4f0; border-bottom:1px solid rgba(0,0,0,0.08); padding:0 48px; height:60px; display:flex; align-items:center; justify-content:space-between; position:sticky; top:0; z-index:100;">
+
+<header id="site-header" style="background:#f5f4f0; border-bottom:1px solid rgba(0,0,0,0.08); padding:0 48px; height:60px; display:flex; align-items:center; justify-content:space-between; position:sticky; top:0; z-index:100;">
   <a href="/" style="display:flex; align-items:center; flex-shrink:0;">
     <img src="/logos/tracce.svg" alt="Tracce Studio" style="height:26px; width:auto;" />
   </a>
-  <nav class="ts-nav-links" style="display:flex; gap:28px;">
-    {navLinks.map((link) => (
+  <nav id="nav-desktop" style="display:flex; gap:28px;">
+    {navLinks.map(link => (
       <a href={link.href} style="font-size:11px; font-weight:500; letter-spacing:0.1em; text-transform:uppercase; color:#0a0a0a; text-decoration:none;">
         {link.label}
       </a>
     ))}
   </nav>
-  <a href="/contatti" style="background:#0033ff; color:#fff; font-size:11px; font-weight:500; letter-spacing:0.08em; text-transform:uppercase; padding:9px 20px; border-radius:2px; text-decoration:none; flex-shrink:0;">
+  <div style="display:flex; align-items:center; gap:16px;">
+    <a href="/contatti" id="nav-cta" style="background:#0033ff; color:#fff; font-size:11px; font-weight:500; letter-spacing:0.08em; text-transform:uppercase; padding:9px 20px; border-radius:2px; text-decoration:none;">
+      Inizia il progetto
+    </a>
+    <button id="hamburger" aria-label="Menu" style="display:none; flex-direction:column; gap:5px; background:none; border:none; cursor:pointer; padding:4px;">
+      <span class="bar" style="width:22px; height:2px; background:#0a0a0a; display:block; transition:all 0.3s;"></span>
+      <span class="bar" style="width:22px; height:2px; background:#0a0a0a; display:block; transition:all 0.3s;"></span>
+      <span class="bar" style="width:22px; height:2px; background:#0a0a0a; display:block; transition:all 0.3s;"></span>
+    </button>
+  </div>
+</header>
+
+<div id="mobile-menu" style="display:none; position:fixed; top:60px; left:0; right:0; background:#f5f4f0; border-bottom:1px solid rgba(0,0,0,0.08); z-index:99; padding:24px 20px; flex-direction:column; gap:0;">
+  {navLinks.map(link => (
+    <a href={link.href} style="font-size:13px; font-weight:500; letter-spacing:0.1em; text-transform:uppercase; color:#0a0a0a; text-decoration:none; padding:16px 0; border-bottom:1px solid rgba(0,0,0,0.06); display:block;">
+      {link.label}
+    </a>
+  ))}
+  <a href="/contatti" style="margin-top:20px; display:block; background:#0033ff; color:#fff; font-size:12px; font-weight:600; letter-spacing:0.08em; text-transform:uppercase; padding:14px 24px; border-radius:2px; text-decoration:none; text-align:center;">
     Inizia il progetto
   </a>
-</header>
+</div>
+
+<style>
+  @media (max-width: 768px) {
+    #nav-desktop { display: none !important; }
+    #nav-cta { display: none !important; }
+    #hamburger { display: flex !important; }
+  }
+</style>
+
+<script is:inline>
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobile-menu');
+  let open = false;
+  hamburger.addEventListener('click', function() {
+    open = !open;
+    mobileMenu.style.display = open ? 'flex' : 'none';
+    const bars = hamburger.querySelectorAll('.bar');
+    if (open) {
+      bars[0].style.transform = 'rotate(45deg) translate(5px, 5px)';
+      bars[1].style.opacity = '0';
+      bars[2].style.transform = 'rotate(-45deg) translate(5px, -5px)';
+    } else {
+      bars[0].style.transform = '';
+      bars[1].style.opacity = '1';
+      bars[2].style.transform = '';
+    }
+  });
+  document.querySelectorAll('#mobile-menu a').forEach(function(link) {
+    link.addEventListener('click', function() {
+      open = false;
+      mobileMenu.style.display = 'none';
+      const bars = hamburger.querySelectorAll('.bar');
+      bars[0].style.transform = '';
+      bars[1].style.opacity = '1';
+      bars[2].style.transform = '';
+    });
+  });
+</script>
