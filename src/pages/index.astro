@@ -1,0 +1,147 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro"
+import { client } from "../lib/sanity"
+import { projectsQuery, servicesQuery } from "../lib/queries"
+
+const projects = await client.fetch(projectsQuery).catch(() => [])
+const services = await client.fetch(servicesQuery).catch(() => [])
+
+const defaultServices = [
+  { n: "01", title: "Branding", desc: "Costruiamo identità visive memorabili. Logo, palette, tipografia e brand guidelines per ogni canale." },
+  { n: "02", title: "Web Design", desc: "Design su misura, orientato alla conversione. Ogni layout nasce da una analisi del tuo business." },
+  { n: "03", title: "Web Development", desc: "Sviluppiamo siti e applicazioni veloci, sicuri e scalabili. Soluzioni tecnologiche ad ogni livello." },
+  { n: "04", title: "Digital Strategy", desc: "Strategie data-driven per crescere online. SEO, contenuti, campagne: il percorso digitale della tua azienda." },
+  { n: "05", title: "Social Media", desc: "Gestione e crescita della tua community. Content creation, pianificazione editoriale e campagne." },
+]
+
+const defaultProjects = [
+  { title: "Dramee", tags: "Website Development - UI Design", wide: true },
+  { title: "Lustra", tags: "E-commerce - Shopify", wide: false },
+  { title: "Chalet Ciro", tags: "Website Development - Branding", wide: false },
+  { title: "Le Angioine", tags: "Website Design - Strategy", wide: false },
+]
+
+const ticker = ["Branding","Web Design","UX UI Design","Web Development","Digital Strategy","Social Media","Branding","Web Design","UX UI Design","Web Development","Digital Strategy","Social Media"]
+
+const showServices = services.length > 0 ? services : defaultServices
+const showProjects = projects.length > 0 ? projects : defaultProjects
+---
+<BaseLayout title="Tracce Studio - Web Agency Campania">
+
+  <!-- HERO -->
+  <section style="padding:80px 48px 60px; display:grid; grid-template-columns:1fr 140px; gap:40px; align-items:start; position:relative; overflow:hidden;">
+    <div style="position:absolute; top:-80px; right:-80px; width:420px; height:420px; background:#0033ff; border-radius:50%; opacity:0.10; pointer-events:none;"></div>
+    <div>
+      <h1 style="font-family:'Barlow Condensed',sans-serif; font-weight:900; text-transform:uppercase; line-height:0.92; font-size:clamp(52px,7.5vw,88px); color:#0a0a0a;">
+        La web agency<br />
+        <span style="color:#0033ff;">che ti posiziona</span><br />
+        nel mondo<br />digitale
+      </h1>
+      <p style="font-size:14px; line-height:1.7; color:#555; max-width:520px; margin-top:24px;">
+        Distinguiti, fatti amare e soprattutto fa in modo che ti seguano.
+        Siamo una web agency con sede in Campania. Trasformiamo le tue idee
+        in un progetto <strong>a tua misura</strong>.
+      </p>
+      <a href="/contatti" style="display:inline-block; margin-top:32px; background:#0033ff; color:#fff; font-family:'Barlow Condensed',sans-serif; font-weight:700; text-transform:uppercase; letter-spacing:0.1em; font-size:13px; padding:14px 32px; border-radius:2px; text-decoration:none;">
+        Inizia il progetto
+      </a>
+    </div>
+    <div style="width:128px; height:128px; border-radius:50%; border:1.5px solid #0a0a0a; display:flex; flex-direction:column; align-items:center; justify-content:center; flex-shrink:0; margin-top:8px; gap:4px;">
+      <span style="font-family:'Barlow Condensed',sans-serif; font-weight:900; font-size:38px; line-height:1; color:#0a0a0a;">TA</span>
+      <span style="font-size:6.5px; letter-spacing:0.14em; text-transform:uppercase; text-align:center; color:#555; line-height:1.4;">We know how to<br />improve your<br />business</span>
+    </div>
+  </section>
+
+  <!-- TICKER -->
+  <div style="background:#0033ff; padding:11px 0; overflow:hidden; white-space:nowrap;">
+    <div style="display:inline-flex; animation:ticker 20s linear infinite;">
+      {ticker.map((item) => (
+        <span style="font-family:'Barlow Condensed',sans-serif; font-weight:700; font-size:12px; letter-spacing:0.12em; text-transform:uppercase; color:#fff; padding:0 28px; display:inline-flex; align-items:center; gap:28px;">
+          {item}
+          <span style="width:3px; height:3px; background:rgba(255,255,255,0.4); border-radius:50%; display:inline-block;"></span>
+        </span>
+      ))}
+    </div>
+  </div>
+
+  <!-- SERVICES -->
+  <section style="padding:80px 48px; border-top:1px solid rgba(0,0,0,0.08);">
+    <p style="font-size:10px; letter-spacing:0.14em; text-transform:uppercase; color:#0033ff; font-weight:500; margin-bottom:40px;">— Cosa facciamo per te</p>
+    {showServices.map((s: any) => (
+      <div style="display:grid; grid-template-columns:64px 1fr 1fr; gap:16px 40px; padding:28px 0; border-top:1px solid rgba(0,0,0,0.08); align-items:start;">
+        <span style="font-family:'Barlow Condensed',sans-serif; font-size:12px; font-weight:700; color:#0033ff; letter-spacing:0.08em; padding-top:4px;">{s.n}</span>
+        <h3 style="font-family:'Barlow Condensed',sans-serif; font-size:30px; font-weight:900; text-transform:uppercase; line-height:1;">{s.title}</h3>
+        <p style="font-size:13px; line-height:1.7; color:#555; padding-top:4px;">{s.shortDesc || s.desc}</p>
+      </div>
+    ))}
+  </section>
+
+  <!-- PORTFOLIO -->
+  <section style="background:#0a0a0a; padding:80px 48px;">
+    <p style="font-size:10px; letter-spacing:0.14em; text-transform:uppercase; color:#0033ff; font-weight:500; margin-bottom:32px;">— Portfolio</p>
+    <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:2px;">
+      {showProjects.slice(0,4).map((p: any, i: number) => {
+        const isWide = p.wide === true || i === 0
+        return (
+          <div style={isWide ? "grid-column:span 2; position:relative; overflow:hidden; background:#161616; cursor:pointer;" : "position:relative; overflow:hidden; background:#161616; cursor:pointer;"}>
+            <div style={isWide ? "aspect-ratio:2/1; background:#1a1a1a; display:flex; align-items:center; justify-content:center;" : "aspect-ratio:1/1; background:#1a1a1a; display:flex; align-items:center; justify-content:center;"}>
+              <span style="font-family:'Barlow Condensed',sans-serif; font-weight:900; font-size:40px; color:rgba(255,255,255,0.05); text-transform:uppercase;">{p.title}</span>
+            </div>
+            <div style="position:absolute; inset:0; background:rgba(0,51,255,0); display:flex; flex-direction:column; justify-content:flex-end; padding:20px; transition:background 0.3s;">
+              <p style="font-family:'Barlow Condensed',sans-serif; font-weight:900; text-transform:uppercase; font-size:20px; color:#fff; letter-spacing:0.04em;">{p.title}</p>
+              <p style="font-size:11px; color:rgba(255,255,255,0.7); margin-top:4px;">{p.tags}</p>
+            </div>
+          </div>
+        )
+      })}
+    </div>
+    <div style="margin-top:40px; text-align:center;">
+      <a href="/portfolio" style="display:inline-block; border:1px solid rgba(255,255,255,0.2); color:#fff; font-family:'Barlow Condensed',sans-serif; font-weight:700; text-transform:uppercase; letter-spacing:0.1em; font-size:12px; padding:14px 32px; border-radius:2px; text-decoration:none;">
+        Vedi tutto il portfolio
+      </a>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section style="padding:80px 48px; border-top:1px solid rgba(0,0,0,0.08);">
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:80px;">
+      <div>
+        <p style="font-size:10px; letter-spacing:0.14em; text-transform:uppercase; color:#0033ff; font-weight:500; margin-bottom:24px;">— Contatti</p>
+        <h2 style="font-family:'Barlow Condensed',sans-serif; font-weight:900; text-transform:uppercase; line-height:0.95; font-size:clamp(36px,4.5vw,60px); margin-bottom:16px;">Dai inizio<br />al tuo progetto</h2>
+        <p style="font-size:13px; color:#555; line-height:1.7; margin-bottom:40px;">
+          Siamo pronti ad ascoltarti. Compila il modulo e ti ricontattiamo entro 24 ore.
+        </p>
+        <div style="display:flex; flex-direction:column; gap:14px;">
+          <div style="display:flex; gap:14px; font-size:13px;">
+            <span style="font-size:9.5px; letter-spacing:0.1em; text-transform:uppercase; font-weight:500; color:#888; min-width:58px; padding-top:2px;">Email</span>
+            <span>info@traccestudio.it</span>
+          </div>
+          <div style="display:flex; gap:14px; font-size:13px;">
+            <span style="font-size:9.5px; letter-spacing:0.1em; text-transform:uppercase; font-weight:500; color:#888; min-width:58px; padding-top:2px;">Tel</span>
+            <span>+39 392 078 5890</span>
+          </div>
+          <div style="display:flex; gap:14px; font-size:13px;">
+            <span style="font-size:9.5px; letter-spacing:0.1em; text-transform:uppercase; font-weight:500; color:#888; min-width:58px; padding-top:2px;">Orari</span>
+            <span>Lun - Ven 09:00 - 19:00</span>
+          </div>
+        </div>
+      </div>
+      <form style="display:flex; flex-direction:column; gap:16px;">
+        <input type="text" placeholder="Il tuo nome" style="background:transparent; border:none; border-bottom:1px solid rgba(0,0,0,0.2); padding:12px 0; font-size:13px; outline:none; font-family:'DM Sans',sans-serif; color:#0a0a0a;" />
+        <input type="email" placeholder="La tua email" style="background:transparent; border:none; border-bottom:1px solid rgba(0,0,0,0.2); padding:12px 0; font-size:13px; outline:none; font-family:'DM Sans',sans-serif; color:#0a0a0a;" />
+        <textarea placeholder="Raccontaci del tuo progetto" rows="4" style="background:transparent; border:none; border-bottom:1px solid rgba(0,0,0,0.2); padding:12px 0; font-size:13px; outline:none; font-family:'DM Sans',sans-serif; color:#0a0a0a; resize:none;"></textarea>
+        <button type="submit" style="align-self:flex-start; margin-top:8px; background:#0033ff; color:#fff; border:none; font-family:'Barlow Condensed',sans-serif; font-weight:700; text-transform:uppercase; letter-spacing:0.1em; font-size:13px; padding:14px 32px; border-radius:2px; cursor:pointer;">
+          Invia
+        </button>
+      </form>
+    </div>
+  </section>
+
+  <style>
+    @keyframes ticker {
+      from { transform: translateX(0); }
+      to { transform: translateX(-50%); }
+    }
+  </style>
+
+</BaseLayout>
