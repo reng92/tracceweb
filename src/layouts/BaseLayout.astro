@@ -1,7 +1,7 @@
 ﻿---
 import Header from '../components/Header.astro'
 import Footer from '../components/Footer.astro'
-import { ViewTransitions } from 'astro:transitions'
+import { ClientRouter } from 'astro:transitions'
 import '../styles/global.css'
 
 interface Props {
@@ -46,7 +46,7 @@ const canonicalURL = new URL(Astro.url.pathname, 'https://traccestudio.it').href
   <meta name="twitter:image" content="https://traccestudio.it/tracce_logo_1200x600.png" />
   <meta name="twitter:title" content={title} />
   <meta name="twitter:description" content={description} />
-  <ViewTransitions />
+  <ClientRouter />
 </head>
 <body>
   <div id="scroll-progress" style="position:fixed;top:0;left:0;height:2px;background:#0033ff;width:0%;z-index:10000;pointer-events:none;will-change:width;transform-origin:left;"></div>
