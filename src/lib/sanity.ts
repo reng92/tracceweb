@@ -6,6 +6,7 @@ export const client = createClient({
   dataset: import.meta.env.PUBLIC_SANITY_DATASET,
   useCdn: true,
   apiVersion: '2024-01-01',
+  token: import.meta.env.SANITY_API_READ_TOKEN,
 })
 
 const builder = imageUrlBuilder(client)
