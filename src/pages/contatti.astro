@@ -4,54 +4,83 @@ import BaseLayout from '../layouts/BaseLayout.astro'
 
 <BaseLayout title="Contatti — Tracce Studio">
 
-  <section style="padding:80px 48px 60px; border-bottom:1px solid rgba(0,0,0,0.08);">
+  <section class="contatti-hero" style="border-bottom:1px solid rgba(0,0,0,0.08);">
     <p style="font-size:10px; letter-spacing:0.14em; text-transform:uppercase; color:#0033ff; font-weight:500; margin-bottom:16px;">Parliamo</p>
     <h1 style="font-family:'Barlow Condensed',sans-serif; font-weight:900; text-transform:uppercase; font-size:clamp(48px,7vw,88px); line-height:1; color:#0a0a0a; margin:0;">
       Contatti
     </h1>
   </section>
 
-  <section style="padding:80px 48px; display:grid; grid-template-columns:1fr 1fr; gap:80px;">
+  <section class="contatti-form-section">
+    <div class="contatti-grid">
 
-    <div>
-      <p style="font-size:10px; letter-spacing:0.14em; text-transform:uppercase; color:#0033ff; font-weight:500; margin-bottom:24px;">Dove siamo</p>
-      <div style="display:flex; flex-direction:column; gap:20px;">
-        <div style="display:flex; gap:20px;">
-          <span style="font-size:9.5px; letter-spacing:0.12em; text-transform:uppercase; font-weight:500; color:#888; min-width:60px; padding-top:2px;">Email</span>
-          <a href="mailto:info@traccestudio.it" style="font-size:14px; color:#0a0a0a; text-decoration:none;">info@traccestudio.it</a>
+      <div>
+        <p style="font-size:10px; letter-spacing:0.14em; text-transform:uppercase; color:#0033ff; font-weight:500; margin-bottom:24px;">Dove siamo</p>
+        <div style="display:flex; flex-direction:column; gap:20px;">
+          <div style="display:flex; gap:20px;">
+            <span style="font-size:9.5px; letter-spacing:0.12em; text-transform:uppercase; font-weight:500; color:#888; min-width:60px; padding-top:2px;">Email</span>
+            <a href="mailto:info@traccestudio.it" style="font-size:14px; color:#0a0a0a; text-decoration:none;">info@traccestudio.it</a>
+          </div>
+          <div style="display:flex; gap:20px;">
+            <span style="font-size:9.5px; letter-spacing:0.12em; text-transform:uppercase; font-weight:500; color:#888; min-width:60px; padding-top:2px;">Tel</span>
+            <a href="tel:+393920785890" style="font-size:14px; color:#0a0a0a; text-decoration:none;">+39 392 078 5890</a>
+          </div>
+          <div style="display:flex; gap:20px;">
+            <span style="font-size:9.5px; letter-spacing:0.12em; text-transform:uppercase; font-weight:500; color:#888; min-width:60px; padding-top:2px;">Sede</span>
+            <span style="font-size:14px; color:#0a0a0a;">Campania, Italia</span>
+          </div>
+          <div style="display:flex; gap:20px;">
+            <span style="font-size:9.5px; letter-spacing:0.12em; text-transform:uppercase; font-weight:500; color:#888; min-width:60px; padding-top:2px;">Orari</span>
+            <span style="font-size:14px; color:#0a0a0a;">Lun – Ven, 09:00 – 19:00</span>
+          </div>
         </div>
-        <div style="display:flex; gap:20px;">
-          <span style="font-size:9.5px; letter-spacing:0.12em; text-transform:uppercase; font-weight:500; color:#888; min-width:60px; padding-top:2px;">Tel</span>
-          <a href="tel:+393920785890" style="font-size:14px; color:#0a0a0a; text-decoration:none;">+39 392 078 5890</a>
-        </div>
-        <div style="display:flex; gap:20px;">
-          <span style="font-size:9.5px; letter-spacing:0.12em; text-transform:uppercase; font-weight:500; color:#888; min-width:60px; padding-top:2px;">Sede</span>
-          <span style="font-size:14px; color:#0a0a0a;">Campania, Italia</span>
-        </div>
-        <div style="display:flex; gap:20px;">
-          <span style="font-size:9.5px; letter-spacing:0.12em; text-transform:uppercase; font-weight:500; color:#888; min-width:60px; padding-top:2px;">Orari</span>
-          <span style="font-size:14px; color:#0a0a0a;">Lun – Ven, 09:00 – 19:00</span>
+        <div style="margin-top:48px; display:flex; gap:16px;">
+          <a href="https://instagram.com/traccestudio" target="_blank" rel="noopener" style="font-size:11px; letter-spacing:0.1em; text-transform:uppercase; font-weight:500; color:#0033ff; text-decoration:none; border-bottom:1px solid #0033ff; padding-bottom:2px;">Instagram</a>
+          <a href="https://linkedin.com/company/traccestudio" target="_blank" rel="noopener" style="font-size:11px; letter-spacing:0.1em; text-transform:uppercase; font-weight:500; color:#0033ff; text-decoration:none; border-bottom:1px solid #0033ff; padding-bottom:2px;">LinkedIn</a>
         </div>
       </div>
-      <div style="margin-top:48px; display:flex; gap:16px;">
-        <a href="https://instagram.com/traccestudio" target="_blank" rel="noopener" style="font-size:11px; letter-spacing:0.1em; text-transform:uppercase; font-weight:500; color:#0033ff; text-decoration:none; border-bottom:1px solid #0033ff; padding-bottom:2px;">Instagram</a>
-        <a href="https://linkedin.com/company/traccestudio" target="_blank" rel="noopener" style="font-size:11px; letter-spacing:0.1em; text-transform:uppercase; font-weight:500; color:#0033ff; text-decoration:none; border-bottom:1px solid #0033ff; padding-bottom:2px;">LinkedIn</a>
-      </div>
-    </div>
 
-    <div>
-      <p style="font-size:10px; letter-spacing:0.14em; text-transform:uppercase; color:#0033ff; font-weight:500; margin-bottom:24px;">Scrivi un messaggio</p>
-      <form action="https://formspree.io/f/xwvwooow" method="POST" style="display:flex; flex-direction:column; gap:20px;">
-        <input type="text" name="nome" placeholder="Il tuo nome" required style="background:transparent; border:none; border-bottom:1px solid rgba(0,0,0,0.2); padding:12px 0; font-size:14px; outline:none; font-family:inherit; color:#0a0a0a;" />
-        <input type="email" name="email" placeholder="La tua email" required style="background:transparent; border:none; border-bottom:1px solid rgba(0,0,0,0.2); padding:12px 0; font-size:14px; outline:none; font-family:inherit; color:#0a0a0a;" />
-        <input type="text" name="azienda" placeholder="Azienda (opzionale)" style="background:transparent; border:none; border-bottom:1px solid rgba(0,0,0,0.2); padding:12px 0; font-size:14px; outline:none; font-family:inherit; color:#0a0a0a;" />
-        <textarea name="messaggio" placeholder="Raccontaci del tuo progetto" rows="5" required style="background:transparent; border:none; border-bottom:1px solid rgba(0,0,0,0.2); padding:12px 0; font-size:14px; outline:none; font-family:inherit; color:#0a0a0a; resize:none;"></textarea>
-        <button type="submit" style="align-self:flex-start; background:#0033ff; color:#fff; font-family:'Barlow Condensed',sans-serif; font-weight:700; font-size:13px; letter-spacing:0.12em; text-transform:uppercase; padding:14px 32px; border:none; border-radius:2px; cursor:pointer; margin-top:8px;">
-          Invia messaggio →
-        </button>
-      </form>
+      <div>
+        <p style="font-size:10px; letter-spacing:0.14em; text-transform:uppercase; color:#0033ff; font-weight:500; margin-bottom:24px;">Scrivi un messaggio</p>
+        <form action="https://formspree.io/f/xwvwooow" method="POST" style="display:flex; flex-direction:column; gap:20px;">
+          <input type="text" name="nome" placeholder="Il tuo nome" required style="background:transparent; border:none; border-bottom:1px solid rgba(0,0,0,0.2); padding:12px 0; font-size:14px; outline:none; font-family:inherit; color:#0a0a0a;" />
+          <input type="email" name="email" placeholder="La tua email" required style="background:transparent; border:none; border-bottom:1px solid rgba(0,0,0,0.2); padding:12px 0; font-size:14px; outline:none; font-family:inherit; color:#0a0a0a;" />
+          <input type="text" name="azienda" placeholder="Azienda (opzionale)" style="background:transparent; border:none; border-bottom:1px solid rgba(0,0,0,0.2); padding:12px 0; font-size:14px; outline:none; font-family:inherit; color:#0a0a0a;" />
+          <textarea name="messaggio" placeholder="Raccontaci del tuo progetto" rows="5" required style="background:transparent; border:none; border-bottom:1px solid rgba(0,0,0,0.2); padding:12px 0; font-size:14px; outline:none; font-family:inherit; color:#0a0a0a; resize:none;"></textarea>
+          <button type="submit" style="align-self:flex-start; background:#0033ff; color:#fff; font-family:'Barlow Condensed',sans-serif; font-weight:700; font-size:13px; letter-spacing:0.12em; text-transform:uppercase; padding:14px 32px; border:none; border-radius:2px; cursor:pointer; margin-top:8px;">
+            Invia messaggio →
+          </button>
+        </form>
+      </div>
+
     </div>
 
   </section>
+
+  <style>
+    .contatti-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+    }
+    .contatti-hero {
+      padding: 80px 48px 40px;
+    }
+    .contatti-form-section {
+      padding: 60px 48px 80px;
+    }
+    @media (max-width: 768px) {
+      .contatti-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+      .contatti-hero {
+        padding: 48px 20px 32px;
+      }
+      .contatti-form-section {
+        padding: 40px 20px 60px;
+      }
+    }
+  </style>
 
 </BaseLayout>

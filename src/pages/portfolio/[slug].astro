@@ -5,14 +5,14 @@ import { urlFor } from '../../lib/sanity'
 
 export async function getStaticPaths() {
   const projects = await client.fetch(
-    `*[_type == "project"]{ slug, title, category, description, url, coverImage, gallery, clientLogo, tags }`
+    `*[_type == "project"]{ slug, title, category, description, url, coverImage, gallery, clientLogo, tags, desktopImage, mobileImages }`
   ).catch(() => [])
 
   if (projects.length === 0) {
     return [
-      { params: { slug: 'dramee' }, props: { project: { title: 'Dramée', category: 'Web Development', description: 'Progetto in arrivo.', url: null, coverImage: null, gallery: [], clientLogo: null, tags: ['Web Development', 'UI Design'] } } },
-      { params: { slug: 'lustra' }, props: { project: { title: 'Lustra', category: 'E-commerce', description: 'Progetto in arrivo.', url: null, coverImage: null, gallery: [], clientLogo: null, tags: ['E-commerce', 'Shopify'] } } },
-      { params: { slug: 'chalet-ciro' }, props: { project: { title: 'Chalet Ciro', category: 'Branding + Web', description: 'Progetto in arrivo.', url: null, coverImage: null, gallery: [], clientLogo: null, tags: ['Branding', 'Web Development'] } } },
+      { params: { slug: 'dramee' }, props: { project: { title: 'Dramée', category: 'Web Development', description: 'Progetto in arrivo.', url: null, coverImage: null, gallery: [], clientLogo: null, tags: ['Web Development', 'UI Design'], desktopImage: null, mobileImages: [] } } },
+      { params: { slug: 'lustra' }, props: { project: { title: 'Lustra', category: 'E-commerce', description: 'Progetto in arrivo.', url: null, coverImage: null, gallery: [], clientLogo: null, tags: ['E-commerce', 'Shopify'], desktopImage: null, mobileImages: [] } } },
+      { params: { slug: 'chalet-ciro' }, props: { project: { title: 'Chalet Ciro', category: 'Branding + Web', description: 'Progetto in arrivo.', url: null, coverImage: null, gallery: [], clientLogo: null, tags: ['Branding', 'Web Development'], desktopImage: null, mobileImages: [] } } },
     ]
   }
 
@@ -23,6 +23,7 @@ export async function getStaticPaths() {
 }
 
 const { project } = Astro.props
+const p = project
 ---
 
 <BaseLayout title={project.title + ' — Tracce Studio'}>
@@ -56,7 +57,7 @@ const { project } = Astro.props
   {project.coverImage && (
     <section style="padding: 0 48px;">
       <img
-        src={urlFor(project.coverImage).width(1400).url()}
+        src={urlFor(project.coverImage).width(1600).quality(90).url()}
         alt={project.title}
         style="width:100%; max-height:600px; object-fit:cover; display:block; border-radius:2px;"
       />
@@ -83,20 +84,46 @@ const { project } = Astro.props
     </div>
   </section>
 
-  <!-- GALLERIA -->
-  {project.gallery && project.gallery.length > 0 && (
-    <section style="padding: 60px 48px 80px;">
-      <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px;">
-        {project.gallery.map((img: any, i: number) => (
-          <img
-            src={urlFor(img).width(900).url()}
-            alt={project.title + ' ' + (i + 1)}
-            style={`width:100%; object-fit:cover; border-radius:2px; display:block; ${i === 0 ? 'grid-column:span 2; max-height:500px;' : 'aspect-ratio:4/3;'}`}
-          />
+  <!-- SCREENSHOT DESKTOP -->
+  <section style="padding:0 48px 80px; background:#f5f4f0;">
+    {p.desktopImage && (
+      <div style="border-radius:8px; overflow:hidden; box-shadow:0 24px 80px rgba(0,0,0,0.15); border:1px solid rgba(0,0,0,0.08);">
+        <div style="background:#e0e0e0; padding:10px 16px; display:flex; align-items:center; gap:6px;">
+          <span style="width:10px; height:10px; border-radius:50%; background:#ff5f57; display:inline-block;"></span>
+          <span style="width:10px; height:10px; border-radius:50%; background:#febc2e; display:inline-block;"></span>
+          <span style="width:10px; height:10px; border-radius:50%; background:#28c840; display:inline-block;"></span>
+          <span style="flex:1; background:#fff; border-radius:4px; height:18px; margin-left:8px; display:flex; align-items:center; justify-content:center;">
+            <span style="font-size:9px; color:#888; letter-spacing:0.06em;">traccestudio.it</span>
+          </span>
+        </div>
+        <img
+          src={urlFor(p.desktopImage).width(1600).quality(90).url()}
+          alt={p.title + ' — desktop'}
+          style="width:100%; display:block;"
+        />
+      </div>
+    )}
+  </section>
+
+  <!-- MOCKUP MOBILE -->
+  <section style="padding:0 48px 80px; background:#f5f4f0;">
+    {p.mobileImages && p.mobileImages.length > 0 && (
+      <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:32px; max-width:900px; margin:0 auto;">
+        {p.mobileImages.slice(0,3).map((img: any) => (
+          <div style="border-radius:24px; overflow:hidden; box-shadow:0 16px 48px rgba(0,0,0,0.18); border:6px solid #0a0a0a; position:relative;">
+            <div style="background:#0a0a0a; height:20px; display:flex; align-items:center; justify-content:center;">
+              <span style="width:48px; height:4px; background:#333; border-radius:2px; display:block;"></span>
+            </div>
+            <img
+              src={urlFor(img).width(400).quality(85).url()}
+              alt={p.title + ' — mobile'}
+              style="width:100%; display:block;"
+            />
+          </div>
         ))}
       </div>
-    </section>
-  )}
+    )}
+  </section>
 
   <!-- CTA PROSSIMO PROGETTO -->
   <section style="background:#0a0a0a; padding:80px 48px; text-align:center;">

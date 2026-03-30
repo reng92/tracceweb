@@ -23,6 +23,25 @@ const {
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;800;900&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet" />
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="/favicon.png" />
+  <link rel="shortcut icon" href="/favicon.png" />
+  <link rel="apple-touch-icon" href="/favicon.png" />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content={title} />
+  <meta property="og:description" content={description} />
+  <meta property="og:image" content="https://traccestudio.it/og-image.jpg" />
+  <meta property="og:url" content="https://traccestudio.it" />
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="it_IT" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content="https://traccestudio.it/og-image.jpg" />
+  <meta name="twitter:title" content={title} />
+  <meta name="twitter:description" content={description} />
 </head>
 <body>
   <Header />
@@ -50,16 +69,23 @@ const {
     </div>
   </div>
 
-  <script>
+  <script is:inline>
     (function() {
-      var consent = localStorage.getItem('tracce_cookie_consent');
-      if (!consent) {
+      function showBanner() {
         document.getElementById('cookie-banner').style.display = 'block';
       }
+      window.showCookieBanner = showBanner;
+
+      var consent = localStorage.getItem('tracce_cookie_consent');
+      if (!consent) {
+        showBanner();
+      }
+
       document.getElementById('cookie-accept-all').addEventListener('click', function() {
         localStorage.setItem('tracce_cookie_consent', 'all');
         document.getElementById('cookie-banner').style.display = 'none';
       });
+
       document.getElementById('cookie-accept-necessary').addEventListener('click', function() {
         localStorage.setItem('tracce_cookie_consent', 'necessary');
         document.getElementById('cookie-banner').style.display = 'none';
