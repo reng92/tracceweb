@@ -1,50 +1,63 @@
 ---
-import BaseLayout from "../layouts/BaseLayout.astro"
+import BaseLayout from '../layouts/BaseLayout.astro'
+import { client } from '../lib/sanity'
+import { teamQuery } from '../lib/queries'
+import { urlFor } from '../lib/sanity'
+
+const team = await client.fetch(teamQuery).catch(() => [])
+
+const staticTeam = [
+  { name: 'Luigi Cartolano', role: 'Founder & Creative Director', bio: 'Appassionato di design e tecnologia, guida Tracce con visione strategica e attenzione maniacale ai dettagli.', photo: null },
+]
 ---
+
 <BaseLayout title="Chi siamo — Tracce Studio">
 
-  <section style="padding:80px 48px; display:grid; grid-template-columns:1fr 1fr; gap:80px; align-items:center;">
+  <section style="padding:80px 48px 60px; border-bottom:1px solid rgba(0,0,0,0.08);">
+    <p style="font-size:10px; letter-spacing:0.14em; text-transform:uppercase; color:#0033ff; font-weight:500; margin-bottom:16px;">La nostra storia</p>
+    <h1 style="font-family:'Barlow Condensed',sans-serif; font-weight:900; text-transform:uppercase; font-size:clamp(48px,7vw,88px); line-height:1; color:#0a0a0a; margin:0;">
+      Chi siamo
+    </h1>
+  </section>
+
+  <section style="padding:80px 48px; display:grid; grid-template-columns:1fr 1fr; gap:80px; border-bottom:1px solid rgba(0,0,0,0.08);">
     <div>
-      <p style="font-size:10px; letter-spacing:0.14em; text-transform:uppercase; color:#0033ff; font-weight:500; margin-bottom:24px;">— Chi siamo</p>
-      <h1 style="font-family:'Barlow Condensed',sans-serif; font-weight:900; text-transform:uppercase; font-size:clamp(48px,6vw,72px); line-height:0.92; color:#0a0a0a; margin-bottom:32px;">
-        La web agency<br /><span style="color:#0033ff;">che ti posiziona</span>
-      </h1>
-      <p style="font-size:15px; line-height:1.8; color:#444; margin-bottom:20px;">
-        Siamo Tracce, una web agency con sede in Campania. Dal 2021 aiutiamo aziende e professionisti a crescere nel mondo digitale con strategia, design e tecnologia.
-      </p>
-      <p style="font-size:15px; line-height:1.8; color:#444; margin-bottom:32px;">
-        Distinguiti, fatti amare e soprattutto fa in modo che ti seguano. Ogni progetto nasce da un ascolto profondo delle tue esigenze e si trasforma in una soluzione digitale su misura.
-      </p>
-      <a href="/contatti" style="display:inline-block; background:#0033ff; color:#fff; font-family:'Barlow Condensed',sans-serif; font-weight:700; text-transform:uppercase; letter-spacing:0.1em; font-size:13px; padding:14px 32px; border-radius:2px; text-decoration:none;">
-        Lavora con noi
-      </a>
+      <p style="font-size:10px; letter-spacing:0.14em; text-transform:uppercase; color:#0033ff; font-weight:500; margin-bottom:20px;">La nostra missione</p>
+      <h2 style="font-family:'Barlow Condensed',sans-serif; font-weight:900; text-transform:uppercase; font-size:40px; line-height:1.05; color:#0a0a0a; margin:0 0 24px;">
+        Trasformiamo idee in esperienze digitali memorabili
+      </h2>
     </div>
-    <div style="background:#0a0a0a; border-radius:2px; padding:48px; display:flex; flex-direction:column; gap:32px;">
-      <div>
-        <div style="font-family:'Barlow Condensed',sans-serif; font-weight:900; font-size:56px; color:#0033ff; line-height:1;">2021</div>
-        <div style="font-size:13px; color:#999; margin-top:4px;">Anno di fondazione</div>
-      </div>
-      <div style="border-top:1px solid #1a1a1a; padding-top:32px;">
-        <div style="font-family:'Barlow Condensed',sans-serif; font-weight:900; font-size:56px; color:#0033ff; line-height:1;">50+</div>
-        <div style="font-size:13px; color:#999; margin-top:4px;">Progetti completati</div>
-      </div>
-      <div style="border-top:1px solid #1a1a1a; padding-top:32px;">
-        <div style="font-family:'Barlow Condensed',sans-serif; font-weight:900; font-size:56px; color:#0033ff; line-height:1;">100%</div>
-        <div style="font-size:13px; color:#999; margin-top:4px;">Clienti soddisfatti</div>
-      </div>
+    <div style="display:flex; flex-direction:column; gap:20px; padding-top:8px;">
+      <p style="font-size:15px; line-height:1.8; color:#333; margin:0;">
+        Tracce Studio è una web agency con sede in Campania. Lavoriamo con brand e imprenditori che vogliono distinguersi nel digitale con progetti autentici, strategici e belli da vedere.
+      </p>
+      <p style="font-size:15px; line-height:1.8; color:#333; margin:0;">
+        Non facciamo siti standard. Ogni progetto nasce da un ascolto profondo: capiamo il business, il pubblico e gli obiettivi, poi costruiamo la soluzione più efficace.
+      </p>
     </div>
   </section>
 
-  <section style="padding:80px 48px; background:#0a0a0a;">
-    <p style="font-size:10px; letter-spacing:0.14em; text-transform:uppercase; color:#0033ff; font-weight:500; margin-bottom:40px;">— I nostri clienti</p>
-    <div style="display:flex; gap:48px; align-items:center; flex-wrap:wrap;">
-      <img src="/logos/chaletciro.png" alt="Chalet Ciro" style="height:32px; width:auto; filter:invert(1); opacity:0.6;" />
-      <img src="/logos/casasurace.png" alt="Casa Surace" style="height:32px; width:auto; filter:invert(1); opacity:0.6;" />
-      <img src="/logos/leangioine.png" alt="Le Angioine" style="height:32px; width:auto; filter:invert(1); opacity:0.6;" />
-      <img src="/logos/fbibaits.png" alt="FBaits" style="height:32px; width:auto; filter:invert(1); opacity:0.6;" />
-      <img src="/logos/dramee.svg" alt="Dramée" style="height:24px; width:auto; filter:invert(1); opacity:0.6;" />
-      <img src="/logos/lustra.png" alt="Lustra" style="height:28px; width:auto; filter:invert(1); opacity:0.6;" />
-      <img src="/logos/bitar.png" alt="Bitar" style="height:28px; width:auto; filter:invert(1); opacity:0.6;" />
+  <section style="padding:80px 48px;">
+    <p style="font-size:10px; letter-spacing:0.14em; text-transform:uppercase; color:#0033ff; font-weight:500; margin-bottom:48px;">Il team</p>
+    <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:32px;">
+      {(team.length > 0 ? team : staticTeam).map((member: any) => (
+        <div>
+          <div style="aspect-ratio:3/4; background:#e8e8e5; border-radius:2px; overflow:hidden; margin-bottom:16px;">
+            {member.photo ? (
+              <img src={urlFor(member.photo).width(400).url()} alt={member.name} style="width:100%; height:100%; object-fit:cover; display:block;" />
+            ) : (
+              <div style="width:100%; height:100%; display:flex; align-items:center; justify-content:center;">
+                <span style="font-family:'Barlow Condensed',sans-serif; font-weight:900; font-size:48px; color:rgba(0,0,0,0.12); text-transform:uppercase;">
+                  {member.name.split(' ').map((w: string) => w[0]).join('')}
+                </span>
+              </div>
+            )}
+          </div>
+          <h3 style="font-family:'Barlow Condensed',sans-serif; font-weight:900; text-transform:uppercase; font-size:20px; color:#0a0a0a; margin:0 0 4px;">{member.name}</h3>
+          <p style="font-size:11px; letter-spacing:0.1em; text-transform:uppercase; color:#0033ff; font-weight:500; margin:0 0 12px;">{member.role}</p>
+          <p style="font-size:13px; line-height:1.7; color:#555; margin:0;">{member.bio}</p>
+        </div>
+      ))}
     </div>
   </section>
 

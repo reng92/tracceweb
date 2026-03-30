@@ -1,0 +1,46 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro'
+import { client } from '../lib/sanity'
+import { servicesQuery } from '../lib/queries'
+
+const services = await client.fetch(servicesQuery).catch(() => [])
+
+const staticServices = [
+  { n: '01', title: 'Branding', desc: "Costruiamo identità visive memorabili. Logo, palette, tipografia e brand guidelines per un'immagine coerente su ogni canale." },
+  { n: '02', title: 'Web Design', desc: "Design su misura, orientato alla conversione. Ogni layout nasce da un'analisi profonda del tuo business e del tuo pubblico." },
+  { n: '03', title: 'UX/UI Design', desc: "Interfacce intuitive e piacevoli da usare. Progettiamo esperienze digitali che guidano l'utente verso l'azione." },
+  { n: '04', title: 'Web Development', desc: 'Siti e applicazioni veloci, sicuri e scalabili. Soluzioni tecnologiche avanzate adattate a ogni livello di complessità.' },
+  { n: '05', title: 'Digital Strategy', desc: 'Strategie data-driven per crescere online. SEO, contenuti, campagne: costruiamo il percorso digitale della tua azienda.' },
+  { n: '06', title: 'Social Media', desc: 'Gestione e crescita della tua community. Content creation, pianificazione editoriale e campagne sponsorizzate su misura.' },
+]
+---
+
+<BaseLayout title="Servizi — Tracce Studio">
+
+  <section style="padding:80px 48px 40px; border-bottom:1px solid rgba(0,0,0,0.08);">
+    <p style="font-size:10px; letter-spacing:0.14em; text-transform:uppercase; color:#0033ff; font-weight:500; margin-bottom:16px;">Cosa facciamo</p>
+    <h1 style="font-family:'Barlow Condensed',sans-serif; font-weight:900; text-transform:uppercase; font-size:clamp(48px,7vw,88px); line-height:1; color:#0a0a0a; margin:0;">
+      Servizi
+    </h1>
+  </section>
+
+  <section style="padding:0 48px 80px;">
+    {staticServices.map(s => (
+      <div style="display:grid; grid-template-columns:64px 1fr 1fr; gap:16px; padding:28px 0; border-bottom:1px solid rgba(0,0,0,0.08); align-items:start;">
+        <span style="font-family:'Barlow Condensed',sans-serif; font-weight:700; font-size:12px; color:#0033ff; letter-spacing:0.1em; padding-top:4px;">{s.n}</span>
+        <h2 style="font-family:'Barlow Condensed',sans-serif; font-weight:900; text-transform:uppercase; font-size:30px; line-height:1; color:#0a0a0a; margin:0;">{s.title}</h2>
+        <p style="font-size:13px; line-height:1.7; color:#555; margin:0; padding-top:4px;">{s.desc}</p>
+      </div>
+    ))}
+  </section>
+
+  <section style="background:#0033ff; padding:80px 48px; text-align:center;">
+    <h2 style="font-family:'Barlow Condensed',sans-serif; font-weight:900; text-transform:uppercase; font-size:clamp(36px,5vw,64px); color:#fff; margin:0 0 32px; line-height:1;">
+      Pronto a partire?
+    </h2>
+    <a href="/contatti" style="background:#fff; color:#0033ff; font-family:'Barlow Condensed',sans-serif; font-weight:700; font-size:13px; letter-spacing:0.12em; text-transform:uppercase; padding:16px 40px; border-radius:2px; text-decoration:none;">
+      Parliamo del tuo progetto →
+    </a>
+  </section>
+
+</BaseLayout>
