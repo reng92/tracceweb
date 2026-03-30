@@ -143,5 +143,9 @@ const p = project
 
 <script>
   import { gsap } from 'gsap'
-  gsap.from('#slug-title', { y: 60, opacity: 0, duration: 1.1, ease: 'power4.out', delay: 0.05 })
+
+  document.addEventListener('astro:page-load', () => {
+    if (!document.getElementById('slug-title')) return
+    gsap.from('#slug-title', { y: 60, opacity: 0, duration: 1.1, ease: 'power4.out', delay: 0.05 })
+  })
 </script>

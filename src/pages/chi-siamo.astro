@@ -167,37 +167,41 @@ const staticTeam = [
   import { ScrollTrigger } from 'gsap/ScrollTrigger'
   gsap.registerPlugin(ScrollTrigger)
 
-  // --- Hero entrance ---
-  gsap.from('.about-hero h1', { y: 60, opacity: 0, duration: 1.1, ease: 'power4.out', delay: 0.05 })
+  document.addEventListener('astro:page-load', () => {
+    if (!document.querySelector('.about-hero')) return
 
-  // --- About grid fade ---
-  gsap.from('.about-grid > div', {
-    scrollTrigger: { trigger: '.about-grid', start: 'top 82%', once: true },
-    y: 40, opacity: 0, duration: 0.9, stagger: 0.15, ease: 'power3.out'
-  })
+    // Hero entrance
+    gsap.from('.about-hero h1', { y: 60, opacity: 0, duration: 1.1, ease: 'power4.out', delay: 0.05 })
 
-  // --- Stat items stagger ---
-  gsap.from('.stat-item', {
-    scrollTrigger: { trigger: '.about-stats', start: 'top 85%', once: true },
-    y: 30, opacity: 0, duration: 0.8, stagger: 0.12, ease: 'power3.out'
-  })
+    // About grid fade
+    gsap.from('.about-grid > div', {
+      scrollTrigger: { trigger: '.about-grid', start: 'top 82%', once: true },
+      y: 40, opacity: 0, duration: 0.9, stagger: 0.15, ease: 'power3.out'
+    })
 
-  // --- Animated counters ---
-  document.querySelectorAll<HTMLElement>('.stat-number').forEach(el => {
-    const target = parseInt(el.dataset.target || '0', 10)
-    const obj = { val: 0 }
-    ScrollTrigger.create({
-      trigger: el,
-      start: 'top 85%',
-      once: true,
-      onEnter: () => {
-        gsap.to(obj, {
-          val: target,
-          duration: 2,
-          ease: 'power2.out',
-          onUpdate: () => { el.textContent = Math.round(obj.val).toString() }
-        })
-      }
+    // Stat items stagger
+    gsap.from('.stat-item', {
+      scrollTrigger: { trigger: '.about-stats', start: 'top 85%', once: true },
+      y: 30, opacity: 0, duration: 0.8, stagger: 0.12, ease: 'power3.out'
+    })
+
+    // Animated counters
+    document.querySelectorAll<HTMLElement>('.stat-number').forEach(el => {
+      const target = parseInt(el.dataset.target || '0', 10)
+      const obj = { val: 0 }
+      ScrollTrigger.create({
+        trigger: el,
+        start: 'top 85%',
+        once: true,
+        onEnter: () => {
+          gsap.to(obj, {
+            val: target,
+            duration: 2,
+            ease: 'power2.out',
+            onUpdate: () => { el.textContent = Math.round(obj.val).toString() }
+          })
+        }
+      })
     })
   })
 </script>

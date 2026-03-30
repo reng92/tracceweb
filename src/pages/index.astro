@@ -173,57 +173,45 @@ const svcList = services.length > 0 ? services : staticServices
   import { ScrollTrigger } from 'gsap/ScrollTrigger'
   gsap.registerPlugin(ScrollTrigger)
 
-  // --- Hero entrance (timeline staggered) ---
-  const heroTitle = document.getElementById('hero-title')
-  if (heroTitle) {
+  document.addEventListener('astro:page-load', () => {
+    const heroTitle = document.getElementById('hero-title')
+    if (!heroTitle) return  // non siamo sulla home, esci
+
+    // Hero entrance
     const tl = gsap.timeline({ defaults: { ease: 'power4.out' } })
-    tl.from('#hero-title',  { y: 80, opacity: 0, duration: 1.1, delay: 0.05 })
-      .from('#hero-desc',   { y: 30, opacity: 0, duration: 0.9 }, '-=0.65')
-      .from('#hero-cta',    { y: 20, opacity: 0, duration: 0.7 }, '-=0.6')
-      .from('#hero-badge',  { scale: 0.75, opacity: 0, duration: 0.8, ease: 'back.out(2)' }, '-=0.7')
-  }
+    tl.from('#hero-title', { y: 80, opacity: 0, duration: 1.1, delay: 0.05 })
+      .from('#hero-desc',  { y: 30, opacity: 0, duration: 0.9 }, '-=0.65')
+      .from('#hero-cta',   { y: 20, opacity: 0, duration: 0.7 }, '-=0.6')
+      .from('#hero-badge', { scale: 0.75, opacity: 0, duration: 0.8, ease: 'back.out(2)' }, '-=0.7')
 
-  // --- Services stagger ---
-  const serviceRows = gsap.utils.toArray<HTMLElement>('.gsap-service-row')
-  if (serviceRows.length) {
-    gsap.from(serviceRows, {
-      scrollTrigger: { trigger: '#gsap-services', start: 'top 80%', once: true },
-      y: 32, opacity: 0, duration: 0.7, stagger: 0.1, ease: 'power3.out'
-    })
-  }
+    // Services stagger
+    const serviceRows = gsap.utils.toArray<HTMLElement>('.gsap-service-row')
+    if (serviceRows.length) {
+      gsap.from(serviceRows, {
+        scrollTrigger: { trigger: '#gsap-services', start: 'top 80%', once: true },
+        y: 32, opacity: 0, duration: 0.7, stagger: 0.1, ease: 'power3.out'
+      })
+    }
 
-  // --- Portfolio cards stagger ---
-  const projCards = gsap.utils.toArray<HTMLElement>('.proj-card')
-  if (projCards.length) {
-    gsap.from(projCards, {
-      scrollTrigger: { trigger: projCards[0], start: 'top 85%', once: true },
-      y: 50, opacity: 0, duration: 0.8, stagger: 0.09, ease: 'power3.out'
-    })
-  }
+    // Portfolio cards stagger
+    const projCards = gsap.utils.toArray<HTMLElement>('.proj-card')
+    if (projCards.length) {
+      gsap.from(projCards, {
+        scrollTrigger: { trigger: projCards[0], start: 'top 85%', once: true },
+        y: 50, opacity: 0, duration: 0.8, stagger: 0.09, ease: 'power3.out'
+      })
+    }
 
-  // --- Hero parallax ---
-  if (heroTitle) {
+    // Hero parallax
     gsap.to('#hero-title', {
-      scrollTrigger: {
-        trigger: '#hero-section',
-        start: 'top top',
-        end: 'bottom top',
-        scrub: 1.5
-      },
-      y: -70,
-      ease: 'none'
+      scrollTrigger: { trigger: '#hero-section', start: 'top top', end: 'bottom top', scrub: 1.5 },
+      y: -70, ease: 'none'
     })
     gsap.to('#hero-desc', {
-      scrollTrigger: {
-        trigger: '#hero-section',
-        start: 'top top',
-        end: 'bottom top',
-        scrub: 2
-      },
-      y: -40,
-      ease: 'none'
+      scrollTrigger: { trigger: '#hero-section', start: 'top top', end: 'bottom top', scrub: 2 },
+      y: -40, ease: 'none'
     })
-  }
+  })
 </script>
 
 <style>

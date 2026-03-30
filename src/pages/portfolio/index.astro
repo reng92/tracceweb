@@ -49,11 +49,12 @@ const projects = fetchedProjects.length > 0 ? fetchedProjects : staticProjects
   import { ScrollTrigger } from 'gsap/ScrollTrigger'
   gsap.registerPlugin(ScrollTrigger)
 
-  const cards = gsap.utils.toArray<HTMLElement>('.gsap-portfolio-card')
-  if (cards.length) {
+  document.addEventListener('astro:page-load', () => {
+    const cards = gsap.utils.toArray<HTMLElement>('.gsap-portfolio-card')
+    if (!cards.length) return
     gsap.from(cards, {
       scrollTrigger: { trigger: cards[0], start: 'top 88%', once: true },
       y: 60, opacity: 0, duration: 0.85, stagger: 0.1, ease: 'power3.out'
     })
-  }
+  })
 </script>

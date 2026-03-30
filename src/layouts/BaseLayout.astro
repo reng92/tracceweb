@@ -1,6 +1,7 @@
 ﻿---
 import Header from '../components/Header.astro'
 import Footer from '../components/Footer.astro'
+import { ViewTransitions } from 'astro:transitions'
 import '../styles/global.css'
 
 interface Props {
@@ -45,6 +46,7 @@ const canonicalURL = new URL(Astro.url.pathname, 'https://traccestudio.it').href
   <meta name="twitter:image" content="https://traccestudio.it/tracce_logo_1200x600.png" />
   <meta name="twitter:title" content={title} />
   <meta name="twitter:description" content={description} />
+  <ViewTransitions />
 </head>
 <body>
   <div id="scroll-progress" style="position:fixed;top:0;left:0;height:2px;background:#0033ff;width:0%;z-index:10000;pointer-events:none;will-change:width;transform-origin:left;"></div>
@@ -54,44 +56,79 @@ const canonicalURL = new URL(Astro.url.pathname, 'https://traccestudio.it').href
   </main>
   <Footer />
 
+  <!-- BACK TO TOP -->
+  <button id="back-to-top" aria-label="Torna su" style="position:fixed;bottom:28px;right:28px;width:44px;height:44px;background:#0a0a0a;color:#fff;border:none;border-radius:2px;cursor:pointer;display:flex;align-items:center;justify-content:center;z-index:998;opacity:0;pointer-events:none;transition:opacity 0.3s,transform 0.3s;transform:translateY(8px);">
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M8 12V4M4 8l4-4 4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+  </button>
+  <script is:inline>
+    (function () {
+      var btn = document.getElementById('back-to-top')
+      if (!btn) return
+      // Click: si ri-aggancia ad ogni navigazione (btn è un nuovo elemento)
+      btn.addEventListener('click', function () {
+        window.scrollTo({ top: 0, behavior: 'smooth' })
+      })
+      // Scroll: un solo listener per tutta la sessione
+      if (!window.__btScrollInit) {
+        window.__btScrollInit = true
+        window.addEventListener('scroll', function () {
+          var b = document.getElementById('back-to-top')
+          if (!b) return
+          var show = window.scrollY > 400
+          b.style.opacity = show ? '1' : '0'
+          b.style.pointerEvents = show ? 'auto' : 'none'
+          b.style.transform = show ? 'translateY(0)' : 'translateY(8px)'
+        }, { passive: true })
+      }
+    })()
+  </script>
+
   <!-- GSAP GLOBAL -->
   <script>
     import { gsap } from 'gsap'
     import { ScrollTrigger } from 'gsap/ScrollTrigger'
     gsap.registerPlugin(ScrollTrigger)
 
-    // --- Scroll progress bar ---
-    const progressBar = document.getElementById('scroll-progress')
-    if (progressBar) {
+    // Progress bar — un solo listener per tutta la sessione
+    if (!(window as any).__progressInit) {
+      ;(window as any).__progressInit = true
       window.addEventListener('scroll', () => {
+        const bar = document.getElementById('scroll-progress')
+        if (!bar) return
         const max = document.documentElement.scrollHeight - window.innerHeight
-        gsap.set(progressBar, { width: (max > 0 ? (window.scrollY / max) * 100 : 0) + '%' })
+        gsap.set(bar, { width: (max > 0 ? (window.scrollY / max) * 100 : 0) + '%' })
       }, { passive: true })
     }
 
-    // --- Global fade + slide-up via ScrollTrigger ---
-    gsap.utils.toArray<HTMLElement>('[data-gsap="fade"]').forEach(el => {
-      gsap.from(el, {
-        scrollTrigger: { trigger: el, start: 'top 88%', once: true },
-        y: 48,
-        opacity: 0,
-        duration: 0.9,
-        ease: 'power3.out'
-      })
-    })
+    function initGlobalAnimations() {
+      // Pulisce i ScrollTrigger della pagina precedente
+      ScrollTrigger.getAll().forEach(st => st.kill())
 
-    // --- Magnetic buttons ---
-    document.querySelectorAll<HTMLElement>('[data-gsap="magnetic"]').forEach(btn => {
-      btn.addEventListener('mousemove', (e: MouseEvent) => {
-        const rect = btn.getBoundingClientRect()
-        const dx = (e.clientX - (rect.left + rect.width / 2)) * 0.38
-        const dy = (e.clientY - (rect.top + rect.height / 2)) * 0.38
-        gsap.to(btn, { x: dx, y: dy, duration: 0.3, ease: 'power2.out' })
+      // Fade + slide-up globale
+      gsap.utils.toArray<HTMLElement>('[data-gsap="fade"]').forEach(el => {
+        gsap.from(el, {
+          scrollTrigger: { trigger: el, start: 'top 88%', once: true },
+          y: 48, opacity: 0, duration: 0.9, ease: 'power3.out'
+        })
       })
-      btn.addEventListener('mouseleave', () => {
-        gsap.to(btn, { x: 0, y: 0, duration: 0.65, ease: 'elastic.out(1,0.4)' })
+
+      // Magnetic buttons
+      document.querySelectorAll<HTMLElement>('[data-gsap="magnetic"]').forEach(btn => {
+        btn.addEventListener('mousemove', (e: MouseEvent) => {
+          const rect = btn.getBoundingClientRect()
+          const dx = (e.clientX - (rect.left + rect.width / 2)) * 0.38
+          const dy = (e.clientY - (rect.top + rect.height / 2)) * 0.38
+          gsap.to(btn, { x: dx, y: dy, duration: 0.3, ease: 'power2.out' })
+        })
+        btn.addEventListener('mouseleave', () => {
+          gsap.to(btn, { x: 0, y: 0, duration: 0.65, ease: 'elastic.out(1,0.4)' })
+        })
       })
-    })
+    }
+
+    document.addEventListener('astro:page-load', initGlobalAnimations)
   </script>
 
   <!-- COOKIE PANEL -->
@@ -167,6 +204,8 @@ const canonicalURL = new URL(Astro.url.pathname, 'https://traccestudio.it').href
       bottom: 24px;
       right: 24px;
       width: 380px;
+      max-height: calc(100vh - 48px);
+      overflow-y: auto;
       background: #0a0a0a;
       color: #fff;
       border-radius: 4px;
@@ -338,6 +377,7 @@ const canonicalURL = new URL(Astro.url.pathname, 'https://traccestudio.it').href
         left: 12px;
         bottom: 12px;
         width: auto;
+        max-height: calc(100vh - 24px);
       }
     }
   </style>
