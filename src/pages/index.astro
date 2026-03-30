@@ -71,7 +71,7 @@ const showProjects = projects.slice(0, 4)
     <div class="ts-portfolio-grid">
       {showProjects.map((p: any, i: number) => (
         
-          href={"/portfolio/" + p.slug.current}
+          href={`/portfolio/${p.slug?.current ?? ''}`}
           class={i === 0 ? "ts-wide" : ""}
           style={i === 0
             ? "grid-column:span 2; position:relative; overflow:hidden; background:#161616; display:block; text-decoration:none;"
