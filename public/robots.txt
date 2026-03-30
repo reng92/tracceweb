@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://traccestudio.it/sitemap-index.xml

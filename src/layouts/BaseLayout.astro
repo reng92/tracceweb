@@ -12,6 +12,8 @@ const {
   title = 'Tracce Studio — Web Agency Campania',
   description = 'Siamo una web agency con sede in Campania.'
 } = Astro.props
+
+const canonicalURL = new URL(Astro.url.pathname, 'https://traccestudio.it').href
 ---
 <!DOCTYPE html>
 <html lang="it">
@@ -19,6 +21,7 @@ const {
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content={description} />
+  <link rel="canonical" href={canonicalURL} />
   <title>{title}</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -32,63 +35,369 @@ const {
   <!-- Open Graph -->
   <meta property="og:title" content={title} />
   <meta property="og:description" content={description} />
-  <meta property="og:image" content="https://traccestudio.it/og-image.jpg" />
-  <meta property="og:url" content="https://traccestudio.it" />
+  <meta property="og:image" content="https://traccestudio.it/tracce_logo_1200x600.png" />
+  <meta property="og:url" content={canonicalURL} />
   <meta property="og:type" content="website" />
   <meta property="og:locale" content="it_IT" />
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:image" content="https://traccestudio.it/og-image.jpg" />
+  <meta name="twitter:image" content="https://traccestudio.it/tracce_logo_1200x600.png" />
   <meta name="twitter:title" content={title} />
   <meta name="twitter:description" content={description} />
 </head>
 <body>
+  <div id="scroll-progress" style="position:fixed;top:0;left:0;height:2px;background:#0033ff;width:0%;z-index:10000;pointer-events:none;will-change:width;transform-origin:left;"></div>
   <Header />
   <main>
     <slot />
   </main>
   <Footer />
 
-  <div id="cookie-banner" style="display:none; position:fixed; bottom:24px; left:24px; max-width:420px; background:#0a0a0a; color:#fff; padding:24px 28px; border-radius:4px; z-index:9999; box-shadow:0 8px 40px rgba(0,0,0,0.3); font-family:'DM Sans',sans-serif;">
-    <p style="font-size:13px; line-height:1.6; margin:0 0 8px; font-weight:600;">Questo sito utilizza cookie</p>
-    <p style="font-size:12px; line-height:1.6; color:rgba(255,255,255,0.65); margin:0 0 20px;">
-      Usiamo cookie tecnici (necessari) e, con il tuo consenso, cookie analitici per migliorare la navigazione.
-      Consulta la nostra <a href="/cookie-policy" style="color:#0033ff; text-decoration:underline;">Cookie Policy</a>.
-    </p>
-    <div style="display:flex; gap:10px; flex-wrap:wrap;">
-      <button id="cookie-accept-all" style="background:#0033ff; color:#fff; border:none; padding:9px 20px; font-size:11px; font-weight:600; letter-spacing:0.08em; text-transform:uppercase; border-radius:2px; cursor:pointer;">
-        Accetta tutti
-      </button>
-      <button id="cookie-accept-necessary" style="background:transparent; color:rgba(255,255,255,0.7); border:1px solid rgba(255,255,255,0.2); padding:9px 20px; font-size:11px; font-weight:600; letter-spacing:0.08em; text-transform:uppercase; border-radius:2px; cursor:pointer;">
-        Solo necessari
-      </button>
-      <a href="/cookie-policy" style="display:flex; align-items:center; font-size:11px; color:rgba(255,255,255,0.4); text-decoration:none; letter-spacing:0.06em; text-transform:uppercase;">
-        Gestisci
-      </a>
+  <!-- GSAP GLOBAL -->
+  <script>
+    import { gsap } from 'gsap'
+    import { ScrollTrigger } from 'gsap/ScrollTrigger'
+    gsap.registerPlugin(ScrollTrigger)
+
+    // --- Scroll progress bar ---
+    const progressBar = document.getElementById('scroll-progress')
+    if (progressBar) {
+      window.addEventListener('scroll', () => {
+        const max = document.documentElement.scrollHeight - window.innerHeight
+        gsap.set(progressBar, { width: (max > 0 ? (window.scrollY / max) * 100 : 0) + '%' })
+      }, { passive: true })
+    }
+
+    // --- Global fade + slide-up via ScrollTrigger ---
+    gsap.utils.toArray<HTMLElement>('[data-gsap="fade"]').forEach(el => {
+      gsap.from(el, {
+        scrollTrigger: { trigger: el, start: 'top 88%', once: true },
+        y: 48,
+        opacity: 0,
+        duration: 0.9,
+        ease: 'power3.out'
+      })
+    })
+
+    // --- Magnetic buttons ---
+    document.querySelectorAll<HTMLElement>('[data-gsap="magnetic"]').forEach(btn => {
+      btn.addEventListener('mousemove', (e: MouseEvent) => {
+        const rect = btn.getBoundingClientRect()
+        const dx = (e.clientX - (rect.left + rect.width / 2)) * 0.38
+        const dy = (e.clientY - (rect.top + rect.height / 2)) * 0.38
+        gsap.to(btn, { x: dx, y: dy, duration: 0.3, ease: 'power2.out' })
+      })
+      btn.addEventListener('mouseleave', () => {
+        gsap.to(btn, { x: 0, y: 0, duration: 0.65, ease: 'elastic.out(1,0.4)' })
+      })
+    })
+  </script>
+
+  <!-- COOKIE PANEL -->
+  <div id="cookie-panel" aria-label="Preferenze cookie" role="dialog" aria-modal="true">
+    <div class="cp-header">
+      <p class="cp-label">Cookie</p>
+      <h2 class="cp-title">Gestisci le preferenze</h2>
+      <p class="cp-desc">
+        Utilizziamo cookie per migliorare la tua esperienza. Puoi scegliere quali categorie accettare.
+        Leggi la nostra <a href="/cookie-policy">Cookie Policy</a>.
+      </p>
+    </div>
+
+    <div class="cp-categories">
+
+      <!-- Necessari -->
+      <div class="cp-row">
+        <div class="cp-row-info">
+          <span class="cp-cat-name">Necessari</span>
+          <p class="cp-cat-desc">Indispensabili per il funzionamento del sito. Non possono essere disattivati.</p>
+        </div>
+        <span class="cp-always-on">Sempre attivi</span>
+      </div>
+
+      <!-- Funzionali -->
+      <div class="cp-row">
+        <div class="cp-row-info">
+          <span class="cp-cat-name">Funzionali</span>
+          <p class="cp-cat-desc">Memorizzano preferenze come lingua e layout per migliorare la navigazione.</p>
+        </div>
+        <label class="cp-toggle">
+          <input type="checkbox" id="toggle-funzionali" />
+          <span class="cp-track"><span class="cp-thumb"></span></span>
+        </label>
+      </div>
+
+      <!-- Analitici -->
+      <div class="cp-row">
+        <div class="cp-row-info">
+          <span class="cp-cat-name">Analitici</span>
+          <p class="cp-cat-desc">Raccolgono dati anonimi sulle visite per aiutarci a migliorare il sito.</p>
+        </div>
+        <label class="cp-toggle">
+          <input type="checkbox" id="toggle-analitici" />
+          <span class="cp-track"><span class="cp-thumb"></span></span>
+        </label>
+      </div>
+
+      <!-- Profilazione / Marketing -->
+      <div class="cp-row cp-row--last">
+        <div class="cp-row-info">
+          <span class="cp-cat-name">Profilazione</span>
+          <p class="cp-cat-desc">Permettono di mostrarti contenuti e pubblicità pertinenti ai tuoi interessi.</p>
+        </div>
+        <label class="cp-toggle">
+          <input type="checkbox" id="toggle-profilazione" />
+          <span class="cp-track"><span class="cp-thumb"></span></span>
+        </label>
+      </div>
+
+    </div>
+
+    <div class="cp-actions">
+      <button id="cookie-save" class="cp-btn cp-btn--primary">Salva preferenze</button>
+      <button id="cookie-accept-all" class="cp-btn cp-btn--ghost">Accetta tutti</button>
+      <button id="cookie-necessary" class="cp-btn cp-btn--text">Solo necessari</button>
     </div>
   </div>
 
+  <style>
+    #cookie-panel {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      width: 380px;
+      background: #0a0a0a;
+      color: #fff;
+      border-radius: 4px;
+      z-index: 9999;
+      box-shadow: 0 16px 60px rgba(0,0,0,0.4);
+      font-family: 'DM Sans', sans-serif;
+      transform: translateY(calc(100% + 32px));
+      opacity: 0;
+      transition: transform 0.4s cubic-bezier(0.16,1,0.3,1), opacity 0.4s ease;
+      pointer-events: none;
+    }
+    #cookie-panel.cp-visible {
+      transform: translateY(0);
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .cp-header {
+      padding: 24px 24px 0;
+    }
+    .cp-label {
+      font-size: 9px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: #0033ff;
+      font-weight: 600;
+      margin: 0 0 8px;
+    }
+    .cp-title {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 900;
+      text-transform: uppercase;
+      font-size: 22px;
+      color: #fff;
+      margin: 0 0 10px;
+      line-height: 1;
+    }
+    .cp-desc {
+      font-size: 11.5px;
+      line-height: 1.65;
+      color: rgba(255,255,255,0.5);
+      margin: 0;
+    }
+    .cp-desc a {
+      color: #0033ff;
+      text-decoration: underline;
+    }
+
+    .cp-categories {
+      padding: 16px 24px 0;
+    }
+    .cp-row {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 14px 0;
+      border-top: 1px solid rgba(255,255,255,0.07);
+    }
+    .cp-row--last {
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+    }
+    .cp-row-info {
+      flex: 1;
+    }
+    .cp-cat-name {
+      font-size: 12px;
+      font-weight: 600;
+      color: #fff;
+      display: block;
+      margin-bottom: 3px;
+    }
+    .cp-cat-desc {
+      font-size: 11px;
+      line-height: 1.5;
+      color: rgba(255,255,255,0.4);
+      margin: 0;
+    }
+    .cp-always-on {
+      font-size: 9px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.3);
+      white-space: nowrap;
+      padding-top: 2px;
+      flex-shrink: 0;
+    }
+
+    /* Toggle */
+    .cp-toggle {
+      flex-shrink: 0;
+      cursor: pointer;
+      display: block;
+      padding-top: 2px;
+    }
+    .cp-toggle input {
+      position: absolute;
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+    .cp-track {
+      display: block;
+      width: 40px;
+      height: 22px;
+      background: rgba(255,255,255,0.12);
+      border-radius: 11px;
+      position: relative;
+      transition: background 0.25s ease;
+    }
+    .cp-thumb {
+      position: absolute;
+      top: 3px;
+      left: 3px;
+      width: 16px;
+      height: 16px;
+      background: rgba(255,255,255,0.4);
+      border-radius: 50%;
+      transition: transform 0.25s cubic-bezier(0.34,1.56,0.64,1), background 0.25s ease;
+    }
+    .cp-toggle input:checked + .cp-track {
+      background: #0033ff;
+    }
+    .cp-toggle input:checked + .cp-track .cp-thumb {
+      transform: translateX(18px);
+      background: #fff;
+    }
+
+    /* Buttons */
+    .cp-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      padding: 16px 24px 20px;
+    }
+    .cp-btn {
+      width: 100%;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      font-size: 12px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      border-radius: 2px;
+      cursor: pointer;
+      padding: 11px 20px;
+      border: none;
+      transition: opacity 0.2s;
+    }
+    .cp-btn:hover { opacity: 0.85; }
+    .cp-btn--primary {
+      background: #0033ff;
+      color: #fff;
+    }
+    .cp-btn--ghost {
+      background: transparent;
+      color: rgba(255,255,255,0.7);
+      border: 1px solid rgba(255,255,255,0.15) !important;
+    }
+    .cp-btn--text {
+      background: transparent;
+      color: rgba(255,255,255,0.3);
+      font-size: 10px;
+      padding: 6px;
+    }
+
+    @media (max-width: 480px) {
+      #cookie-panel {
+        right: 12px;
+        left: 12px;
+        bottom: 12px;
+        width: auto;
+      }
+    }
+  </style>
+
   <script is:inline>
-    (function() {
+    (function () {
+      var panel = document.getElementById('cookie-panel');
+
+      function getConsent() {
+        try { return JSON.parse(localStorage.getItem('tracce_cookie_consent') || 'null'); } catch { return null; }
+      }
+      function saveConsent(prefs) {
+        localStorage.setItem('tracce_cookie_consent', JSON.stringify(prefs));
+      }
+      function hideBanner() {
+        panel.classList.remove('cp-visible');
+      }
       function showBanner() {
-        document.getElementById('cookie-banner').style.display = 'block';
+        panel.classList.add('cp-visible');
       }
       window.showCookieBanner = showBanner;
 
-      var consent = localStorage.getItem('tracce_cookie_consent');
-      if (!consent) {
-        showBanner();
+      // Restore toggle states from saved prefs
+      var saved = getConsent();
+      if (saved && typeof saved === 'object') {
+        ['funzionali', 'analitici', 'profilazione'].forEach(function(cat) {
+          var el = document.getElementById('toggle-' + cat);
+          if (el) el.checked = !!saved[cat];
+        });
       }
 
-      document.getElementById('cookie-accept-all').addEventListener('click', function() {
-        localStorage.setItem('tracce_cookie_consent', 'all');
-        document.getElementById('cookie-banner').style.display = 'none';
+      if (!saved) {
+        // Small delay so the slide-in animation is visible after paint
+        setTimeout(showBanner, 300);
+      }
+
+      document.getElementById('cookie-save').addEventListener('click', function () {
+        saveConsent({
+          necessari: true,
+          funzionali: document.getElementById('toggle-funzionali').checked,
+          analitici:  document.getElementById('toggle-analitici').checked,
+          profilazione: document.getElementById('toggle-profilazione').checked,
+        });
+        hideBanner();
       });
 
-      document.getElementById('cookie-accept-necessary').addEventListener('click', function() {
-        localStorage.setItem('tracce_cookie_consent', 'necessary');
-        document.getElementById('cookie-banner').style.display = 'none';
+      document.getElementById('cookie-accept-all').addEventListener('click', function () {
+        ['funzionali', 'analitici', 'profilazione'].forEach(function(cat) {
+          document.getElementById('toggle-' + cat).checked = true;
+        });
+        saveConsent({ necessari: true, funzionali: true, analitici: true, profilazione: true });
+        hideBanner();
+      });
+
+      document.getElementById('cookie-necessary').addEventListener('click', function () {
+        ['funzionali', 'analitici', 'profilazione'].forEach(function(cat) {
+          document.getElementById('toggle-' + cat).checked = false;
+        });
+        saveConsent({ necessari: true, funzionali: false, analitici: false, profilazione: false });
+        hideBanner();
       });
     })();
   </script>

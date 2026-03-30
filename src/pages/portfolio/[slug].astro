@@ -38,7 +38,7 @@ const p = project
         {project.clientLogo && (
           <img src={urlFor(project.clientLogo).height(48).url()} alt={project.title} style="height:40px; margin-bottom:20px; display:block;" />
         )}
-        <h1 style="font-family:'Barlow Condensed',sans-serif; font-weight:900; text-transform:uppercase; font-size:clamp(48px,7vw,88px); line-height:1; color:#0a0a0a; margin:0;">
+        <h1 id="slug-title" style="font-family:'Barlow Condensed',sans-serif; font-weight:900; text-transform:uppercase; font-size:clamp(48px,7vw,88px); line-height:1; color:#0a0a0a; margin:0;">
           {project.title}
         </h1>
         <p style="font-size:12px; letter-spacing:0.1em; text-transform:uppercase; color:#888; margin-top:12px;">
@@ -46,7 +46,7 @@ const p = project
         </p>
       </div>
       {project.url && (
-        <a href={project.url} target="_blank" rel="noopener" style="background:#0033ff; color:#fff; font-family:'Barlow Condensed',sans-serif; font-weight:700; font-size:13px; letter-spacing:0.12em; text-transform:uppercase; padding:14px 32px; border-radius:2px; text-decoration:none; white-space:nowrap;">
+        <a href={project.url} target="_blank" rel="noopener" data-gsap="magnetic" style="background:#0033ff; color:#fff; font-family:'Barlow Condensed',sans-serif; font-weight:700; font-size:13px; letter-spacing:0.12em; text-transform:uppercase; padding:14px 32px; border-radius:2px; text-decoration:none; white-space:nowrap;">
           Visita il sito →
         </a>
       )}
@@ -59,6 +59,7 @@ const p = project
       <img
         src={urlFor(project.coverImage).width(1600).quality(90).url()}
         alt={project.title}
+        loading="lazy"
         style="width:100%; max-height:600px; object-fit:cover; display:block; border-radius:2px;"
       />
     </section>
@@ -68,7 +69,7 @@ const p = project
   <section style="padding: 60px 48px; display:grid; grid-template-columns:1fr 300px; gap:60px; border-bottom:1px solid rgba(0,0,0,0.08);">
     <div>
       <p style="font-size:10px; letter-spacing:0.14em; text-transform:uppercase; color:#0033ff; font-weight:500; margin-bottom:16px;">Il progetto</p>
-      <p style="font-size:16px; line-height:1.8; color:#333; max-width:640px;">
+      <p data-gsap="fade" style="font-size:16px; line-height:1.8; color:#333; max-width:640px;">
         {project.description}
       </p>
     </div>
@@ -99,6 +100,7 @@ const p = project
         <img
           src={urlFor(p.desktopImage).width(1600).quality(90).url()}
           alt={p.title + ' — desktop'}
+          loading="lazy"
           style="width:100%; display:block;"
         />
       </div>
@@ -117,6 +119,7 @@ const p = project
             <img
               src={urlFor(img).width(400).quality(85).url()}
               alt={p.title + ' — mobile'}
+              loading="lazy"
               style="width:100%; display:block;"
             />
           </div>
@@ -131,9 +134,14 @@ const p = project
     <h2 style="font-family:'Barlow Condensed',sans-serif; font-weight:900; text-transform:uppercase; font-size:clamp(36px,5vw,64px); color:#fff; margin:0 0 32px;">
       Inizia il tuo progetto
     </h2>
-    <a href="/contatti" style="background:#0033ff; color:#fff; font-family:'Barlow Condensed',sans-serif; font-weight:700; font-size:13px; letter-spacing:0.12em; text-transform:uppercase; padding:16px 40px; border-radius:2px; text-decoration:none;">
+    <a href="/contatti" data-gsap="magnetic" style="background:#0033ff; color:#fff; font-family:'Barlow Condensed',sans-serif; font-weight:700; font-size:13px; letter-spacing:0.12em; text-transform:uppercase; padding:16px 40px; border-radius:2px; text-decoration:none;">
       Contattaci →
     </a>
   </section>
 
 </BaseLayout>
+
+<script>
+  import { gsap } from 'gsap'
+  gsap.from('#slug-title', { y: 60, opacity: 0, duration: 1.1, ease: 'power4.out', delay: 0.05 })
+</script>

@@ -6,6 +6,12 @@ const navLinks = [
   { label: "Chi siamo", href: "/chi-siamo" },
   { label: "Contatti", href: "/contatti" },
 ]
+
+const currentPath = Astro.url.pathname
+function isActive(href: string) {
+  if (href === '/') return currentPath === '/'
+  return currentPath.startsWith(href)
+}
 ---
 
 <header id="site-header" style="background:#f5f4f0; border-bottom:1px solid rgba(0,0,0,0.08); padding:0 48px; height:60px; display:flex; align-items:center; justify-content:space-between; position:sticky; top:0; z-index:100;">
@@ -14,7 +20,7 @@ const navLinks = [
   </a>
   <nav id="nav-desktop" style="display:flex; gap:28px;">
     {navLinks.map(link => (
-      <a href={link.href} style="font-size:11px; font-weight:500; letter-spacing:0.1em; text-transform:uppercase; color:#0a0a0a; text-decoration:none;">
+      <a href={link.href} class={isActive(link.href) ? 'nav-link nav-link--active' : 'nav-link'}>
         {link.label}
       </a>
     ))}
@@ -33,7 +39,7 @@ const navLinks = [
 
 <div id="mobile-menu" style="display:none; position:fixed; top:60px; left:0; right:0; background:#f5f4f0; border-bottom:1px solid rgba(0,0,0,0.08); z-index:99; padding:24px 20px; flex-direction:column; gap:0;">
   {navLinks.map(link => (
-    <a href={link.href} style="font-size:13px; font-weight:500; letter-spacing:0.1em; text-transform:uppercase; color:#0a0a0a; text-decoration:none; padding:16px 0; border-bottom:1px solid rgba(0,0,0,0.06); display:block;">
+    <a href={link.href} style={`font-size:13px; font-weight:500; letter-spacing:0.1em; text-transform:uppercase; color:${isActive(link.href) ? '#0033ff' : '#0a0a0a'}; text-decoration:none; padding:16px 0; border-bottom:1px solid rgba(0,0,0,0.06); display:block;`}>
       {link.label}
     </a>
   ))}
@@ -43,6 +49,28 @@ const navLinks = [
 </div>
 
 <style>
+  .nav-link {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #0a0a0a;
+    text-decoration: none;
+    position: relative;
+    padding-bottom: 2px;
+  }
+  .nav-link--active {
+    color: #0033ff;
+  }
+  .nav-link--active::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: #0033ff;
+  }
   @media (max-width: 768px) {
     #nav-desktop { display: none !important; }
     #nav-cta { display: none !important; }

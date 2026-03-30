@@ -37,6 +37,29 @@ const staticTeam = [
     </div>
   </section>
 
+  <section class="about-stats-section">
+    <div class="about-stats">
+      <div class="stat-item">
+        <div class="stat-value">
+          <span class="stat-number" data-target="50">0</span><span class="stat-suffix">+</span>
+        </div>
+        <p class="stat-label">Progetti completati</p>
+      </div>
+      <div class="stat-item">
+        <div class="stat-value">
+          <span class="stat-number" data-target="30">0</span><span class="stat-suffix">+</span>
+        </div>
+        <p class="stat-label">Clienti felici</p>
+      </div>
+      <div class="stat-item">
+        <div class="stat-value">
+          <span class="stat-number" data-target="5">0</span><span class="stat-suffix">+</span>
+        </div>
+        <p class="stat-label">Anni nel digitale</p>
+      </div>
+    </div>
+  </section>
+
   {false && (
     <section style="padding:80px 48px;">
       <p style="font-size:10px; letter-spacing:0.14em; text-transform:uppercase; color:#0033ff; font-weight:500; margin-bottom:48px;">Il team</p>
@@ -79,6 +102,38 @@ const staticTeam = [
       gap: 32px;
       padding: 60px 48px 80px;
     }
+    .about-stats-section {
+      padding: 60px 48px 80px;
+      border-top: 1px solid rgba(0,0,0,0.08);
+    }
+    .about-stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 2px;
+    }
+    .stat-item {
+      padding: 40px 32px;
+      background: #0a0a0a;
+    }
+    .stat-value {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 900;
+      font-size: clamp(56px, 7vw, 88px);
+      line-height: 1;
+      color: #fff;
+      margin-bottom: 12px;
+    }
+    .stat-suffix {
+      color: #0033ff;
+    }
+    .stat-label {
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.4);
+      margin: 0;
+    }
+
     @media (max-width: 768px) {
       .about-hero {
         padding: 48px 20px 32px;
@@ -93,7 +148,56 @@ const staticTeam = [
         gap: 24px;
         padding: 40px 20px 60px;
       }
+      .about-stats-section {
+        padding: 40px 20px 60px;
+      }
+      .about-stats {
+        grid-template-columns: 1fr;
+      }
+      .stat-item {
+        padding: 28px 24px;
+      }
     }
   </style>
 
 </BaseLayout>
+
+<script>
+  import { gsap } from 'gsap'
+  import { ScrollTrigger } from 'gsap/ScrollTrigger'
+  gsap.registerPlugin(ScrollTrigger)
+
+  // --- Hero entrance ---
+  gsap.from('.about-hero h1', { y: 60, opacity: 0, duration: 1.1, ease: 'power4.out', delay: 0.05 })
+
+  // --- About grid fade ---
+  gsap.from('.about-grid > div', {
+    scrollTrigger: { trigger: '.about-grid', start: 'top 82%', once: true },
+    y: 40, opacity: 0, duration: 0.9, stagger: 0.15, ease: 'power3.out'
+  })
+
+  // --- Stat items stagger ---
+  gsap.from('.stat-item', {
+    scrollTrigger: { trigger: '.about-stats', start: 'top 85%', once: true },
+    y: 30, opacity: 0, duration: 0.8, stagger: 0.12, ease: 'power3.out'
+  })
+
+  // --- Animated counters ---
+  document.querySelectorAll<HTMLElement>('.stat-number').forEach(el => {
+    const target = parseInt(el.dataset.target || '0', 10)
+    const obj = { val: 0 }
+    ScrollTrigger.create({
+      trigger: el,
+      start: 'top 85%',
+      once: true,
+      onEnter: () => {
+        gsap.to(obj, {
+          val: target,
+          duration: 2,
+          ease: 'power2.out',
+          onUpdate: () => { el.textContent = Math.round(obj.val).toString() }
+        })
+      }
+    })
+  })
+</script>
