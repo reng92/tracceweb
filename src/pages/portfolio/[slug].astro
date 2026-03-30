@@ -1,0 +1,112 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro'
+import { client } from '../../lib/sanity'
+import { urlFor } from '../../lib/sanity'
+
+export async function getStaticPaths() {
+  const projects = await client.fetch(
+    `*[_type == "project"]{ slug, title, category, description, url, coverImage, gallery, clientLogo, tags }`
+  ).catch(() => [])
+
+  if (projects.length === 0) {
+    return [
+      { params: { slug: 'dramee' }, props: { project: { title: 'Dramée', category: 'Web Development', description: 'Progetto in arrivo.', url: null, coverImage: null, gallery: [], clientLogo: null, tags: ['Web Development', 'UI Design'] } } },
+      { params: { slug: 'lustra' }, props: { project: { title: 'Lustra', category: 'E-commerce', description: 'Progetto in arrivo.', url: null, coverImage: null, gallery: [], clientLogo: null, tags: ['E-commerce', 'Shopify'] } } },
+      { params: { slug: 'chalet-ciro' }, props: { project: { title: 'Chalet Ciro', category: 'Branding + Web', description: 'Progetto in arrivo.', url: null, coverImage: null, gallery: [], clientLogo: null, tags: ['Branding', 'Web Development'] } } },
+    ]
+  }
+
+  return projects.map((p: any) => ({
+    params: { slug: p.slug.current },
+    props: { project: p },
+  }))
+}
+
+const { project } = Astro.props
+---
+
+<BaseLayout title={project.title + ' — Tracce Studio'}>
+
+  <!-- HERO PROGETTO -->
+  <section style="padding: 80px 48px 60px; border-bottom: 1px solid rgba(0,0,0,0.08);">
+    <a href="/portfolio" style="font-size:11px; letter-spacing:0.12em; text-transform:uppercase; color:#0033ff; text-decoration:none; font-weight:500;">
+      ← Portfolio
+    </a>
+    <div style="display:flex; align-items:flex-end; justify-content:space-between; margin-top:32px; flex-wrap:wrap; gap:24px;">
+      <div>
+        {project.clientLogo && (
+          <img src={urlFor(project.clientLogo).height(48).url()} alt={project.title} style="height:40px; margin-bottom:20px; display:block;" />
+        )}
+        <h1 style="font-family:'Barlow Condensed',sans-serif; font-weight:900; text-transform:uppercase; font-size:clamp(48px,7vw,88px); line-height:1; color:#0a0a0a; margin:0;">
+          {project.title}
+        </h1>
+        <p style="font-size:12px; letter-spacing:0.1em; text-transform:uppercase; color:#888; margin-top:12px;">
+          {project.category}
+        </p>
+      </div>
+      {project.url && (
+        <a href={project.url} target="_blank" rel="noopener" style="background:#0033ff; color:#fff; font-family:'Barlow Condensed',sans-serif; font-weight:700; font-size:13px; letter-spacing:0.12em; text-transform:uppercase; padding:14px 32px; border-radius:2px; text-decoration:none; white-space:nowrap;">
+          Visita il sito →
+        </a>
+      )}
+    </div>
+  </section>
+
+  <!-- IMMAGINE COVER -->
+  {project.coverImage && (
+    <section style="padding: 0 48px;">
+      <img
+        src={urlFor(project.coverImage).width(1400).url()}
+        alt={project.title}
+        style="width:100%; max-height:600px; object-fit:cover; display:block; border-radius:2px;"
+      />
+    </section>
+  )}
+
+  <!-- DESCRIZIONE + TAG -->
+  <section style="padding: 60px 48px; display:grid; grid-template-columns:1fr 300px; gap:60px; border-bottom:1px solid rgba(0,0,0,0.08);">
+    <div>
+      <p style="font-size:10px; letter-spacing:0.14em; text-transform:uppercase; color:#0033ff; font-weight:500; margin-bottom:16px;">Il progetto</p>
+      <p style="font-size:16px; line-height:1.8; color:#333; max-width:640px;">
+        {project.description}
+      </p>
+    </div>
+    <div>
+      <p style="font-size:10px; letter-spacing:0.14em; text-transform:uppercase; color:#888; font-weight:500; margin-bottom:16px;">Servizi</p>
+      <div style="display:flex; flex-direction:column; gap:8px;">
+        {(project.tags ?? []).map((tag: string) => (
+          <span style="font-size:12px; font-weight:500; color:#0a0a0a; padding:8px 0; border-bottom:1px solid rgba(0,0,0,0.08);">
+            {tag}
+          </span>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- GALLERIA -->
+  {project.gallery && project.gallery.length > 0 && (
+    <section style="padding: 60px 48px 80px;">
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px;">
+        {project.gallery.map((img: any, i: number) => (
+          <img
+            src={urlFor(img).width(900).url()}
+            alt={project.title + ' ' + (i + 1)}
+            style={`width:100%; object-fit:cover; border-radius:2px; display:block; ${i === 0 ? 'grid-column:span 2; max-height:500px;' : 'aspect-ratio:4/3;'}`}
+          />
+        ))}
+      </div>
+    </section>
+  )}
+
+  <!-- CTA PROSSIMO PROGETTO -->
+  <section style="background:#0a0a0a; padding:80px 48px; text-align:center;">
+    <p style="font-size:10px; letter-spacing:0.14em; text-transform:uppercase; color:#0033ff; font-weight:500; margin-bottom:16px;">Lavoriamo insieme?</p>
+    <h2 style="font-family:'Barlow Condensed',sans-serif; font-weight:900; text-transform:uppercase; font-size:clamp(36px,5vw,64px); color:#fff; margin:0 0 32px;">
+      Inizia il tuo progetto
+    </h2>
+    <a href="/contatti" style="background:#0033ff; color:#fff; font-family:'Barlow Condensed',sans-serif; font-weight:700; font-size:13px; letter-spacing:0.12em; text-transform:uppercase; padding:16px 40px; border-radius:2px; text-decoration:none;">
+      Contattaci →
+    </a>
+  </section>
+
+</BaseLayout>
