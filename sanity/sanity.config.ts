@@ -1,5 +1,6 @@
 import { defineConfig } from 'sanity'
 import { structureTool } from 'sanity/structure'
+import { visionTool } from '@sanity/vision'
 import { schemaTypes } from './schemas'
 
 export default defineConfig({
@@ -7,6 +8,11 @@ export default defineConfig({
   title: 'Tracce Studio',
   projectId: 'v89xdrb0',
   dataset: 'production',
-  plugins: [structureTool()],
-  schema: { types: schemaTypes },
+  plugins: [
+    structureTool(),
+    visionTool(),
+  ],
+  schema: {
+    types: schemaTypes,
+  },
 })
