@@ -26,7 +26,7 @@ const { project } = Astro.props
 const p = project
 ---
 
-<BaseLayout title={project.title + ' — Tracce Studio'}>
+<BaseLayout title={project.title + ' — Tracce Studio'} description={project.description ? project.description.slice(0, 155) + (project.description.length > 155 ? '…' : '') : `Scopri il progetto ${project.title} realizzato da Tracce Studio: web design e sviluppo su misura in Campania.`}>
 
   <!-- HERO PROGETTO -->
   <section style="padding: 80px 48px 60px; border-bottom: 1px solid rgba(0,0,0,0.08);">
@@ -85,48 +85,54 @@ const p = project
     </div>
   </section>
 
-  <!-- SCREENSHOT DESKTOP -->
-  <section style="padding:0 48px 80px; background:#f5f4f0;">
-    {p.desktopImage && (
-      <div style="border-radius:8px; overflow:hidden; box-shadow:0 24px 80px rgba(0,0,0,0.15); border:1px solid rgba(0,0,0,0.08);">
-        <div style="background:#e0e0e0; padding:10px 16px; display:flex; align-items:center; gap:6px;">
-          <span style="width:10px; height:10px; border-radius:50%; background:#ff5f57; display:inline-block;"></span>
-          <span style="width:10px; height:10px; border-radius:50%; background:#febc2e; display:inline-block;"></span>
-          <span style="width:10px; height:10px; border-radius:50%; background:#28c840; display:inline-block;"></span>
-          <span style="flex:1; background:#fff; border-radius:4px; height:18px; margin-left:8px; display:flex; align-items:center; justify-content:center;">
-            <span style="font-size:9px; color:#888; letter-spacing:0.06em;">traccestudio.it</span>
-          </span>
-        </div>
-        <img
-          src={urlFor(p.desktopImage).width(1600).quality(90).url()}
-          alt={p.title + ' — desktop'}
-          loading="lazy"
-          style="width:100%; display:block;"
-        />
-      </div>
-    )}
-  </section>
-
-  <!-- MOCKUP MOBILE -->
-  <section style="padding:0 48px 80px; background:#f5f4f0;">
-    {p.mobileImages && p.mobileImages.length > 0 && (
-      <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:32px; max-width:900px; margin:0 auto;">
-        {p.mobileImages.slice(0,3).map((img: any) => (
-          <div style="border-radius:24px; overflow:hidden; box-shadow:0 16px 48px rgba(0,0,0,0.18); border:6px solid #0a0a0a; position:relative;">
-            <div style="background:#0a0a0a; height:20px; display:flex; align-items:center; justify-content:center;">
-              <span style="width:48px; height:4px; background:#333; border-radius:2px; display:block;"></span>
-            </div>
+  <!-- MOCKUP MACBOOK DESKTOP -->
+  {p.desktopImage && (
+    <section class="mockup-desktop-section" data-gsap="fade">
+      <div class="macbook">
+        <div class="mb-lid">
+          <div class="mb-camera"><span></span></div>
+          <div class="mb-screen">
             <img
-              src={urlFor(img).width(400).quality(85).url()}
-              alt={p.title + ' — mobile'}
+              src={urlFor(p.desktopImage).width(1600).quality(90).url()}
+              alt={p.title + ' — desktop'}
               loading="lazy"
-              style="width:100%; display:block;"
             />
+          </div>
+        </div>
+        <div class="mb-foot-band"></div>
+        <div class="mb-deck">
+          <div class="mb-kbd"></div>
+          <div class="mb-pad"></div>
+        </div>
+        <div class="mb-bottom-edge"></div>
+      </div>
+    </section>
+  )}
+
+  <!-- MOCKUP IPHONE MOBILE -->
+  {p.mobileImages && p.mobileImages.length > 0 && (
+    <section class="mockup-mobile-section" data-gsap="fade">
+      <div class="iphones-grid">
+        {p.mobileImages.slice(0, 3).map((img: any) => (
+          <div class="iphone">
+            <div class="iphone-silent"></div>
+            <div class="iphone-vol-up"></div>
+            <div class="iphone-vol-down"></div>
+            <div class="iphone-power"></div>
+            <div class="iphone-screen">
+              <div class="iphone-island"></div>
+              <img
+                src={urlFor(img).width(500).quality(85).url()}
+                alt={p.title + ' — mobile'}
+                loading="lazy"
+              />
+              <div class="iphone-home-bar"></div>
+            </div>
           </div>
         ))}
       </div>
-    )}
-  </section>
+    </section>
+  )}
 
   <!-- CTA PROSSIMO PROGETTO -->
   <section style="background:#0a0a0a; padding:80px 48px; text-align:center;">
@@ -149,3 +155,233 @@ const p = project
     gsap.from('#slug-title', { y: 60, opacity: 0, duration: 1.1, ease: 'power4.out', delay: 0.05 })
   })
 </script>
+
+<style>
+  /* ---- SEZIONI ---- */
+  .mockup-desktop-section {
+    padding: 60px 48px 40px;
+    background: #f5f4f0;
+  }
+  .mockup-mobile-section {
+    padding: 40px 48px 80px;
+    background: #f5f4f0;
+  }
+
+  /* ---- MACBOOK ---- */
+  .macbook {
+    max-width: 860px;
+    margin: 0 auto;
+    filter: drop-shadow(0 40px 80px rgba(0,0,0,0.2)) drop-shadow(0 8px 20px rgba(0,0,0,0.12));
+  }
+
+  .mb-lid {
+    background: #1c1c1e;
+    border-radius: 16px 16px 2px 2px;
+    padding: 18px 16px 12px;
+    position: relative;
+  }
+  .mb-lid::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 16px 16px 2px 2px;
+    box-shadow: inset 0 0 0 1px rgba(255,255,255,0.06);
+    pointer-events: none;
+  }
+
+  .mb-camera {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 8px;
+  }
+  .mb-camera span {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #3c3c3e;
+    box-shadow: 0 0 0 1px rgba(255,255,255,0.06);
+  }
+
+  .mb-screen {
+    background: #000;
+    border-radius: 3px;
+    overflow: hidden;
+    aspect-ratio: 16 / 10;
+    line-height: 0;
+  }
+  .mb-screen img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top center;
+    display: block;
+  }
+
+  .mb-foot-band {
+    height: 5px;
+    background: linear-gradient(to bottom, #2a2a2c, #505254);
+    box-shadow: 0 2px 6px rgba(0,0,0,0.4);
+  }
+
+  .mb-deck {
+    background: linear-gradient(170deg, #d8d8d8 0%, #c6c6c8 60%, #bababb 100%);
+    border-radius: 0 0 10px 10px;
+    padding: 20px 24px 22px;
+  }
+  .mb-kbd {
+    height: 76px;
+    border-radius: 4px;
+    background-color: #c2c2c4;
+    background-image:
+      repeating-linear-gradient(
+        0deg,
+        transparent 0px, transparent 12px,
+        rgba(0,0,0,0.07) 12px, rgba(0,0,0,0.07) 14px
+      ),
+      repeating-linear-gradient(
+        90deg,
+        transparent 0px, transparent 24px,
+        rgba(0,0,0,0.05) 24px, rgba(0,0,0,0.05) 25px
+      );
+  }
+  .mb-pad {
+    width: 24%;
+    height: 46px;
+    background: linear-gradient(to bottom, #c8c8ca, #bcbcbe);
+    border-radius: 5px;
+    margin: 12px auto 0;
+    border: 1px solid rgba(0,0,0,0.08);
+  }
+  .mb-bottom-edge {
+    height: 4px;
+    background: linear-gradient(to bottom, #acacae, #b4b4b6);
+    border-radius: 0 0 8px 8px;
+  }
+
+  /* ---- IPHONE 17 PRO MAX ---- */
+  .iphones-grid {
+    display: flex;
+    gap: 24px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .iphone {
+    position: relative;
+    width: 188px;
+    background: linear-gradient(155deg, #707075 0%, #4a4a4e 45%, #606064 100%);
+    border-radius: 46px;
+    padding: 14px 11px;
+    box-shadow:
+      inset 0 0 0 1px rgba(255,255,255,0.1),
+      0 0 0 1px rgba(0,0,0,0.65),
+      0 30px 80px rgba(0,0,0,0.32),
+      0 8px 20px rgba(0,0,0,0.18);
+    flex-shrink: 0;
+  }
+
+  .iphone-silent {
+    position: absolute;
+    left: -3px; top: 80px;
+    width: 3px; height: 26px;
+    background: #38383c;
+    border-radius: 2px 0 0 2px;
+  }
+  .iphone-vol-up {
+    position: absolute;
+    left: -3px; top: 120px;
+    width: 3px; height: 40px;
+    background: #38383c;
+    border-radius: 2px 0 0 2px;
+  }
+  .iphone-vol-down {
+    position: absolute;
+    left: -3px; top: 170px;
+    width: 3px; height: 40px;
+    background: #38383c;
+    border-radius: 2px 0 0 2px;
+  }
+  .iphone-power {
+    position: absolute;
+    right: -3px; top: 128px;
+    width: 3px; height: 56px;
+    background: #38383c;
+    border-radius: 0 2px 2px 0;
+  }
+
+  .iphone-screen {
+    background: #000;
+    border-radius: 36px;
+    overflow: hidden;
+    aspect-ratio: 9 / 19.5;
+    position: relative;
+    line-height: 0;
+  }
+  .iphone-island {
+    position: absolute;
+    top: 13px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 76px;
+    height: 24px;
+    background: #000;
+    border-radius: 12px;
+    z-index: 2;
+    box-shadow: 0 0 0 2px #0a0a0a;
+  }
+  .iphone-screen img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top center;
+    display: block;
+  }
+  .iphone-home-bar {
+    position: absolute;
+    bottom: 9px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 78px;
+    height: 4px;
+    background: rgba(255,255,255,0.28);
+    border-radius: 2px;
+    z-index: 2;
+  }
+
+  /* ---- RESPONSIVE ---- */
+  @media (max-width: 768px) {
+    .mockup-desktop-section,
+    .mockup-mobile-section {
+      padding-left: 20px;
+      padding-right: 20px;
+    }
+    .iphone {
+      width: 152px;
+      border-radius: 38px;
+      padding: 12px 9px;
+    }
+    .iphone-silent  { top: 64px;  height: 22px; }
+    .iphone-vol-up  { top: 97px;  height: 34px; }
+    .iphone-vol-down{ top: 139px; height: 34px; }
+    .iphone-power   { top: 104px; height: 46px; }
+    .iphone-island  { width: 62px; height: 20px; top: 11px; }
+    .iphone-screen  { border-radius: 29px; }
+    .iphones-grid   { gap: 16px; }
+  }
+
+  @media (max-width: 520px) {
+    .iphone {
+      width: 118px;
+      border-radius: 30px;
+      padding: 10px 8px;
+    }
+    .iphone-silent  { top: 50px;  height: 18px; }
+    .iphone-vol-up  { top: 76px;  height: 28px; }
+    .iphone-vol-down{ top: 110px; height: 28px; }
+    .iphone-power   { top: 82px;  height: 38px; }
+    .iphone-island  { width: 50px; height: 16px; top: 9px; border-radius: 8px; }
+    .iphone-screen  { border-radius: 22px; }
+    .iphones-grid   { gap: 10px; }
+    .iphone-home-bar{ width: 56px; }
+  }
+</style>

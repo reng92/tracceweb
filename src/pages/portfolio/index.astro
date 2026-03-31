@@ -13,7 +13,7 @@ const staticProjects = [
 const fetchedProjects = await client.fetch(projectsQuery).catch(() => [])
 const projects = fetchedProjects.length > 0 ? fetchedProjects : staticProjects
 ---
-<BaseLayout title="Portfolio — Tracce Studio">
+<BaseLayout title="Portfolio — Tracce Studio" description="Scopri i progetti di Tracce Studio: siti web, brand identity ed e-commerce realizzati per clienti in Campania e in tutta Italia.">
 
   <section class="ts-container" style="padding-top:80px; padding-bottom:40px;">
     <p style="font-size:10px; letter-spacing:0.14em; text-transform:uppercase; color:#0033ff; font-weight:500; margin-bottom:24px;">— I nostri lavori</p>

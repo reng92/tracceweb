@@ -90,32 +90,42 @@ function isActive(href: string) {
   }
 </style>
 
-<script is:inline>
-  const hamburger = document.getElementById('hamburger');
-  const mobileMenu = document.getElementById('mobile-menu');
-  let open = false;
-  hamburger.addEventListener('click', function() {
-    open = !open;
-    mobileMenu.style.display = open ? 'flex' : 'none';
-    const bars = hamburger.querySelectorAll('.bar');
-    if (open) {
-      bars[0].style.transform = 'rotate(45deg) translate(5px, 5px)';
-      bars[1].style.opacity = '0';
-      bars[2].style.transform = 'rotate(-45deg) translate(5px, -5px)';
-    } else {
-      bars[0].style.transform = '';
-      bars[1].style.opacity = '1';
-      bars[2].style.transform = '';
-    }
-  });
-  document.querySelectorAll('#mobile-menu a').forEach(function(link) {
-    link.addEventListener('click', function() {
-      open = false;
-      mobileMenu.style.display = 'none';
-      const bars = hamburger.querySelectorAll('.bar');
-      bars[0].style.transform = '';
-      bars[1].style.opacity = '1';
-      bars[2].style.transform = '';
-    });
-  });
+<script>
+  document.addEventListener('astro:page-load', () => {
+    const hamburger = document.getElementById('hamburger')
+    const mobileMenu = document.getElementById('mobile-menu')
+    if (!hamburger || !mobileMenu) return
+
+    // Replace with a fresh clone to strip any stale listeners from previous navigations
+    const btn = hamburger.cloneNode(true) as HTMLElement
+    hamburger.parentNode!.replaceChild(btn, hamburger)
+
+    let open = false
+
+    btn.addEventListener('click', () => {
+      open = !open
+      mobileMenu.style.display = open ? 'flex' : 'none'
+      const bars = btn.querySelectorAll<HTMLElement>('.bar')
+      if (open) {
+        bars[0].style.transform = 'rotate(45deg) translate(5px, 5px)'
+        bars[1].style.opacity = '0'
+        bars[2].style.transform = 'rotate(-45deg) translate(5px, -5px)'
+      } else {
+        bars[0].style.transform = ''
+        bars[1].style.opacity = '1'
+        bars[2].style.transform = ''
+      }
+    })
+
+    mobileMenu.querySelectorAll<HTMLElement>('a').forEach(link => {
+      link.addEventListener('click', () => {
+        open = false
+        mobileMenu.style.display = 'none'
+        const bars = btn.querySelectorAll<HTMLElement>('.bar')
+        bars[0].style.transform = ''
+        bars[1].style.opacity = '1'
+        bars[2].style.transform = ''
+      })
+    })
+  })
 </script>

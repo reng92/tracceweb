@@ -47,6 +47,39 @@ const canonicalURL = new URL(Astro.url.pathname, 'https://traccestudio.it').href
   <meta name="twitter:title" content={title} />
   <meta name="twitter:description" content={description} />
   <ClientRouter />
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "ProfessionalService",
+    "name": "Tracce Studio",
+    "description": "Web agency in Campania specializzata in branding, web design e sviluppo web.",
+    "url": "https://traccestudio.it",
+    "logo": "https://traccestudio.it/logos/tracce.svg",
+    "image": "https://traccestudio.it/tracce_logo_1200x600.png",
+    "telephone": "+393500785990",
+    "email": "info@traccestudio.it",
+    "address": {
+      "@type": "PostalAddress",
+      "addressRegion": "Campania",
+      "addressCountry": "IT"
+    },
+    "openingHoursSpecification": [
+      {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday"],
+        "opens": "09:00",
+        "closes": "19:00"
+      }
+    ],
+    "serviceType": ["Branding","Web Design","Web Development","E-commerce","SEO"],
+    "areaServed": {
+      "@type": "State",
+      "name": "Campania"
+    },
+    "sameAs": [
+      "https://instagram.com/traccestudio",
+      "https://linkedin.com/company/traccestudio"
+    ]
+  })} />
 </head>
 <body>
   <div id="scroll-progress" style="position:fixed;top:0;left:0;height:2px;background:#0033ff;width:0%;z-index:10000;pointer-events:none;will-change:width;transform-origin:left;"></div>
@@ -57,7 +90,7 @@ const canonicalURL = new URL(Astro.url.pathname, 'https://traccestudio.it').href
   <Footer />
 
   <!-- BACK TO TOP -->
-  <button id="back-to-top" aria-label="Torna su" style="position:fixed;bottom:28px;right:28px;width:44px;height:44px;background:#0a0a0a;color:#fff;border:none;border-radius:2px;cursor:pointer;display:flex;align-items:center;justify-content:center;z-index:998;opacity:0;pointer-events:none;transition:opacity 0.3s,transform 0.3s;transform:translateY(8px);">
+  <button id="back-to-top" aria-label="Torna su" style="position:fixed;bottom:28px;right:28px;width:44px;height:44px;background:#0a0a0a;color:#fff;border:none;border-radius:2px;cursor:pointer;display:flex;align-items:center;justify-content:center;z-index:998;opacity:0;pointer-events:none;transition:opacity 0.3s,transform 0.3s;transform:translateY(8px);" class="btt-btn">
     <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path d="M8 12V4M4 8l4-4 4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
     </svg>
@@ -371,14 +404,27 @@ const canonicalURL = new URL(Astro.url.pathname, 'https://traccestudio.it').href
       padding: 6px;
     }
 
-    @media (max-width: 480px) {
-      #cookie-panel {
-        right: 12px;
-        left: 12px;
-        bottom: 12px;
-        width: auto;
-        max-height: calc(100vh - 24px);
+    @media (max-width: 600px) {
+      .btt-btn {
+        bottom: 16px !important;
+        right: 16px !important;
       }
+      #cookie-panel {
+        right: 0;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        border-radius: 12px 12px 0 0;
+        max-height: 80vh;
+      }
+      .cp-header { padding: 16px 16px 0; }
+      .cp-title { font-size: 18px; margin-bottom: 6px; }
+      .cp-desc { font-size: 10.5px; }
+      .cp-categories { padding: 8px 16px 0; }
+      .cp-row { padding: 9px 0; }
+      .cp-cat-desc { display: none; }
+      .cp-actions { padding: 12px 16px 20px; gap: 6px; }
+      .cp-btn { padding: 10px 16px; font-size: 11px; }
     }
   </style>
 

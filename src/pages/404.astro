@@ -1,0 +1,27 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro'
+---
+
+<BaseLayout title="Pagina non trovata — Tracce Studio" description="La pagina che cerchi non esiste. Torna alla home di Tracce Studio.">
+
+  <section style="min-height:calc(100vh - 60px); display:flex; align-items:center; justify-content:center; padding:60px 48px; text-align:center;">
+    <div>
+      <p style="font-size:10px; letter-spacing:0.16em; text-transform:uppercase; color:#0033ff; font-weight:600; margin:0 0 20px;">404</p>
+      <h1 style="font-family:'Barlow Condensed',sans-serif; font-weight:900; text-transform:uppercase; font-size:clamp(56px,12vw,120px); line-height:1; color:#0a0a0a; margin:0 0 24px; letter-spacing:-0.01em;">
+        Pagina<br>non trovata
+      </h1>
+      <p style="font-size:15px; color:rgba(10,10,10,0.5); max-width:400px; margin:0 auto 40px; line-height:1.7;">
+        L'URL che hai visitato non esiste o è stato spostato.
+      </p>
+      <a href="/" data-gsap="magnetic" style="display:inline-block; background:#0033ff; color:#fff; font-family:'Barlow Condensed',sans-serif; font-weight:700; font-size:13px; letter-spacing:0.12em; text-transform:uppercase; padding:14px 36px; border-radius:2px; text-decoration:none;">
+        Torna alla home →
+      </a>
+      <div style="margin-top:60px; display:flex; gap:32px; justify-content:center; flex-wrap:wrap;">
+        <a href="/servizi" style="font-size:11px; letter-spacing:0.1em; text-transform:uppercase; font-weight:500; color:#0a0a0a; text-decoration:none; border-bottom:1px solid rgba(0,0,0,0.2); padding-bottom:2px;">Servizi</a>
+        <a href="/portfolio" style="font-size:11px; letter-spacing:0.1em; text-transform:uppercase; font-weight:500; color:#0a0a0a; text-decoration:none; border-bottom:1px solid rgba(0,0,0,0.2); padding-bottom:2px;">Portfolio</a>
+        <a href="/contatti" style="font-size:11px; letter-spacing:0.1em; text-transform:uppercase; font-weight:500; color:#0a0a0a; text-decoration:none; border-bottom:1px solid rgba(0,0,0,0.2); padding-bottom:2px;">Contatti</a>
+      </div>
+    </div>
+  </section>
+
+</BaseLayout>
