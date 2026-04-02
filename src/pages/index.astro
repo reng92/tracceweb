@@ -159,6 +159,10 @@ const svcList = services.length > 0 ? services : staticServices
         <input type="text" name="nome" placeholder="Il tuo nome" required style="background:transparent; border:none; border-bottom:1px solid rgba(0,0,0,0.2); padding:12px 0; font-size:13px; outline:none; font-family:inherit;" />
         <input type="email" name="email" placeholder="La tua email" required style="background:transparent; border:none; border-bottom:1px solid rgba(0,0,0,0.2); padding:12px 0; font-size:13px; outline:none; font-family:inherit;" />
         <textarea name="messaggio" placeholder="Raccontaci del tuo progetto" rows="4" style="background:transparent; border:none; border-bottom:1px solid rgba(0,0,0,0.2); padding:12px 0; font-size:13px; outline:none; font-family:inherit; resize:none;"></textarea>
+        <label style="display:flex; align-items:flex-start; gap:10px; cursor:pointer;">
+          <input type="checkbox" name="gdpr" required style="margin-top:2px; flex-shrink:0; accent-color:#0033ff; width:14px; height:14px; cursor:pointer;" />
+          <span style="font-size:11px; color:#666; line-height:1.5;">Ho letto e accetto il trattamento dei miei dati personali ai sensi del <a href="/privacy-policy" target="_blank" style="color:#0033ff; text-decoration:none; border-bottom:1px solid #0033ff;">Regolamento GDPR (UE) 2016/679</a>.</span>
+        </label>
         <button type="submit" style="align-self:flex-start; background:#0033ff; color:#fff; font-family:'Barlow Condensed',sans-serif; font-weight:700; text-transform:uppercase; letter-spacing:0.12em; font-size:13px; padding:14px 32px; border:none; border-radius:2px; cursor:pointer; margin-top:8px;">
           Invia
         </button>
