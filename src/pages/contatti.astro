@@ -51,6 +51,10 @@ import BaseLayout from '../layouts/BaseLayout.astro'
           <input type="email" name="email" placeholder="La tua email" required style="background:transparent; border:none; border-bottom:1px solid rgba(0,0,0,0.2); padding:12px 0; font-size:14px; outline:none; font-family:inherit; color:#0a0a0a;" />
           <input type="text" name="azienda" placeholder="Azienda (opzionale)" style="background:transparent; border:none; border-bottom:1px solid rgba(0,0,0,0.2); padding:12px 0; font-size:14px; outline:none; font-family:inherit; color:#0a0a0a;" />
           <textarea name="messaggio" placeholder="Raccontaci del tuo progetto" rows="5" required style="background:transparent; border:none; border-bottom:1px solid rgba(0,0,0,0.2); padding:12px 0; font-size:14px; outline:none; font-family:inherit; color:#0a0a0a; resize:none;"></textarea>
+          <label style="display:flex; align-items:flex-start; gap:10px; cursor:pointer;">
+            <input type="checkbox" name="gdpr" required style="margin-top:2px; flex-shrink:0; accent-color:#0033ff; width:14px; height:14px; cursor:pointer;" />
+            <span style="font-size:11px; color:#666; line-height:1.5;">Ho letto e accetto il trattamento dei miei dati personali ai sensi del <a href="/privacy-policy" target="_blank" style="color:#0033ff; text-decoration:none; border-bottom:1px solid #0033ff;">Regolamento GDPR (UE) 2016/679</a>.</span>
+          </label>
           <button id="form-submit-btn" type="submit" style="align-self:flex-start; background:#0033ff; color:#fff; font-family:'Barlow Condensed',sans-serif; font-weight:700; font-size:13px; letter-spacing:0.12em; text-transform:uppercase; padding:14px 32px; border:none; border-radius:2px; cursor:pointer; margin-top:8px;">
             Invia messaggio →
           </button>
