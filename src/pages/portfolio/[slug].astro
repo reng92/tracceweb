@@ -85,48 +85,53 @@ const p = project
     </div>
   </section>
 
-  <!-- MOCKUP MACBOOK DESKTOP -->
+  <!-- MOCKUP LAPTOP DESKTOP -->
   {p.desktopImage && (
     <section class="mockup-desktop-section" data-gsap="fade">
-      <div class="macbook">
-        <div class="mb-lid">
-          <div class="mb-camera"><span></span></div>
-          <div class="mb-screen">
+      <div class="laptop">
+        <div class="lp-lid">
+          <div class="lp-bezel-top">
+            <div class="lp-camera"><span></span></div>
+          </div>
+          <div class="lp-screen">
             <img
               src={urlFor(p.desktopImage).width(1600).quality(90).url()}
               alt={p.title + ' — desktop'}
               loading="lazy"
             />
           </div>
+          <div class="lp-bezel-bottom"></div>
         </div>
-        <div class="mb-foot-band"></div>
-        <div class="mb-deck">
-          <div class="mb-kbd"></div>
-          <div class="mb-pad"></div>
+        <div class="lp-hinge"></div>
+        <div class="lp-base">
+          <div class="lp-kbd-area">
+            <div class="lp-kbd"></div>
+          </div>
+          <div class="lp-touchpad"></div>
         </div>
-        <div class="mb-bottom-edge"></div>
+        <div class="lp-bottom-edge"></div>
       </div>
     </section>
   )}
 
-  <!-- MOCKUP IPHONE MOBILE -->
+  <!-- MOCKUP SMARTPHONE MOBILE -->
   {p.mobileImages && p.mobileImages.length > 0 && (
     <section class="mockup-mobile-section" data-gsap="fade">
-      <div class="iphones-grid">
+      <div class="phones-grid">
         {p.mobileImages.slice(0, 3).map((img: any) => (
-          <div class="iphone">
-            <div class="iphone-silent"></div>
-            <div class="iphone-vol-up"></div>
-            <div class="iphone-vol-down"></div>
-            <div class="iphone-power"></div>
-            <div class="iphone-screen">
-              <div class="iphone-island"></div>
+          <div class="phone">
+            <div class="phone-silent"></div>
+            <div class="phone-vol-up"></div>
+            <div class="phone-vol-down"></div>
+            <div class="phone-power"></div>
+            <div class="phone-screen">
+              <div class="phone-camera-dot"></div>
               <img
                 src={urlFor(img).width(500).quality(85).url()}
                 alt={p.title + ' — mobile'}
                 loading="lazy"
               />
-              <div class="iphone-home-bar"></div>
+              <div class="phone-home-bar"></div>
             </div>
           </div>
         ))}
@@ -167,49 +172,50 @@ const p = project
     background: #f5f4f0;
   }
 
-  /* ---- MACBOOK ---- */
-  .macbook {
+  /* ---- LAPTOP ---- */
+  .laptop {
     max-width: 860px;
     margin: 0 auto;
     filter: drop-shadow(0 40px 80px rgba(0,0,0,0.2)) drop-shadow(0 8px 20px rgba(0,0,0,0.12));
   }
 
-  .mb-lid {
-    background: #1c1c1e;
-    border-radius: 16px 16px 2px 2px;
-    padding: 18px 16px 12px;
+  .lp-lid {
+    background: #2a2a2e;
+    border-radius: 10px 10px 2px 2px;
+    padding: 0;
     position: relative;
-  }
-  .mb-lid::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    border-radius: 16px 16px 2px 2px;
-    box-shadow: inset 0 0 0 1px rgba(255,255,255,0.06);
-    pointer-events: none;
+    box-shadow: inset 0 0 0 1px rgba(255,255,255,0.05);
   }
 
-  .mb-camera {
+  .lp-bezel-top {
     display: flex;
     justify-content: center;
-    margin-bottom: 8px;
+    align-items: center;
+    height: 22px;
+    background: #252528;
+    border-radius: 10px 10px 0 0;
   }
-  .mb-camera span {
-    width: 6px;
-    height: 6px;
+  .lp-camera {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .lp-camera span {
+    width: 7px;
+    height: 7px;
     border-radius: 50%;
-    background: #3c3c3e;
-    box-shadow: 0 0 0 1px rgba(255,255,255,0.06);
+    background: #1a1a1c;
+    box-shadow: inset 0 0 0 2px rgba(255,255,255,0.08), 0 0 0 1px rgba(255,255,255,0.04);
   }
 
-  .mb-screen {
+  .lp-screen {
     background: #000;
-    border-radius: 3px;
     overflow: hidden;
-    aspect-ratio: 16 / 10;
+    aspect-ratio: 16 / 9;
     line-height: 0;
+    margin: 0 12px;
   }
-  .mb-screen img {
+  .lp-screen img {
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -217,61 +223,70 @@ const p = project
     display: block;
   }
 
-  .mb-foot-band {
-    height: 5px;
-    background: linear-gradient(to bottom, #2a2a2c, #505254);
-    box-shadow: 0 2px 6px rgba(0,0,0,0.4);
+  .lp-bezel-bottom {
+    height: 14px;
+    background: #252528;
+    border-radius: 0 0 2px 2px;
   }
 
-  .mb-deck {
-    background: linear-gradient(170deg, #d8d8d8 0%, #c6c6c8 60%, #bababb 100%);
-    border-radius: 0 0 10px 10px;
-    padding: 20px 24px 22px;
+  .lp-hinge {
+    height: 6px;
+    background: linear-gradient(to bottom, #1a1a1c, #444448);
   }
-  .mb-kbd {
-    height: 76px;
-    border-radius: 4px;
-    background-color: #c2c2c4;
+
+  .lp-base {
+    background: linear-gradient(170deg, #e0e0e2 0%, #cecece 60%, #c4c4c6 100%);
+    border-radius: 0 0 8px 8px;
+    padding: 18px 28px 20px;
+  }
+  .lp-kbd-area {
+    margin-bottom: 10px;
+  }
+  .lp-kbd {
+    height: 72px;
+    border-radius: 3px;
+    background-color: #c8c8ca;
     background-image:
       repeating-linear-gradient(
         0deg,
-        transparent 0px, transparent 12px,
-        rgba(0,0,0,0.07) 12px, rgba(0,0,0,0.07) 14px
+        transparent 0px, transparent 11px,
+        rgba(0,0,0,0.06) 11px, rgba(0,0,0,0.06) 13px
       ),
       repeating-linear-gradient(
         90deg,
-        transparent 0px, transparent 24px,
-        rgba(0,0,0,0.05) 24px, rgba(0,0,0,0.05) 25px
+        transparent 0px, transparent 22px,
+        rgba(0,0,0,0.04) 22px, rgba(0,0,0,0.04) 23px
       );
+    box-shadow: inset 0 1px 2px rgba(0,0,0,0.08);
   }
-  .mb-pad {
-    width: 24%;
-    height: 46px;
-    background: linear-gradient(to bottom, #c8c8ca, #bcbcbe);
-    border-radius: 5px;
-    margin: 12px auto 0;
-    border: 1px solid rgba(0,0,0,0.08);
+  .lp-touchpad {
+    width: 26%;
+    height: 44px;
+    background: linear-gradient(to bottom, #d0d0d2, #c4c4c6);
+    border-radius: 4px;
+    margin: 0 auto;
+    border: 1px solid rgba(0,0,0,0.1);
   }
-  .mb-bottom-edge {
+  .lp-bottom-edge {
     height: 4px;
-    background: linear-gradient(to bottom, #acacae, #b4b4b6);
-    border-radius: 0 0 8px 8px;
+    background: linear-gradient(to bottom, #b8b8ba, #c0c0c2);
+    border-radius: 0 0 6px 6px;
   }
 
-  /* ---- IPHONE 17 PRO MAX ---- */
-  .iphones-grid {
+  /* ---- SMARTPHONE (no hole) ---- */
+  .phones-grid {
     display: flex;
     gap: 24px;
     justify-content: center;
     flex-wrap: wrap;
   }
 
-  .iphone {
+  .phone {
     position: relative;
     width: 188px;
-    background: linear-gradient(155deg, #707075 0%, #4a4a4e 45%, #606064 100%);
-    border-radius: 46px;
-    padding: 14px 11px;
+    background: linear-gradient(155deg, #6a6a70 0%, #46464a 45%, #5a5a5e 100%);
+    border-radius: 36px;
+    padding: 16px 10px;
     box-shadow:
       inset 0 0 0 1px rgba(255,255,255,0.1),
       0 0 0 1px rgba(0,0,0,0.65),
@@ -280,70 +295,72 @@ const p = project
     flex-shrink: 0;
   }
 
-  .iphone-silent {
+  .phone-silent {
     position: absolute;
-    left: -3px; top: 80px;
-    width: 3px; height: 26px;
+    left: -3px; top: 72px;
+    width: 3px; height: 24px;
     background: #38383c;
     border-radius: 2px 0 0 2px;
   }
-  .iphone-vol-up {
+  .phone-vol-up {
     position: absolute;
-    left: -3px; top: 120px;
-    width: 3px; height: 40px;
+    left: -3px; top: 110px;
+    width: 3px; height: 38px;
     background: #38383c;
     border-radius: 2px 0 0 2px;
   }
-  .iphone-vol-down {
+  .phone-vol-down {
     position: absolute;
-    left: -3px; top: 170px;
-    width: 3px; height: 40px;
+    left: -3px; top: 158px;
+    width: 3px; height: 38px;
     background: #38383c;
     border-radius: 2px 0 0 2px;
   }
-  .iphone-power {
+  .phone-power {
     position: absolute;
-    right: -3px; top: 128px;
-    width: 3px; height: 56px;
+    right: -3px; top: 120px;
+    width: 3px; height: 52px;
     background: #38383c;
     border-radius: 0 2px 2px 0;
   }
 
-  .iphone-screen {
+  .phone-screen {
     background: #000;
-    border-radius: 36px;
+    border-radius: 26px;
     overflow: hidden;
     aspect-ratio: 9 / 19.5;
     position: relative;
     line-height: 0;
   }
-  .iphone-island {
+  .phone-camera-dot {
     position: absolute;
-    top: 13px;
+    top: 14px;
     left: 50%;
     transform: translateX(-50%);
-    width: 76px;
-    height: 24px;
-    background: #000;
-    border-radius: 12px;
+    width: 9px;
+    height: 9px;
+    background: #111;
+    border-radius: 50%;
     z-index: 2;
-    box-shadow: 0 0 0 2px #0a0a0a;
+    box-shadow: inset 0 0 0 2px rgba(255,255,255,0.06), 0 0 0 1px rgba(255,255,255,0.04);
   }
-  .iphone-screen img {
+  .phone-screen img {
     width: 100%;
     height: 100%;
     object-fit: cover;
     object-position: top center;
     display: block;
+    padding-top: 30px;
+    box-sizing: border-box;
   }
-  .iphone-home-bar {
+  .phone-home-bar {
     position: absolute;
     bottom: 9px;
     left: 50%;
     transform: translateX(-50%);
-    width: 78px;
+    width: 72px;
     height: 4px;
-    background: rgba(255,255,255,0.28);
+    background: rgba(255,255,255,0.25);
     border-radius: 2px;
     z-index: 2;
   }
@@ -355,33 +372,35 @@ const p = project
       padding-left: 20px;
       padding-right: 20px;
     }
-    .iphone {
+    .phone {
       width: 152px;
-      border-radius: 38px;
-      padding: 12px 9px;
+      border-radius: 30px;
+      padding: 13px 9px;
     }
-    .iphone-silent  { top: 64px;  height: 22px; }
-    .iphone-vol-up  { top: 97px;  height: 34px; }
-    .iphone-vol-down{ top: 139px; height: 34px; }
-    .iphone-power   { top: 104px; height: 46px; }
-    .iphone-island  { width: 62px; height: 20px; top: 11px; }
-    .iphone-screen  { border-radius: 29px; }
-    .iphones-grid   { gap: 16px; }
+    .phone-silent   { top: 58px;  height: 20px; }
+    .phone-vol-up   { top: 90px;  height: 32px; }
+    .phone-vol-down { top: 132px; height: 32px; }
+    .phone-power    { top: 98px;  height: 44px; }
+    .phone-screen   { border-radius: 22px; }
+    .phone-camera-dot { width: 7px; height: 7px; top: 11px; }
+    .phone-screen img { padding-top: 24px; }
+    .phones-grid    { gap: 16px; }
   }
 
   @media (max-width: 520px) {
-    .iphone {
+    .phone {
       width: 118px;
-      border-radius: 30px;
+      border-radius: 24px;
       padding: 10px 8px;
     }
-    .iphone-silent  { top: 50px;  height: 18px; }
-    .iphone-vol-up  { top: 76px;  height: 28px; }
-    .iphone-vol-down{ top: 110px; height: 28px; }
-    .iphone-power   { top: 82px;  height: 38px; }
-    .iphone-island  { width: 50px; height: 16px; top: 9px; border-radius: 8px; }
-    .iphone-screen  { border-radius: 22px; }
-    .iphones-grid   { gap: 10px; }
-    .iphone-home-bar{ width: 56px; }
+    .phone-silent   { top: 45px;  height: 16px; }
+    .phone-vol-up   { top: 70px;  height: 26px; }
+    .phone-vol-down { top: 103px; height: 26px; }
+    .phone-power    { top: 76px;  height: 36px; }
+    .phone-screen   { border-radius: 17px; }
+    .phone-camera-dot { width: 6px; height: 6px; top: 9px; }
+    .phone-screen img { padding-top: 20px; }
+    .phones-grid    { gap: 10px; }
+    .phone-home-bar { width: 52px; }
   }
 </style>
