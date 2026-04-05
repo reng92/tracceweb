@@ -24,9 +24,36 @@ export async function getStaticPaths() {
 
 const { project } = Astro.props
 const p = project
+const slug = Astro.params.slug
+
+const pageSchema = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "CreativeWork",
+      "url": `https://traccestudio.it/portfolio/${slug}`,
+      "name": project.title,
+      "description": project.description || `Progetto ${project.title} realizzato da Tracce Studio.`,
+      "creator": {
+        "@type": "Organization",
+        "name": "Tracce Studio",
+        "url": "https://traccestudio.it"
+      },
+      ...(project.coverImage ? { "image": urlFor(project.coverImage).width(1200).url() } : {})
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://traccestudio.it/" },
+        { "@type": "ListItem", "position": 2, "name": "Portfolio", "item": "https://traccestudio.it/portfolio" },
+        { "@type": "ListItem", "position": 3, "name": project.title, "item": `https://traccestudio.it/portfolio/${slug}` }
+      ]
+    }
+  ]
+}
 ---
 
-<BaseLayout title={project.title + ' — Tracce Studio'} description={project.description ? project.description.slice(0, 155) + (project.description.length > 155 ? '…' : '') : `Scopri il progetto ${project.title} realizzato da Tracce Studio: web design e sviluppo su misura in Campania.`}>
+<BaseLayout title={project.title + ' — Tracce Studio'} description={project.description ? project.description.slice(0, 155) + (project.description.length > 155 ? '…' : '') : `Scopri il progetto ${project.title} realizzato da Tracce Studio: web design e sviluppo su misura in Campania.`} pageSchema={pageSchema}>
 
   <!-- HERO PROGETTO -->
   <section style="padding: 80px 48px 60px; border-bottom: 1px solid rgba(0,0,0,0.08);">

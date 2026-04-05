@@ -7,11 +7,13 @@ import '../styles/global.css'
 interface Props {
   title?: string
   description?: string
+  pageSchema?: Record<string, unknown>
 }
 
 const {
   title = 'Tracce Studio — Web Agency Campania',
-  description = 'Siamo una web agency con sede in Campania.'
+  description = 'Siamo una web agency con sede in Campania.',
+  pageSchema
 } = Astro.props
 
 const canonicalURL = new URL(Astro.url.pathname, 'https://traccestudio.it').href
@@ -32,6 +34,10 @@ const canonicalURL = new URL(Astro.url.pathname, 'https://traccestudio.it').href
   <link rel="icon" type="image/png" href="/favicon.png" />
   <link rel="shortcut icon" href="/favicon.png" />
   <link rel="apple-touch-icon" href="/favicon.png" />
+  <link rel="manifest" href="/site.webmanifest" />
+  <meta name="theme-color" content="#0033ff" />
+  <!-- Google Search Console — sostituire con il codice del proprio account -->
+  <!-- <meta name="google-site-verification" content="IL_TUO_CODICE_QUI" /> -->
 
   <!-- Open Graph -->
   <meta property="og:title" content={title} />
@@ -40,12 +46,33 @@ const canonicalURL = new URL(Astro.url.pathname, 'https://traccestudio.it').href
   <meta property="og:url" content={canonicalURL} />
   <meta property="og:type" content="website" />
   <meta property="og:locale" content="it_IT" />
+  <meta property="og:site_name" content="Tracce Studio" />
+  <meta property="og:image:alt" content="Tracce Studio — Web Agency Campania" />
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:image" content="https://traccestudio.it/tracce_logo_1200x600.png" />
   <meta name="twitter:title" content={title} />
   <meta name="twitter:description" content={description} />
+  <!-- Analytics (Plausible) — caricato solo con consenso analitici -->
+  <script is:inline>
+    (function () {
+      function loadPlausible() {
+        if (document.getElementById('plausible-js')) return
+        var s = document.createElement('script')
+        s.id = 'plausible-js'
+        s.defer = true
+        s.setAttribute('data-domain', 'traccestudio.it')
+        s.src = 'https://plausible.io/js/script.js'
+        document.head.appendChild(s)
+      }
+      window.__loadAnalytics = loadPlausible
+      try {
+        var c = JSON.parse(localStorage.getItem('tracce_cookie_consent') || 'null')
+        if (c && c.analitici) loadPlausible()
+      } catch (e) {}
+    })()
+  </script>
   <ClientRouter />
   <script type="application/ld+json" set:html={JSON.stringify({
     "@context": "https://schema.org",
@@ -80,6 +107,7 @@ const canonicalURL = new URL(Astro.url.pathname, 'https://traccestudio.it').href
       "https://linkedin.com/company/traccestudio"
     ]
   })} />
+  {pageSchema && <script type="application/ld+json" set:html={JSON.stringify(pageSchema)} />}
 </head>
 <body>
   <div id="scroll-progress" style="position:fixed;top:0;left:0;height:2px;background:#0033ff;width:0%;z-index:10000;pointer-events:none;will-change:width;transform-origin:left;"></div>
@@ -461,12 +489,14 @@ const canonicalURL = new URL(Astro.url.pathname, 'https://traccestudio.it').href
       }
 
       document.getElementById('cookie-save').addEventListener('click', function () {
+        var analitici = document.getElementById('toggle-analitici').checked;
         saveConsent({
           necessari: true,
           funzionali: document.getElementById('toggle-funzionali').checked,
-          analitici:  document.getElementById('toggle-analitici').checked,
+          analitici:  analitici,
           profilazione: document.getElementById('toggle-profilazione').checked,
         });
+        if (analitici && typeof window.__loadAnalytics === 'function') window.__loadAnalytics();
         hideBanner();
       });
 
@@ -475,6 +505,7 @@ const canonicalURL = new URL(Astro.url.pathname, 'https://traccestudio.it').href
           document.getElementById('toggle-' + cat).checked = true;
         });
         saveConsent({ necessari: true, funzionali: true, analitici: true, profilazione: true });
+        if (typeof window.__loadAnalytics === 'function') window.__loadAnalytics();
         hideBanner();
       });
 

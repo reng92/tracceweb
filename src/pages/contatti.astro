@@ -1,8 +1,28 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro'
+
+const pageSchema = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "ContactPage",
+      "url": "https://traccestudio.it/contatti",
+      "name": "Contatti — Tracce Studio",
+      "description": "Contatta Tracce Studio per il tuo prossimo progetto web.",
+      "isPartOf": { "@type": "WebSite", "url": "https://traccestudio.it" }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://traccestudio.it/" },
+        { "@type": "ListItem", "position": 2, "name": "Contatti", "item": "https://traccestudio.it/contatti" }
+      ]
+    }
+  ]
+}
 ---
 
-<BaseLayout title="Contatti — Tracce Studio" description="Contatta Tracce Studio per il tuo prossimo progetto web. Scrivici o chiamaci al +39 350 078 5990: ti rispondiamo entro 24 ore.">
+<BaseLayout title="Contatti — Tracce Studio" description="Contatta Tracce Studio per il tuo prossimo progetto web. Scrivici o chiamaci al +39 350 078 5990: ti rispondiamo entro 24 ore." pageSchema={pageSchema}>
 
   <section class="contatti-hero" style="border-bottom:1px solid rgba(0,0,0,0.08);">
     <p style="font-size:10px; letter-spacing:0.14em; text-transform:uppercase; color:#0033ff; font-weight:500; margin-bottom:16px;">Parliamo</p>

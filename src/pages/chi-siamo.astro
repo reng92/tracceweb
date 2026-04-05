@@ -6,12 +6,32 @@ import { urlFor } from '../lib/sanity'
 
 const team = await client.fetch(teamQuery).catch(() => [])
 
+const pageSchema = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "AboutPage",
+      "url": "https://traccestudio.it/chi-siamo",
+      "name": "Chi siamo — Tracce Studio",
+      "description": "Siamo Tracce Studio, un team di designer e sviluppatori con sede in Campania.",
+      "isPartOf": { "@type": "WebSite", "url": "https://traccestudio.it" }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://traccestudio.it/" },
+        { "@type": "ListItem", "position": 2, "name": "Chi siamo", "item": "https://traccestudio.it/chi-siamo" }
+      ]
+    }
+  ]
+}
+
 const staticTeam = [
   { name: 'Luigi Cartolano', role: 'Founder & Creative Director', bio: 'Appassionato di design e tecnologia, guida Tracce con visione strategica e attenzione maniacale ai dettagli.', photo: null },
 ]
 ---
 
-<BaseLayout title="Chi siamo — Tracce Studio" description="Siamo Tracce Studio, un team di designer e sviluppatori con sede in Campania. Oltre 50 progetti completati e 5 anni di esperienza nel digitale.">
+<BaseLayout title="Chi siamo — Tracce Studio" description="Siamo Tracce Studio, un team di designer e sviluppatori con sede in Campania. Oltre 50 progetti completati e 5 anni di esperienza nel digitale." pageSchema={pageSchema}>
 
   <section class="about-hero" style="border-bottom:1px solid rgba(0,0,0,0.08);">
     <p style="font-size:10px; letter-spacing:0.14em; text-transform:uppercase; color:#0033ff; font-weight:500; margin-bottom:16px;">La nostra storia</p>

@@ -12,8 +12,28 @@ const staticProjects = [
 
 const fetchedProjects = await client.fetch(projectsQuery).catch(() => [])
 const projects = fetchedProjects.length > 0 ? fetchedProjects : staticProjects
+
+const pageSchema = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "CollectionPage",
+      "url": "https://traccestudio.it/portfolio",
+      "name": "Portfolio — Tracce Studio",
+      "description": "Scopri i progetti di Tracce Studio: siti web, brand identity ed e-commerce realizzati in Campania e in tutta Italia.",
+      "isPartOf": { "@type": "WebSite", "url": "https://traccestudio.it" }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://traccestudio.it/" },
+        { "@type": "ListItem", "position": 2, "name": "Portfolio", "item": "https://traccestudio.it/portfolio" }
+      ]
+    }
+  ]
+}
 ---
-<BaseLayout title="Portfolio — Tracce Studio" description="Scopri i progetti di Tracce Studio: siti web, brand identity ed e-commerce realizzati per clienti in Campania e in tutta Italia.">
+<BaseLayout title="Portfolio — Tracce Studio" description="Scopri i progetti di Tracce Studio: siti web, brand identity ed e-commerce realizzati per clienti in Campania e in tutta Italia." pageSchema={pageSchema}>
 
   <section class="ts-container" style="padding-top:80px; padding-bottom:40px;">
     <p style="font-size:10px; letter-spacing:0.14em; text-transform:uppercase; color:#0033ff; font-weight:500; margin-bottom:24px;">— I nostri lavori</p>
