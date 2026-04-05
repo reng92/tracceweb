@@ -67,11 +67,26 @@ const pageSchema = {
           <p style="font-size:13px; color:rgba(255,255,255,0.8); margin:0;">Ti risponderemo entro 24 ore.</p>
         </div>
         <form id="contact-form" action="https://formspree.io/f/xwvwooow" method="POST" style="display:flex; flex-direction:column; gap:20px;">
-          <input type="text" name="nome" placeholder="Il tuo nome" required style="background:transparent; border:none; border-bottom:1px solid rgba(0,0,0,0.2); padding:12px 0; font-size:14px; outline:none; font-family:inherit; color:#0a0a0a;" />
-          <input type="email" name="email" placeholder="La tua email" required style="background:transparent; border:none; border-bottom:1px solid rgba(0,0,0,0.2); padding:12px 0; font-size:14px; outline:none; font-family:inherit; color:#0a0a0a;" />
-          <input type="tel" name="telefono" placeholder="Numero di telefono" required style="background:transparent; border:none; border-bottom:1px solid rgba(0,0,0,0.2); padding:12px 0; font-size:14px; outline:none; font-family:inherit; color:#0a0a0a;" />
-          <input type="text" name="azienda" placeholder="Azienda (opzionale)" style="background:transparent; border:none; border-bottom:1px solid rgba(0,0,0,0.2); padding:12px 0; font-size:14px; outline:none; font-family:inherit; color:#0a0a0a;" />
-          <textarea name="messaggio" placeholder="Raccontaci del tuo progetto" rows="5" required style="background:transparent; border:none; border-bottom:1px solid rgba(0,0,0,0.2); padding:12px 0; font-size:14px; outline:none; font-family:inherit; color:#0a0a0a; resize:none;"></textarea>
+          <div style="display:flex; flex-direction:column; gap:4px;">
+            <label for="c-nome" style="font-size:9.5px; letter-spacing:0.12em; text-transform:uppercase; font-weight:500; color:#888;">Nome *</label>
+            <input type="text" id="c-nome" name="nome" placeholder="es. Mario Rossi" required style="background:transparent; border:none; border-bottom:1px solid rgba(0,0,0,0.2); padding:10px 0; font-size:14px; outline:none; font-family:inherit; color:#0a0a0a;" />
+          </div>
+          <div style="display:flex; flex-direction:column; gap:4px;">
+            <label for="c-email" style="font-size:9.5px; letter-spacing:0.12em; text-transform:uppercase; font-weight:500; color:#888;">Email *</label>
+            <input type="email" id="c-email" name="email" placeholder="es. mario@azienda.it" required style="background:transparent; border:none; border-bottom:1px solid rgba(0,0,0,0.2); padding:10px 0; font-size:14px; outline:none; font-family:inherit; color:#0a0a0a;" />
+          </div>
+          <div style="display:flex; flex-direction:column; gap:4px;">
+            <label for="c-telefono" style="font-size:9.5px; letter-spacing:0.12em; text-transform:uppercase; font-weight:500; color:#888;">Telefono *</label>
+            <input type="tel" id="c-telefono" name="telefono" placeholder="es. +39 333 123 4567" required style="background:transparent; border:none; border-bottom:1px solid rgba(0,0,0,0.2); padding:10px 0; font-size:14px; outline:none; font-family:inherit; color:#0a0a0a;" />
+          </div>
+          <div style="display:flex; flex-direction:column; gap:4px;">
+            <label for="c-azienda" style="font-size:9.5px; letter-spacing:0.12em; text-transform:uppercase; font-weight:500; color:#888;">Azienda</label>
+            <input type="text" id="c-azienda" name="azienda" placeholder="Opzionale" style="background:transparent; border:none; border-bottom:1px solid rgba(0,0,0,0.2); padding:10px 0; font-size:14px; outline:none; font-family:inherit; color:#0a0a0a;" />
+          </div>
+          <div style="display:flex; flex-direction:column; gap:4px;">
+            <label for="c-messaggio" style="font-size:9.5px; letter-spacing:0.12em; text-transform:uppercase; font-weight:500; color:#888;">Messaggio *</label>
+            <textarea id="c-messaggio" name="messaggio" placeholder="Raccontaci del tuo progetto" rows="5" required style="background:transparent; border:none; border-bottom:1px solid rgba(0,0,0,0.2); padding:10px 0; font-size:14px; outline:none; font-family:inherit; color:#0a0a0a; resize:none;"></textarea>
+          </div>
           <label style="display:flex; align-items:flex-start; gap:10px; cursor:pointer;">
             <input type="checkbox" name="gdpr" required style="margin-top:2px; flex-shrink:0; accent-color:#0033ff; width:14px; height:14px; cursor:pointer;" />
             <span style="font-size:11px; color:#666; line-height:1.5;">Ho letto e accetto il trattamento dei miei dati personali ai sensi del <a href="/privacy-policy" target="_blank" style="color:#0033ff; text-decoration:none; border-bottom:1px solid #0033ff;">Regolamento GDPR (UE) 2016/679</a>.</span>
