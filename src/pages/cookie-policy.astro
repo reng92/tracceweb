@@ -2,7 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro'
 ---
 
-<BaseLayout title="Cookie Policy — Tracce Studio">
+<BaseLayout title="Cookie Policy — Tracce Studio" description="Informativa sull'uso dei cookie di Tracce Studio, inclusi i cookie tecnici e analitici Google Analytics 4.">
   <section style="padding:80px 48px 40px; border-bottom:1px solid rgba(0,0,0,0.08);">
     <p style="font-size:10px; letter-spacing:0.14em; text-transform:uppercase; color:#0033ff; font-weight:500; margin-bottom:16px;">Legale</p>
     <h1 style="font-family:'Barlow Condensed',sans-serif; font-weight:900; text-transform:uppercase; font-size:clamp(40px,6vw,72px); line-height:1; color:#0a0a0a; margin:0;">
@@ -14,45 +14,89 @@ import BaseLayout from '../layouts/BaseLayout.astro'
     <div style="font-size:14px; line-height:1.8; color:#333; display:flex; flex-direction:column; gap:32px;">
 
       <div>
-        <p>Questo sito utilizza Cookie. I Cookie sono piccoli file di testo che vengono salvati sul dispositivo dell'Utente durante la navigazione. Servono a far funzionare il sito correttamente e a migliorare l'esperienza dell'Utente.</p>
+        <p>Questo sito utilizza cookie e tecnologie simili. La presente Cookie Policy descrive tipologie, finalità e modalità di gestione dei cookie, ai sensi dell'art. 13 del Regolamento UE 2016/679 (GDPR) e del D.Lgs. 196/2003 come modificato dal D.Lgs. 101/2018.</p>
       </div>
 
       <div>
-        <p style="font-size:10px; letter-spacing:0.14em; text-transform:uppercase; color:#0033ff; font-weight:500; margin-bottom:16px;">Categorie di cookie utilizzati</p>
+        <p style="font-size:10px; letter-spacing:0.14em; text-transform:uppercase; color:#0033ff; font-weight:500; margin-bottom:20px;">Cookie tecnici / necessari</p>
+        <p style="margin-bottom:16px;">Indispensabili per il funzionamento del sito. Non richiedono consenso ai sensi dell'art. 122, comma 1, D.Lgs. 196/2003.</p>
 
-        <div style="display:flex; flex-direction:column; gap:20px;">
-
-          <div style="padding:20px 24px; border:1px solid rgba(0,0,0,0.08); border-radius:2px;">
-            <div style="display:flex; align-items:center; gap:12px; margin-bottom:10px;">
-              <span style="background:#0033ff; color:#fff; font-size:10px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; padding:3px 10px; border-radius:2px;">Necessari</span>
-              <span style="font-size:11px; color:#888;">Sempre attivi — non richiedono consenso</span>
-            </div>
-            <p style="margin:0;">Questi cookie sono indispensabili per il funzionamento del sito e non possono essere disabilitati. Non raccolgono informazioni personali identificabili. Includono cookie di sessione e cookie per il salvataggio delle preferenze sul consenso.</p>
-          </div>
-
-          <div style="padding:20px 24px; border:1px solid rgba(0,0,0,0.08); border-radius:2px;">
-            <div style="display:flex; align-items:center; gap:12px; margin-bottom:10px;">
-              <span style="background:#555; color:#fff; font-size:10px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; padding:3px 10px; border-radius:2px;">Analitici</span>
-              <span style="font-size:11px; color:#888;">Richiedono consenso</span>
-            </div>
-            <p style="margin:0;">Permettono di raccogliere informazioni aggregate e anonime su come gli Utenti navigano il sito (pagine visitate, tempo di permanenza, provenienza del traffico). I dati sono utilizzati esclusivamente per migliorare le prestazioni del sito. Attualmente il sito non utilizza strumenti analitici di terze parti.</p>
-          </div>
-
-          <div style="padding:20px 24px; border:1px solid rgba(0,0,0,0.08); border-radius:2px;">
-            <div style="display:flex; align-items:center; gap:12px; margin-bottom:10px;">
-              <span style="background:#555; color:#fff; font-size:10px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; padding:3px 10px; border-radius:2px;">Marketing</span>
-              <span style="font-size:11px; color:#888;">Richiedono consenso</span>
-            </div>
-            <p style="margin:0;">Utilizzati per mostrare pubblicità pertinente agli interessi dell'Utente. Attualmente il sito non utilizza cookie di profilazione o remarketing di terze parti.</p>
-          </div>
-
+        <div style="overflow-x:auto;">
+          <table style="width:100%; border-collapse:collapse; font-size:13px;">
+            <thead>
+              <tr style="border-bottom:2px solid rgba(0,0,0,0.1);">
+                <th style="text-align:left; padding:10px 12px; font-size:10px; letter-spacing:0.1em; text-transform:uppercase; color:#888; font-weight:500;">Nome</th>
+                <th style="text-align:left; padding:10px 12px; font-size:10px; letter-spacing:0.1em; text-transform:uppercase; color:#888; font-weight:500;">Tipo</th>
+                <th style="text-align:left; padding:10px 12px; font-size:10px; letter-spacing:0.1em; text-transform:uppercase; color:#888; font-weight:500;">Finalità</th>
+                <th style="text-align:left; padding:10px 12px; font-size:10px; letter-spacing:0.1em; text-transform:uppercase; color:#888; font-weight:500;">Durata</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr style="border-bottom:1px solid rgba(0,0,0,0.06);">
+                <td style="padding:10px 12px;"><code style="background:#f0f0ec; padding:2px 6px; border-radius:2px; font-size:12px;">tracce_cookie_consent</code></td>
+                <td style="padding:10px 12px; color:#555;">localStorage</td>
+                <td style="padding:10px 12px; color:#555;">Memorizza le preferenze cookie dell'utente</td>
+                <td style="padding:10px 12px; color:#555;">Persistente</td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </div>
 
       <div>
+        <p style="font-size:10px; letter-spacing:0.14em; text-transform:uppercase; color:#0033ff; font-weight:500; margin-bottom:20px;">Cookie analitici — richiedono consenso</p>
+        <p style="margin-bottom:16px;">Utilizzati per raccogliere informazioni aggregate e anonime sul comportamento degli utenti. Il titolare del trattamento dei dati analitici è <strong>Google LLC</strong> (1600 Amphitheatre Parkway, Mountain View, CA 94043, USA). Il trasferimento dei dati verso gli USA avviene sulla base delle Clausole Contrattuali Standard (SCC) approvate dalla Commissione Europea. <a href="https://policies.google.com/privacy" target="_blank" rel="noopener" style="color:#0033ff;">Privacy Policy di Google</a>.</p>
+
+        <div style="overflow-x:auto;">
+          <table style="width:100%; border-collapse:collapse; font-size:13px;">
+            <thead>
+              <tr style="border-bottom:2px solid rgba(0,0,0,0.1);">
+                <th style="text-align:left; padding:10px 12px; font-size:10px; letter-spacing:0.1em; text-transform:uppercase; color:#888; font-weight:500;">Nome</th>
+                <th style="text-align:left; padding:10px 12px; font-size:10px; letter-spacing:0.1em; text-transform:uppercase; color:#888; font-weight:500;">Servizio</th>
+                <th style="text-align:left; padding:10px 12px; font-size:10px; letter-spacing:0.1em; text-transform:uppercase; color:#888; font-weight:500;">Finalità</th>
+                <th style="text-align:left; padding:10px 12px; font-size:10px; letter-spacing:0.1em; text-transform:uppercase; color:#888; font-weight:500;">Durata</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr style="border-bottom:1px solid rgba(0,0,0,0.06);">
+                <td style="padding:10px 12px;"><code style="background:#f0f0ec; padding:2px 6px; border-radius:2px; font-size:12px;">_ga</code></td>
+                <td style="padding:10px 12px; color:#555;">Google Analytics 4</td>
+                <td style="padding:10px 12px; color:#555;">Distingue gli utenti univoci assegnando un ID anonimo</td>
+                <td style="padding:10px 12px; color:#555;">2 anni</td>
+              </tr>
+              <tr style="border-bottom:1px solid rgba(0,0,0,0.06);">
+                <td style="padding:10px 12px;"><code style="background:#f0f0ec; padding:2px 6px; border-radius:2px; font-size:12px;">_ga_FMZYV1EVP3</code></td>
+                <td style="padding:10px 12px; color:#555;">Google Analytics 4</td>
+                <td style="padding:10px 12px; color:#555;">Mantiene lo stato della sessione per la property GA4 specifica</td>
+                <td style="padding:10px 12px; color:#555;">2 anni</td>
+              </tr>
+              <tr style="border-bottom:1px solid rgba(0,0,0,0.06);">
+                <td style="padding:10px 12px;"><code style="background:#f0f0ec; padding:2px 6px; border-radius:2px; font-size:12px;">_gid</code></td>
+                <td style="padding:10px 12px; color:#555;">Google Analytics 4</td>
+                <td style="padding:10px 12px; color:#555;">Identifica il browser per sessioni di 24 ore</td>
+                <td style="padding:10px 12px; color:#555;">24 ore</td>
+              </tr>
+              <tr>
+                <td style="padding:10px 12px;"><code style="background:#f0f0ec; padding:2px 6px; border-radius:2px; font-size:12px;">_gat</code></td>
+                <td style="padding:10px 12px; color:#555;">Google Analytics 4</td>
+                <td style="padding:10px 12px; color:#555;">Limita la frequenza delle richieste al server di Google</td>
+                <td style="padding:10px 12px; color:#555;">1 minuto</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div>
+        <p style="font-size:10px; letter-spacing:0.14em; text-transform:uppercase; color:#0033ff; font-weight:500; margin-bottom:12px;">Cookie di profilazione / marketing</p>
+        <p>Il sito non utilizza attualmente cookie di profilazione o remarketing di terze parti.</p>
+      </div>
+
+      <div>
         <p style="font-size:10px; letter-spacing:0.14em; text-transform:uppercase; color:#0033ff; font-weight:500; margin-bottom:12px;">Come gestire i cookie</p>
-        <p>L'Utente può gestire le preferenze sui cookie in qualsiasi momento tramite il banner presente sul sito o dalle impostazioni del proprio browser. La disabilitazione dei cookie tecnici potrebbe compromettere il corretto funzionamento del sito.</p>
-        <p style="margin-top:12px;">Per ulteriori informazioni sui cookie e su come gestirli: <a href="https://www.garanteprivacy.it/cookie" target="_blank" style="color:#0033ff;">garanteprivacy.it/cookie</a></p>
+        <p>L'utente può gestire le preferenze in qualsiasi momento tramite il pannello cookie presente sul sito (accessibile dal footer) oppure tramite le impostazioni del proprio browser. La disabilitazione dei cookie tecnici potrebbe compromettere il corretto funzionamento del sito.</p>
+        <p style="margin-top:12px;">Istruzioni per i principali browser: <a href="https://support.google.com/chrome/answer/95647" target="_blank" rel="noopener" style="color:#0033ff;">Chrome</a> · <a href="https://support.mozilla.org/it/kb/protezione-antitracciamento-avanzata-firefox" target="_blank" rel="noopener" style="color:#0033ff;">Firefox</a> · <a href="https://support.apple.com/it-it/guide/safari/sfri11471/mac" target="_blank" rel="noopener" style="color:#0033ff;">Safari</a> · <a href="https://support.microsoft.com/it-it/windows/eliminare-e-gestire-i-cookie-168dab11-0753-043d-7c16-ede5947fc64d" target="_blank" rel="noopener" style="color:#0033ff;">Edge</a></p>
+        <p style="margin-top:12px;">Per ulteriori informazioni: <a href="https://www.garanteprivacy.it/cookie" target="_blank" rel="noopener" style="color:#0033ff;">garanteprivacy.it/cookie</a></p>
       </div>
 
       <div>
@@ -61,9 +105,17 @@ import BaseLayout from '../layouts/BaseLayout.astro'
       </div>
 
       <div style="border-top:1px solid rgba(0,0,0,0.08); padding-top:24px;">
-        <p style="font-size:12px; color:#888;">Ultimo aggiornamento: marzo 2026</p>
+        <p style="font-size:12px; color:#888;">Ultimo aggiornamento: aprile 2026</p>
       </div>
 
     </div>
   </section>
+
+  <style>
+    @media (max-width: 768px) {
+      section { padding-left: 20px !important; padding-right: 20px !important; }
+      table { font-size: 12px; }
+      td, th { padding: 8px 8px !important; }
+    }
+  </style>
 </BaseLayout>

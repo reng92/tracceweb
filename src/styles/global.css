@@ -92,6 +92,11 @@
   div[style*="grid-template-columns: repeat(3,1fr)"],
   div[style*="grid-template-columns:repeat(3, 1fr)"] {
     grid-template-columns: 1fr 1fr !important;
+    gap: 12px !important;
+  }
+
+  .ts-portfolio-grid-2 {
+    gap: 12px;
   }
 
   /* SEZIONI CON PADDING FISSO */
@@ -139,5 +144,6 @@
   div[style*="grid-template-columns: repeat(3,1fr)"],
   div[style*="grid-template-columns:repeat(3, 1fr)"] {
     grid-template-columns: 1fr !important;
+    gap: 12px !important;
   }
 }
