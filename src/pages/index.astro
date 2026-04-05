@@ -155,18 +155,26 @@ const svcList = services.length > 0 ? services : staticServices
           </div>
         </div>
       </div>
-      <form action="https://formspree.io/f/xwvwooow" method="POST" style="display:flex; flex-direction:column; gap:16px;">
-        <input type="text" name="nome" placeholder="Il tuo nome" required style="background:transparent; border:none; border-bottom:1px solid rgba(0,0,0,0.2); padding:12px 0; font-size:13px; outline:none; font-family:inherit;" />
-        <input type="email" name="email" placeholder="La tua email" required style="background:transparent; border:none; border-bottom:1px solid rgba(0,0,0,0.2); padding:12px 0; font-size:13px; outline:none; font-family:inherit;" />
-        <textarea name="messaggio" placeholder="Raccontaci del tuo progetto" rows="4" style="background:transparent; border:none; border-bottom:1px solid rgba(0,0,0,0.2); padding:12px 0; font-size:13px; outline:none; font-family:inherit; resize:none;"></textarea>
-        <label style="display:flex; align-items:flex-start; gap:10px; cursor:pointer;">
-          <input type="checkbox" name="gdpr" required style="margin-top:2px; flex-shrink:0; accent-color:#0033ff; width:14px; height:14px; cursor:pointer;" />
-          <span style="font-size:11px; color:#666; line-height:1.5;">Ho letto e accetto il trattamento dei miei dati personali ai sensi del <a href="/privacy-policy" target="_blank" style="color:#0033ff; text-decoration:none; border-bottom:1px solid #0033ff;">Regolamento GDPR (UE) 2016/679</a>.</span>
-        </label>
-        <button type="submit" style="align-self:flex-start; background:#0033ff; color:#fff; font-family:'Barlow Condensed',sans-serif; font-weight:700; text-transform:uppercase; letter-spacing:0.12em; font-size:13px; padding:14px 32px; border:none; border-radius:2px; cursor:pointer; margin-top:8px;">
-          Invia
-        </button>
-      </form>
+      <div>
+        <div id="home-form-success" style="display:none; padding:24px; background:#0033ff; border-radius:2px; margin-bottom:24px;">
+          <p style="font-family:'Barlow Condensed',sans-serif; font-weight:700; font-size:18px; text-transform:uppercase; color:#fff; margin:0 0 8px;">Messaggio inviato!</p>
+          <p style="font-size:13px; color:rgba(255,255,255,0.8); margin:0;">Ti risponderemo entro 24 ore.</p>
+        </div>
+        <form id="home-contact-form" action="https://formspree.io/f/xwvwooow" method="POST" style="display:flex; flex-direction:column; gap:16px;">
+          <input type="text" name="nome" placeholder="Il tuo nome" required style="background:transparent; border:none; border-bottom:1px solid rgba(0,0,0,0.2); padding:12px 0; font-size:13px; outline:none; font-family:inherit;" />
+          <input type="email" name="email" placeholder="La tua email" required style="background:transparent; border:none; border-bottom:1px solid rgba(0,0,0,0.2); padding:12px 0; font-size:13px; outline:none; font-family:inherit;" />
+          <input type="tel" name="telefono" placeholder="Numero di telefono" required style="background:transparent; border:none; border-bottom:1px solid rgba(0,0,0,0.2); padding:12px 0; font-size:13px; outline:none; font-family:inherit;" />
+          <input type="text" name="azienda" placeholder="Azienda (opzionale)" style="background:transparent; border:none; border-bottom:1px solid rgba(0,0,0,0.2); padding:12px 0; font-size:13px; outline:none; font-family:inherit;" />
+          <textarea name="messaggio" placeholder="Raccontaci del tuo progetto" rows="4" required style="background:transparent; border:none; border-bottom:1px solid rgba(0,0,0,0.2); padding:12px 0; font-size:13px; outline:none; font-family:inherit; resize:none;"></textarea>
+          <label style="display:flex; align-items:flex-start; gap:10px; cursor:pointer;">
+            <input type="checkbox" name="gdpr" required style="margin-top:2px; flex-shrink:0; accent-color:#0033ff; width:14px; height:14px; cursor:pointer;" />
+            <span style="font-size:11px; color:#666; line-height:1.5;">Ho letto e accetto il trattamento dei miei dati personali ai sensi del <a href="/privacy-policy" target="_blank" style="color:#0033ff; text-decoration:none; border-bottom:1px solid #0033ff;">Regolamento GDPR (UE) 2016/679</a>.</span>
+          </label>
+          <button id="home-submit-btn" type="submit" style="align-self:flex-start; background:#0033ff; color:#fff; font-family:'Barlow Condensed',sans-serif; font-weight:700; text-transform:uppercase; letter-spacing:0.12em; font-size:13px; padding:14px 32px; border:none; border-radius:2px; cursor:pointer; margin-top:8px;">
+            Invia messaggio →
+          </button>
+        </form>
+      </div>
     </div>
   </section>
 
@@ -180,6 +188,38 @@ const svcList = services.length > 0 ? services : staticServices
   document.addEventListener('astro:page-load', () => {
     const heroTitle = document.getElementById('hero-title')
     if (!heroTitle) return  // non siamo sulla home, esci
+
+    // Home contact form AJAX
+    const homeForm = document.getElementById('home-contact-form') as HTMLFormElement | null
+    const homeSuccess = document.getElementById('home-form-success') as HTMLElement | null
+    const homeBtn = document.getElementById('home-submit-btn') as HTMLButtonElement | null
+    if (homeForm && homeSuccess && homeBtn) {
+      homeForm.addEventListener('submit', async (e) => {
+        e.preventDefault()
+        homeBtn.textContent = 'Invio in corso…'
+        homeBtn.disabled = true
+        try {
+          const formData = new FormData(homeForm)
+          const emailVal = (homeForm.querySelector('[name="email"]') as HTMLInputElement)?.value
+          if (emailVal) formData.set('_cc', emailVal)
+          const res = await fetch(homeForm.action, {
+            method: 'POST',
+            body: formData,
+            headers: { 'Accept': 'application/json' }
+          })
+          if (res.ok) {
+            homeForm.style.display = 'none'
+            homeSuccess.style.display = 'block'
+          } else {
+            homeBtn.textContent = 'Errore — riprova'
+            homeBtn.disabled = false
+          }
+        } catch {
+          homeBtn.textContent = 'Errore — riprova'
+          homeBtn.disabled = false
+        }
+      })
+    }
 
     // Hero entrance
     const tl = gsap.timeline({ defaults: { ease: 'power4.out' } })
