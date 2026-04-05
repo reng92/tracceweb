@@ -54,22 +54,26 @@ const canonicalURL = new URL(Astro.url.pathname, 'https://traccestudio.it').href
   <meta name="twitter:image" content="https://traccestudio.it/tracce_logo_1200x600.png" />
   <meta name="twitter:title" content={title} />
   <meta name="twitter:description" content={description} />
-  <!-- Analytics (Plausible) — caricato solo con consenso analitici -->
+  <!-- Google Analytics 4 — caricato solo con consenso analitici -->
   <script is:inline>
     (function () {
-      function loadPlausible() {
-        if (document.getElementById('plausible-js')) return
+      function loadGA() {
+        if (document.getElementById('ga-script')) return
         var s = document.createElement('script')
-        s.id = 'plausible-js'
-        s.defer = true
-        s.setAttribute('data-domain', 'traccestudio.it')
-        s.src = 'https://plausible.io/js/script.js'
+        s.id = 'ga-script'
+        s.async = true
+        s.src = 'https://www.googletagmanager.com/gtag/js?id=G-FMZYV1EVP3'
         document.head.appendChild(s)
+        window.dataLayer = window.dataLayer || []
+        function gtag() { window.dataLayer.push(arguments) }
+        window.gtag = gtag
+        gtag('js', new Date())
+        gtag('config', 'G-FMZYV1EVP3')
       }
-      window.__loadAnalytics = loadPlausible
+      window.__loadAnalytics = loadGA
       try {
         var c = JSON.parse(localStorage.getItem('tracce_cookie_consent') || 'null')
-        if (c && c.analitici) loadPlausible()
+        if (c && c.analitici) loadGA()
       } catch (e) {}
     })()
   </script>
