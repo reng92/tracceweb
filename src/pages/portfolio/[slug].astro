@@ -399,35 +399,26 @@ const pageSchema = {
       padding-left: 20px;
       padding-right: 20px;
     }
-    .phone {
-      width: 152px;
-      border-radius: 30px;
-      padding: 13px 9px;
-    }
-    .phone-silent   { top: 58px;  height: 20px; }
-    .phone-vol-up   { top: 90px;  height: 32px; }
-    .phone-vol-down { top: 132px; height: 32px; }
-    .phone-power    { top: 98px;  height: 44px; }
-    .phone-screen   { border-radius: 22px; }
-    .phone-camera-dot { width: 7px; height: 7px; top: 11px; }
-    .phone-screen img { padding-top: 24px; }
-    .phones-grid    { gap: 16px; }
-  }
 
-  @media (max-width: 520px) {
-    .phone {
-      width: 118px;
-      border-radius: 24px;
-      padding: 10px 8px;
+    /* 1 colonna: i telefoni si impilano e si allargano */
+    .phones-grid {
+      flex-direction: column;
+      align-items: center;
+      gap: 40px;
     }
-    .phone-silent   { top: 45px;  height: 16px; }
-    .phone-vol-up   { top: 70px;  height: 26px; }
-    .phone-vol-down { top: 103px; height: 26px; }
-    .phone-power    { top: 76px;  height: 36px; }
-    .phone-screen   { border-radius: 17px; }
-    .phone-camera-dot { width: 6px; height: 6px; top: 9px; }
-    .phone-screen img { padding-top: 20px; }
-    .phones-grid    { gap: 10px; }
-    .phone-home-bar { width: 52px; }
+
+    .phone {
+      width: 220px;
+      border-radius: 40px;
+      padding: 18px 12px;
+    }
+    .phone-silent   { top: 82px;  height: 28px; }
+    .phone-vol-up   { top: 124px; height: 44px; }
+    .phone-vol-down { top: 178px; height: 44px; }
+    .phone-power    { top: 138px; height: 60px; }
+    .phone-screen   { border-radius: 30px; }
+    .phone-camera-dot { width: 9px; height: 9px; top: 14px; }
+    .phone-screen img { padding-top: 30px; }
+    .phone-home-bar { width: 72px; }
   }
 </style>
