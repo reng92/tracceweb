@@ -32,10 +32,11 @@ const svcList = services.length > 0 ? services : staticServices
   <section id="hero-section" style="padding:80px 48px 60px; display:grid; grid-template-columns:1fr 140px; gap:40px; align-items:start; position:relative; overflow:hidden;">
     <div style="position:absolute; top:-80px; right:-80px; width:420px; height:420px; background:#0033ff; border-radius:50%; opacity:0.08; pointer-events:none;"></div>
     <div>
-      <h1 id="hero-title" style="font-family:'Barlow Condensed',sans-serif; font-weight:900; text-transform:uppercase; font-size:clamp(52px,7.5vw,88px); line-height:1; color:#0a0a0a; margin:0;">
-        La web agency<br/>
-        <span style="color:#0033ff;">che ti posiziona</span><br/>
-        nel mondo<br/>digitale
+      <h1 id="hero-title" style="font-family:'Barlow Condensed',sans-serif; font-weight:900; text-transform:uppercase; font-size:clamp(52px,7.5vw,88px); line-height:1.05; color:#0a0a0a; margin:0;">
+        <span class="h-lw"><span class="h-l">La web agency</span></span>
+        <span class="h-lw"><span class="h-l" style="color:#0033ff;">che ti posiziona</span></span>
+        <span class="h-lw"><span class="h-l">nel mondo</span></span>
+        <span class="h-lw"><span class="h-l">digitale</span></span>
       </h1>
       <p id="hero-desc" style="font-size:14px; line-height:1.7; color:#555; max-width:520px; margin-top:24px;">
         Distinguiti, fatti amare e, soprattutto, fa in modo che ti seguano. Siamo una web agency con sede in Campania. Insieme trasformiamo le tue idee in un progetto <strong>a tua misura</strong>.
@@ -47,6 +48,24 @@ const svcList = services.length > 0 ? services : staticServices
     <div id="hero-badge" style="width:128px; height:128px; border-radius:50%; border:1px solid #0a0a0a; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:4px; flex-shrink:0; margin-top:8px;">
       <span style="font-family:'Barlow Condensed',sans-serif; font-weight:900; font-size:38px; line-height:1; color:#0a0a0a;">TA</span>
       <span style="font-size:6.5px; letter-spacing:0.14em; text-transform:uppercase; text-align:center; color:#555; line-height:1.4;">We know how to<br/>improve your<br/>business</span>
+    </div>
+  </section>
+
+  <!-- STATS -->
+  <section id="stats-section" style="padding:64px 48px; border-top:1px solid rgba(0,0,0,0.08);">
+    <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:24px; text-align:center;">
+      <div>
+        <p class="stat-num" data-target="40" data-suffix="+" style="font-family:'Barlow Condensed',sans-serif; font-weight:900; font-size:clamp(56px,7vw,96px); line-height:1; color:#0a0a0a; margin:0 0 8px;">0</p>
+        <p style="font-size:10px; letter-spacing:0.14em; text-transform:uppercase; color:#888; margin:0;">Progetti realizzati</p>
+      </div>
+      <div>
+        <p class="stat-num" data-target="5" data-suffix="+" style="font-family:'Barlow Condensed',sans-serif; font-weight:900; font-size:clamp(56px,7vw,96px); line-height:1; color:#0a0a0a; margin:0 0 8px;">0</p>
+        <p style="font-size:10px; letter-spacing:0.14em; text-transform:uppercase; color:#888; margin:0;">Anni di esperienza</p>
+      </div>
+      <div>
+        <p class="stat-num" data-target="100" data-suffix="%" style="font-family:'Barlow Condensed',sans-serif; font-weight:900; font-size:clamp(56px,7vw,96px); line-height:1; color:#0033ff; margin:0 0 8px;">0</p>
+        <p style="font-size:10px; letter-spacing:0.14em; text-transform:uppercase; color:#888; margin:0;">Clienti soddisfatti</p>
+      </div>
     </div>
   </section>
 
@@ -236,12 +255,26 @@ const svcList = services.length > 0 ? services : staticServices
       })
     }
 
-    // Hero entrance
+    // Hero entrance — riga per riga
     const tl = gsap.timeline({ defaults: { ease: 'power4.out' } })
-    tl.from('#hero-title', { y: 80, opacity: 0, duration: 1.1, delay: 0.05 })
-      .from('#hero-desc',  { y: 30, opacity: 0, duration: 0.9 }, '-=0.65')
-      .from('#hero-cta',   { y: 20, opacity: 0, duration: 0.7 }, '-=0.6')
+    tl.from('.h-l',      { y: '115%', duration: 1, stagger: 0.07, delay: 0.05 })
+      .from('#hero-desc',  { y: 24, opacity: 0, duration: 0.9 }, '-=0.55')
+      .from('#hero-cta',   { y: 16, opacity: 0, duration: 0.7 }, '-=0.6')
       .from('#hero-badge', { scale: 0.75, opacity: 0, duration: 0.8, ease: 'back.out(2)' }, '-=0.7')
+
+    // Counter stats
+    gsap.utils.toArray<HTMLElement>('.stat-num').forEach(el => {
+      const target = parseInt(el.dataset.target ?? '0', 10)
+      const suffix = el.dataset.suffix ?? ''
+      const obj = { val: 0 }
+      gsap.to(obj, {
+        val: target,
+        duration: 1.8,
+        ease: 'power2.out',
+        scrollTrigger: { trigger: el, start: 'top 88%', once: true },
+        onUpdate() { el.textContent = Math.round(obj.val) + suffix }
+      })
+    })
 
     // Services stagger
     const serviceRows = gsap.utils.toArray<HTMLElement>('.gsap-service-row')
@@ -276,6 +309,10 @@ const svcList = services.length > 0 ? services : staticServices
 </script>
 
 <style>
+  /* Hero line reveal */
+  .h-lw { display: block; overflow: hidden; }
+  .h-l  { display: block; }
+
   .proj-card {
     position: relative;
     overflow: hidden;
