@@ -6,7 +6,6 @@
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   html { scroll-behavior: smooth; }
   body { font-family: 'DM Sans', sans-serif; background: #f5f4f0; color: #0a0a0a; overflow-x: hidden; }
-  @media (hover: hover) { body { cursor: none; } }
 }
 
 .ts-container { padding-left: 48px; padding-right: 48px; }
