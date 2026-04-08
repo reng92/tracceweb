@@ -261,15 +261,17 @@ const svcList = services.length > 0 ? services : staticServices
       })
     }
 
-    // Hero parallax
-    gsap.to('#hero-title', {
-      scrollTrigger: { trigger: '#hero-section', start: 'top top', end: 'bottom top', scrub: 1.5 },
-      y: -70, ease: 'none'
-    })
-    gsap.to('#hero-desc', {
-      scrollTrigger: { trigger: '#hero-section', start: 'top top', end: 'bottom top', scrub: 2 },
-      y: -40, ease: 'none'
-    })
+    // Hero parallax (desktop only — on mobile the scrub lag causes text overlap)
+    if (window.matchMedia('(min-width: 769px)').matches) {
+      gsap.to('#hero-title', {
+        scrollTrigger: { trigger: '#hero-section', start: 'top top', end: 'bottom top', scrub: 1.5 },
+        y: -70, ease: 'none'
+      })
+      gsap.to('#hero-desc', {
+        scrollTrigger: { trigger: '#hero-section', start: 'top top', end: 'bottom top', scrub: 2 },
+        y: -40, ease: 'none'
+      })
+    }
   })
 </script>
 
