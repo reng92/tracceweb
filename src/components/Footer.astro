@@ -12,8 +12,25 @@ const navLinks = [
     <div>
       <img src="/logos/tracce.svg" alt="Tracce Studio" style="height:26px; filter:invert(1); display:block; margin-bottom:16px;" />
       <div style="font-size:12px; line-height:1.9; color:#666;">
-        Luigi Cartolano<br />Via Mezzacapo 192<br />84036 – Sala Consilina (SA)<br />P.IVA: IT06207980654<br />info@traccestudio.it<br />+39 350 078 5990
+        <div style="font-size:9px; letter-spacing:0.12em; text-transform:uppercase; color:#444; font-weight:500; margin-bottom:4px;">Sede operativa</div>
+        Via Alcide de Gasperi, 33<br />81055 – Santa Maria Capua Vetere (CE)<br />
+        <details style="margin-top:10px; cursor:pointer;">
+          <summary style="font-size:9px; letter-spacing:0.12em; text-transform:uppercase; color:#444; font-weight:500; list-style:none; display:flex; align-items:center; gap:6px; cursor:pointer; user-select:none;">
+            <span>Sede legale</span>
+            <svg class="ts-accordion-icon" width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M2 3.5l3 3 3-3"/></svg>
+          </summary>
+          <div style="margin-top:6px; padding-left:0; color:#555;">
+            Luigi Cartolano<br />Via Mezzacapo 192<br />84036 – Sala Consilina (SA)
+          </div>
+        </details>
+        <div style="margin-top:10px;">P.IVA: IT06207980654</div>
+        info@traccestudio.it<br />+39 350 078 5990
       </div>
+      <style>
+        details[open] .ts-accordion-icon { transform: rotate(180deg); }
+        .ts-accordion-icon { transition: transform 0.2s; }
+        details summary::-webkit-details-marker { display: none; }
+      </style>
     </div>
     <div>
       <div style="font-size:9.5px; letter-spacing:0.14em; text-transform:uppercase; color:#444; font-weight:500; margin-bottom:16px;">Navigazione</div>
