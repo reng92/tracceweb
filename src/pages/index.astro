@@ -21,6 +21,9 @@ const staticServices = [
   { n: '04', title: 'Web Development', desc: 'Siti e applicazioni veloci, sicuri e scalabili.' },
   { n: '05', title: 'Digital Strategy', desc: 'Strategie data-driven per crescere online.' },
   { n: '06', title: 'Social Media', desc: 'Gestione e crescita della tua community.' },
+  { n: '07', title: 'Stampa & Gadget', desc: 'Volantini, 6x3, roll-up, brochure e gadget personalizzati di ogni tipo.' },
+  { n: '08', title: 'Ledwall per Interni & Esterni', desc: 'Schermi LED per vetrine, reception, punti vendita e spazi esterni delle attività.' },
+  { n: '09', title: 'Shooting Fotografico', desc: 'Fotografia professionale per aziende: siti web, social, cataloghi e materiale promozionale.' },
 ]
 
 const list = projects.length > 0 ? projects : staticProjects
@@ -72,7 +75,7 @@ const svcList = services.length > 0 ? services : staticServices
   <!-- TICKER -->
   <div style="background:#0033ff; padding:12px 0; overflow:hidden; white-space:nowrap;">
     <div style="display:inline-flex; animation:ticker 20s linear infinite;">
-      {['Branding','Web Design','UX UI Design','Web Development','Digital Strategy','Social Media','Branding','Web Design','UX UI Design','Web Development','Digital Strategy','Social Media'].map(item => (
+      {['Branding','Web Design','UX UI Design','Web Development','Digital Strategy','Social Media','Stampa & Gadget','Ledwall','Shooting','Branding','Web Design','UX UI Design','Web Development','Digital Strategy','Social Media','Stampa & Gadget','Ledwall','Shooting'].map(item => (
         <span style="font-family:'Barlow Condensed',sans-serif; font-weight:700; font-size:12px; letter-spacing:0.12em; text-transform:uppercase; color:#fff; padding:0 28px; display:inline-flex; align-items:center; gap:28px;">
           {item}<span style="width:3px; height:3px; background:rgba(255,255,255,0.4); border-radius:50%; display:inline-block;"></span>
         </span>
